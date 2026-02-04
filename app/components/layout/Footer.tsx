@@ -14,13 +14,13 @@ export const Footer = () => {
             <Container>
                 <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
                     <div>
-                        <Text variant="header-1" className="mb-2">iTech Peru</Text>
+                        <Text variant="header-1" style={{ marginBottom: 8 }}>iTech Peru</Text>
                         <Text color="secondary">© 2026 iTech Peru. Todos los derechos reservados.</Text>
                     </div>
                     <div>
-                        <Text variant="subheader-1" className="mb-2">Contacto</Text>
-                        <Text color="secondary" display="block">contacto@itechperu.com</Text>
-                        <Text color="secondary" display="block">Lima, Perú</Text>
+                        <Text variant="subheader-1" style={{ marginBottom: 8 }}>Contacto</Text>
+                        <Text color="secondary" style={{ display: 'block' }}>contacto@itechperu.com</Text>
+                        <Text color="secondary" style={{ display: 'block' }}>Lima, Perú</Text>
                     </div>
                 </div>
             </Container>

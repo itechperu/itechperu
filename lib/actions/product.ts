@@ -23,22 +23,22 @@ export async function getProducts() {
 }
 
 // --- FUNCIÓN 2: CREAR PRODUCTO ---
-export async function createProduct(data: {
-    name: string;
-    price: number;
-    condition: string;
-    category: string;
-    image: string;
-}) {
+export async function createProduct(formData: FormData) {
     try {
+        const name = formData.get('name') as string;
+        const price = parseFloat(formData.get('price') as string);
+        const condition = formData.get('condition') as string;
+        const category = formData.get('category') as string;
+        const image = formData.get('image') as string;
+
         await prisma.product.create({
             data: {
-                name: data.name,
+                name,
                 description: "Sin descripción",
-                originalPrice: data.price,
-                condition: data.condition,
-                category: data.category,
-                images: data.image,
+                originalPrice: price,
+                condition,
+                category,
+                images: image,
                 status: "AVAILABLE",
             },
         });
@@ -50,4 +50,4 @@ export async function createProduct(data: {
         console.error("Error creando producto:", error);
         return { success: false, error };
     }
-}   
+}

@@ -33,15 +33,8 @@ export default function AdminPage() {
     async function handleSubmit(formData: FormData) {
         setLoading(true);
         try {
-            const productData = {
-                name: formData.get('name') as string,
-                price: parseFloat(formData.get('originalPrice') as string),
-                condition: formData.get('condition') as string,
-                category: formData.get('category') as string,
-                image: formData.get('image') as string,
-            };
-
-            const result = await createProduct(productData);
+            // Direct FormData passing since server action was updated
+            const result = await createProduct(formData);
 
             if (result.success) {
                 alert('Producto creado exitosamente');
