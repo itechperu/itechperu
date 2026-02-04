@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button, TextInput, Select, Dialog, Icon } from '@gravity-ui/uikit';
 import { Plus } from '@gravity-ui/icons';
-import { createProduct } from '@/lib/actions/product';
+import { createProductAction } from '@/lib/actions/product-actions';
 
 export const CreateProductDialog = () => {
     const [open, setOpen] = React.useState(false);
@@ -12,7 +12,7 @@ export const CreateProductDialog = () => {
     async function handleSubmit(formData: FormData) {
         setLoading(true);
         try {
-            await createProduct(formData);
+            await createProductAction(formData);
             setOpen(false);
         } catch (e) {
             alert('Error creating product');

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card, Button, Text, TextInput, Select, Container, Table, Label } from '@gravity-ui/uikit';
-import { createProduct, getProducts } from '@/lib/actions/product';
+import { createProductAction, getProducts } from '@/lib/actions/product-actions';
 
 // Define the Product interface based on what getProducts returns
 interface Product {
@@ -34,7 +34,7 @@ export default function AdminPage() {
         setLoading(true);
         try {
             // Direct FormData passing since server action was updated
-            const result = await createProduct(formData);
+            const result = await createProductAction(formData);
 
             if (result.success) {
                 alert('Producto creado exitosamente');
