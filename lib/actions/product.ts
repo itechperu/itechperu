@@ -25,7 +25,7 @@ export async function getProducts() {
 // --- FUNCIÓN 2: CREAR PRODUCTO ---
 export async function createProduct(formData: FormData) {
     try {
-        const name = formData.get('name') as string;
+        const name: string = formData.get('name') as string;
         const price = parseFloat(formData.get('price') as string);
         const condition = formData.get('condition') as string;
         const category = formData.get('category') as string;
