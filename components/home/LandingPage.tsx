@@ -610,7 +610,7 @@ export function LandingPage({ products }: LandingPageProps) {
                 
                 /* Testimonial Card Width Logic */
                 .testimonial-card {
-                    --card-width: 85vw; /* Default mobile */
+                    --card-width: 100%; /* Default mobile - One card at a time */
                 }
                 
                 @media (min-width: 768px) {
