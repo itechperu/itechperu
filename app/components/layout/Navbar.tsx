@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Button, Icon, Text } from '@gravity-ui/uikit';
-import { ShoppingBag, Person } from '@gravity-ui/icons';
+import { Button, Icon, Text, useTheme } from '@gravity-ui/uikit';
+import { ShoppingBag, Person, Sun, Moon } from '@gravity-ui/icons';
 import Link from 'next/link';
 
 export const Navbar = () => {
@@ -20,6 +20,8 @@ export const Navbar = () => {
             </Link>
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <ThemeToggle />
+
                 <Link href="/shop">
                     <Button view="flat">Tienda</Button>
                 </Link>
@@ -28,8 +30,9 @@ export const Navbar = () => {
                     <Icon data={ShoppingBag} />
                 </Button>
 
-                <Link href="/admin/products">
+                <Link href="/auth/login">
                     <Button view="flat" size="l">
+                        <span style={{ marginRight: 6 }}>Iniciar Sesión</span>
                         <Icon data={Person} />
                     </Button>
                 </Link>
@@ -37,3 +40,19 @@ export const Navbar = () => {
         </nav>
     );
 };
+
+function ThemeToggle() {
+    const theme = useTheme() as any;
+    const isDark = theme.theme === 'dark';
+
+    return (
+        <Button
+            view="flat"
+            size="l"
+            onClick={() => theme.setTheme(isDark ? 'light' : 'dark')}
+            title={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+        >
+            <Icon data={isDark ? Sun : Moon} />
+        </Button>
+    );
+}
