@@ -438,15 +438,12 @@ export function LandingPage({ products }: LandingPageProps) {
                                 { text: "Recomendadísimos. Vendí un iPhone y compré otro ahí mismo. Todo en una sola cita. Práctico y seguro.", author: "Augusto P.", role: "Cliente Frecuente" }
                             ].map((testimonial, i) => (
                                 <div key={i} className="glass-panel hover-card testimonial-card" style={{
-                                    flex: '0 0 auto',
-                                    // Mobile default, overridden by CSS
-                                    width: '85vw',
                                     padding: 'clamp(24px, 5vw, 32px)',
                                     borderRadius: '24px',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     gap: 16,
-                                    scrollSnapAlign: 'start',
+                                    scrollSnapAlign: 'center',
                                     backgroundColor: 'rgba(10, 10, 15, 0.4)'
                                 }}>
                                     {/* Stars */}
@@ -610,18 +607,22 @@ export function LandingPage({ products }: LandingPageProps) {
                 
                 /* Testimonial Card Width Logic */
                 .testimonial-card {
-                    --card-width: 100%; /* Default mobile - One card at a time */
+                    width: 100%; /* Default mobile */
+                    flex: 0 0 100%; /* Critical: prevents shrinking/growing */
+                    max-width: 100%;
                 }
                 
                 @media (min-width: 768px) {
                     .testimonial-card {
-                         --card-width: calc((100% - 24px) / 2); /* Tablet: 2 items */
+                        width: calc((100% - 24px) / 2);
+                        flex: 0 0 calc((100% - 24px) / 2);
                     }
                 }
                 
                 @media (min-width: 1024px) {
                     .testimonial-card {
-                        --card-width: calc((100% - 48px) / 3); /* Desktop: 3 items exactly (2 gaps of 24px) */
+                        width: calc((100% - 48px) / 3); /* Desktop: 3 items exactly */
+                        flex: 0 0 calc((100% - 48px) / 3);
                     }
                 }
 
