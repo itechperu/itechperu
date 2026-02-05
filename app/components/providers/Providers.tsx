@@ -33,6 +33,14 @@ function ThemeProviderWrapper({ children }: { children: ReactNode }) {
         }
     }, []);
 
+    useEffect(() => {
+        if (mounted) {
+            // Apply theme to document root
+            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.className = `g-root g-root_theme_${theme}`;
+        }
+    }, [theme, mounted]);
+
     const toggleTheme = () => {
         const newTheme: Theme = theme === 'dark' ? 'light' : 'dark';
         console.log('🎨 Changing theme from', theme, 'to', newTheme);

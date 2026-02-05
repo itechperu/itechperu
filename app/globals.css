@@ -1,4 +1,6 @@
-:root {
+:root,
+:root.g-root_theme_dark,
+:root[data-theme="dark"] {
   /* Dark mode as default */
   --lp-text-primary: #ffffff;
   --lp-text-secondary: #94a3b8;
@@ -7,12 +9,12 @@
   --lp-glass-bg: rgba(255, 255, 255, 0.03);
   --lp-glass-border: rgba(255, 255, 255, 0.1);
   --lp-card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  --lp-bg-gradient: radial-gradient(circle at 50% 0%, #1a1b26 0%, #000000 100%);
 }
 
 /* Light mode - support multiple class naming conventions */
-.yc-root_theme_light,
-.g-root_theme_light,
-[data-theme="light"] {
+:root.g-root_theme_light,
+:root[data-theme="light"] {
   --lp-text-primary: #0f172a;
   --lp-text-secondary: #475569;
   --lp-text-gradient-start: #0f172a;
@@ -20,6 +22,7 @@
   --lp-glass-bg: rgba(255, 255, 255, 0.8);
   --lp-glass-border: rgba(0, 0, 0, 0.1);
   --lp-card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  --lp-bg-gradient: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #e2e8f0 100%);
 }
 
 @theme inline {
@@ -27,21 +30,17 @@
   --color-foreground: var(--lp-text-primary);
 }
 
+html {
+  background: var(--lp-bg-gradient);
+  min-height: 100vh;
+}
+
 body {
   color: var(--lp-text-primary);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
+  background: var(--lp-bg-gradient);
   transition: background 0.3s ease, color 0.3s ease;
-  /* Dark mode gradient by default */
-  background: radial-gradient(circle at 50% 0%, #1a1b26 0%, #000000 100%);
-}
-
-/* Light mode body - support multiple selectors */
-.yc-root_theme_light body,
-.g-root_theme_light body,
-[data-theme="light"] body {
-  /* Light mode gradient */
-  background: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #e2e8f0 100%);
 }
 
 /* Glassmorphism Classes */
