@@ -50,7 +50,7 @@ export function Navbar() {
                             <Text variant="header-2" style={{
                                 fontWeight: 700,
                                 letterSpacing: '1px',
-                                color: '#fff',
+                                color: 'var(--lp-text-primary)',
                                 fontSize: 'clamp(16px, 3vw, 20px)',
                                 display: 'none'
                             }} className="logo-text">
@@ -80,7 +80,7 @@ export function Navbar() {
                         <Button
                             view="flat"
                             size="l"
-                            style={{ color: '#fff' }}
+                            style={{ color: 'var(--lp-text-primary)' }}
                             className="mobile-menu-btn"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         >
@@ -91,7 +91,7 @@ export function Navbar() {
                         <Button
                             view="flat"
                             size="l"
-                            style={{ color: '#fff' }}
+                            style={{ color: 'var(--lp-text-primary)' }}
                             onClick={() => theme.setTheme(isDark ? 'light' : 'dark')}
                         >
                             <Icon data={isDark ? Sun : Moon} size={20} />

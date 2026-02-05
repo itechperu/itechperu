@@ -55,7 +55,7 @@ export function LandingPage({ products }: LandingPageProps) {
                         fontWeight: 900,
                         lineHeight: 1.1,
                         marginBottom: 'clamp(20px, 4vw, 32px)',
-                        background: 'linear-gradient(to bottom, #ffffff, #94a3b8)',
+                        background: 'linear-gradient(to bottom, var(--lp-text-gradient-start), var(--lp-text-gradient-end))',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.1))',
@@ -70,7 +70,7 @@ export function LandingPage({ products }: LandingPageProps) {
                     </h1>
 
                     <Text variant="body-2" style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(16px, 4vw, 22px)',
                         maxWidth: '700px',
                         margin: '0 auto clamp(24px, 5vw, 40px)',
@@ -79,7 +79,7 @@ export function LandingPage({ products }: LandingPageProps) {
                         padding: '0 16px'
                     }}>
                         Equipos Apple seleccionados, restaurados por expertos y certificados.<br className="hidden-mobile" />
-                        <strong style={{ color: '#fff' }}>Hasta 60% menos</strong> que nuevos. <strong style={{ color: '#22c55e' }}>100% de garantía</strong>.
+                        <strong style={{ color: 'var(--lp-text-primary)' }}>Hasta 60% menos</strong> que nuevos. <strong style={{ color: '#22c55e' }}>100% de garantía</strong>.
                     </Text>
 
                     {/* Trust Pills - Horizontal Scroll on small mobile if needed, or wrap */}
@@ -133,7 +133,7 @@ export function LandingPage({ products }: LandingPageProps) {
                         <Link href="#proceso">
                             <Button view="outlined" size="xl" style={{
                                 borderColor: 'rgba(255,255,255,0.2)',
-                                color: '#fff',
+                                color: 'var(--lp-text-primary)',
                                 borderRadius: '50px',
                                 backdropFilter: 'blur(10px)',
                                 padding: '0 clamp(24px, 5vw, 32px)',
