@@ -2,16 +2,15 @@
 
 import React, { useState } from 'react';
 import { Button, Icon, Text } from '@gravity-ui/uikit';
-import { ShoppingBag, Person, Magnifier, Bars, Sun, Moon } from '@gravity-ui/icons';
+import { ShoppingBag, Person, Magnifier, Bars } from '@gravity-ui/icons';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { useThemeContext } from '@/app/components/providers/Providers';
+
 
 export function Navbar() {
     const { data: session } = useSession();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const { theme, toggleTheme } = useThemeContext();
-    const isDark = theme === 'dark';
+
 
     return (
         <>
@@ -88,15 +87,7 @@ export function Navbar() {
                             <Icon data={Bars} size={20} />
                         </Button>
 
-                        {/* Theme Toggle */}
-                        <Button
-                            view="flat"
-                            size="l"
-                            style={{ color: 'var(--lp-text-primary)' }}
-                            onClick={toggleTheme}
-                        >
-                            <Icon data={isDark ? Sun : Moon} size={20} />
-                        </Button>
+
 
                         {/* Search - Hidden on mobile */}
                         <Button view="flat" size="l" style={{ color: 'var(--lp-text-primary)' }} className="desktop-action">
@@ -147,7 +138,7 @@ export function Navbar() {
                                         padding: '0 clamp(16px, 3vw, 24px)'
                                     }}>
                                         <Icon data={Person} size={18} style={{ marginRight: 8 }} />
-                                        <span className="button-text">Iniciar SesiÃ³n</span>
+                                        <span className="button-text">Iniciar Sesión</span>
                                     </Button>
                                 </Link>
                             )}
@@ -233,7 +224,7 @@ export function Navbar() {
                                 color: 'var(--lp-text-primary)',
                                 borderRadius: '12px'
                             }}>
-                                Iniciar SesiÃ³n
+                                Iniciar Sesión
                             </Button>
                         </Link>
                     )}
