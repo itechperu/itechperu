@@ -98,7 +98,7 @@ export function LandingPage({ products }: LandingPageProps) {
                                 background: 'rgba(255,255,255,0.05)',
                                 border: '1px solid rgba(255,255,255,0.1)',
                                 fontSize: 'clamp(12px, 3vw, 15px)',
-                                color: '#e2e8f0',
+                                color: 'var(--lp-text-secondary)',
                                 fontWeight: 500,
                                 whiteSpace: 'nowrap'
                             }}>
@@ -132,7 +132,7 @@ export function LandingPage({ products }: LandingPageProps) {
                         </Link>
                         <Link href="#proceso">
                             <Button view="outlined" size="xl" style={{
-                                borderColor: 'rgba(255,255,255,0.2)',
+                                borderColor: 'var(--lp-glass-border)',
                                 color: 'var(--lp-text-primary)',
                                 borderRadius: '50px',
                                 backdropFilter: 'blur(10px)',
@@ -156,7 +156,7 @@ export function LandingPage({ products }: LandingPageProps) {
                 <Container>
                     <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 70px)' }}>
                         <Text variant="display-2" style={{
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             fontWeight: 800,
                             marginBottom: 20,
                             display: 'block',
@@ -165,7 +165,7 @@ export function LandingPage({ products }: LandingPageProps) {
                             Proceso de Certificación
                         </Text>
                         <Text style={{
-                            color: '#94a3b8',
+                            color: 'var(--lp-text-secondary)',
                             fontSize: 'clamp(16px, 3vw, 20px)',
                             display: 'block',
                             maxWidth: '600px',
@@ -222,7 +222,7 @@ export function LandingPage({ products }: LandingPageProps) {
                                 </div>
                                 <div style={{ fontSize: 'clamp(32px, 6vw, 48px)', marginBottom: 20 }}>{item.icon}</div>
                                 <Text variant="header-2" style={{
-                                    color: '#fff',
+                                    color: 'var(--lp-text-primary)',
                                     marginBottom: 12,
                                     display: 'block',
                                     fontSize: 'clamp(20px, 4vw, 24px)',
@@ -231,7 +231,7 @@ export function LandingPage({ products }: LandingPageProps) {
                                     {item.title}
                                 </Text>
                                 <Text style={{
-                                    color: '#94a3b8',
+                                    color: 'var(--lp-text-secondary)',
                                     lineHeight: 1.6,
                                     fontSize: 'clamp(14px, 3vw, 16px)',
                                     flex: 1
