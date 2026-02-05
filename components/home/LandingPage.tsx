@@ -354,84 +354,7 @@ export function LandingPage({ products }: LandingPageProps) {
                     </div>
 
                     <div style={{ position: 'relative', overflow: 'hidden' }}>
-                        {/* Navigation Buttons - Desktop Outside Container if possible, or inside with absolute */}
-                        <div style={{
-                            display: 'flex',
-                            overflowX: 'auto',
-                            gap: '24px',
-                            padding: '20px 4px', // Space for shadows
-                            scrollSnapType: 'x mandatory',
-                            scrollbarWidth: 'none',
-                            justifyContent: 'center',
-                            flexWrap: 'wrap'
-                        }} className="testimonials-scroll">
-                            {[
-                                {
-                                    text: "Vendí mi iPhone sin preocuparme por estafas. El proceso fue super simple y el pago rápido.",
-                                    author: "María García",
-                                    role: "Vendedora"
-                                },
-                                {
-                                    text: "Compré una laptop usada y llegó exactamente como la describieron. ¡Excelente servicio de verificación!",
-                                    author: "Carlos López",
-                                    role: "Comprador"
-                                },
-                                {
-                                    text: "Ya hice 5 ventas con iTech Peru. Mis compradores confían más cuando uso la plataforma.",
-                                    author: "Ana Torres",
-                                    role: "Vendedora"
-                                }
-                            ].map((testimonial, i) => (
-                                <div key={i} className="glass-panel hover-card" style={{
-                                    flex: '0 0 auto',
-                                    width: 'clamp(280px, 80vw, 350px)',
-                                    padding: 'clamp(24px, 5vw, 32px)',
-                                    borderRadius: '24px',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: 16,
-                                    scrollSnapAlign: 'center',
-                                    backgroundColor: 'rgba(10, 10, 15, 0.4)' // Slightly darker background for contrast
-                                }}>
-                                    {/* Stars */}
-                                    <div style={{ display: 'flex', gap: 4 }}>
-                                        {[1, 2, 3, 4, 5].map(star => (
-                                            <span key={star} style={{ color: '#fbbf24', fontSize: '18px' }}>★</span>
-                                        ))}
-                                    </div>
-
-                                    <Text style={{
-                                        color: 'var(--lp-text-secondary)',
-                                        fontStyle: 'italic',
-                                        fontSize: '15px',
-                                        lineHeight: 1.6,
-                                        flex: 1
-                                    }}>
-                                        "{testimonial.text}"
-                                    </Text>
-
-                                    <div style={{ marginTop: 'auto' }}>
-                                        <Text style={{
-                                            color: 'var(--lp-text-primary)',
-                                            fontWeight: 700,
-                                            display: 'block',
-                                            marginBottom: 2
-                                        }}>
-                                            {testimonial.author}
-                                        </Text>
-                                        <Text style={{
-                                            color: 'var(--lp-text-secondary)',
-                                            fontSize: '13px',
-                                            opacity: 0.8
-                                        }}>
-                                            {testimonial.role}
-                                        </Text>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Navigation Arrows for context (Visual only as native scroll is used for simplicity/touch) */}
+                        {/* Navigation Buttons */}
                         <div className="desktop-arrows" style={{
                             position: 'absolute',
                             top: '50%',
@@ -451,10 +374,15 @@ export function LandingPage({ products }: LandingPageProps) {
                                 height: 48,
                                 background: 'rgba(255,255,255,0.05)',
                                 color: 'var(--lp-text-primary)',
-                                backdropFilter: 'blur(4px)'
+                                backdropFilter: 'blur(4px)',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
                             }} onClick={() => {
                                 const container = document.querySelector('.testimonials-scroll');
-                                if (container) container.scrollBy({ left: -300, behavior: 'smooth' });
+                                if (container) {
+                                    // Scroll by roughly one card width
+                                    const cardWidth = container.querySelector('.testimonial-card')?.clientWidth || 350;
+                                    container.scrollBy({ left: -(cardWidth + 24), behavior: 'smooth' });
+                                }
                             }}>
                                 <Icon data={ChevronLeft} size={24} />
                             </Button>
@@ -465,13 +393,98 @@ export function LandingPage({ products }: LandingPageProps) {
                                 height: 48,
                                 background: 'rgba(255,255,255,0.05)',
                                 color: 'var(--lp-text-primary)',
-                                backdropFilter: 'blur(4px)'
+                                backdropFilter: 'blur(4px)',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
                             }} onClick={() => {
                                 const container = document.querySelector('.testimonials-scroll');
-                                if (container) container.scrollBy({ left: 300, behavior: 'smooth' });
+                                if (container) {
+                                    const cardWidth = container.querySelector('.testimonial-card')?.clientWidth || 350;
+                                    container.scrollBy({ left: (cardWidth + 24), behavior: 'smooth' });
+                                }
                             }}>
                                 <Icon data={ChevronRight} size={24} />
                             </Button>
+                        </div>
+
+                        <div style={{
+                            display: 'flex',
+                            overflowX: 'auto',
+                            gap: '24px',
+                            padding: '20px 4px',
+                            scrollSnapType: 'x mandatory',
+                            scrollbarWidth: 'none',
+                            alignItems: 'stretch'
+                        }} className="testimonials-scroll">
+                            {[
+                                { text: "Vendí mi iPhone 13 Pro Max al toque. Me ofrecieron un precio justo y la transferencia fue inmediata. ¡Súper seguro!", author: "Javier M.", role: "Vendedor" },
+                                { text: "Compré una MacBook Air M1 y está impecable, parece nueva. La atención por WhatsApp fue A1 en todo momento.", author: "Sofía R.", role: "Comprador" },
+                                { text: "Tenía miedo de vender mi celular por Facebook, pero aquí vinieron a mi oficina, revisaron todo y me pagaron. Recomendado.", author: "Miguel Ángel C.", role: "Vendedor" },
+                                { text: "El iPhone 12 que pedí llegó con batería al 100% y sin rayones. Además me dieron garantía de un año. ¡Gracias!", author: "Andrea V.", role: "Comprador" },
+                                { text: "Excelente servicio de renovación. Entregué mi iPhone anterior y me llevé uno más moderno pagando la diferencia.", author: "Carlos T.", role: "Comprador" },
+                                { text: "Me gusta que sean transparentes con el estado del equipo. Las fotos eran reales y el producto tal cual la descripción.", author: "Fiorella P.", role: "Comprador" },
+                                { text: "Venta rápida y sin rodeos. Revisaron mi equipo en 15 minutos y procedieron con el pago. Muy profesionales.", author: "Ricardo O.", role: "Vendedor" },
+                                { text: "Ya es el tercer equipo que compro para mi empresa con ustedes. Factura, garantía y buenos precios.", author: "Pedro S.", role: "Comprador Corporativo" },
+                                { text: "Me salvó la vida el envío express, necesitaba el celular para un viaje y llegó en menos de 24 horas.", author: "Lucía G.", role: "Comprador" },
+                                { text: "La atención post-venta es lo mejor. Tuve una duda con la configuración y me ayudaron al instante.", author: "Juan Diego L.", role: "Comprador" },
+                                { text: "Vendí mi iPad que ya no usaba. Mejor precio que en las tiendas de Apple y mucho más rápido.", author: "Carmen B.", role: "Vendedor" },
+                                { text: "Compré un Apple Watch reacondicionado y funciona perfecto para mis entrenamientos. ¡Un golazo!", author: "Roberto K.", role: "Comprador" },
+                                { text: "Seguridad total. No tienes que encontrarte con extraños en la calle. Todo es formal y verificado.", author: "Elena M.", role: "Vendedor" },
+                                { text: "Buscaba un iPhone para mi hija y encontré uno en estado 'Bueno' que se ve excelente. Ahorré bastante.", author: "Patricia Z.", role: "Comprador" },
+                                { text: "El proceso de certificación me dio confianza. Saber que revisan 50 puntos antes de venderlo es clave.", author: "Jorge A.", role: "Comprador" },
+                                { text: "Trato directo y amable. Se nota que saben de productos Apple. Resolvieron todas mis dudas.", author: "Mariana F.", role: "Vendedor" },
+                                { text: "Tenía dudas sobre la batería, pero vino con 95% de condición. Dura todo el día sin problemas.", author: "Luis G.", role: "Comprador" },
+                                { text: "Pude pagar con tarjeta de crédito en cuotas, lo cual me facilitó mucho la compra de mi nueva Mac.", author: "Vanessa Q.", role: "Comprador" },
+                                { text: "Lo mejor es la garantía. Saber que si pasa algo responden es una tranquilidad que no te da marketplace.", author: "Fernando D.", role: "Comprador" },
+                                { text: "Recomendadísimos. Vendí un iPhone y compré otro ahí mismo. Todo en una sola cita. Práctico y seguro.", author: "Augusto P.", role: "Cliente Frecuente" }
+                            ].map((testimonial, i) => (
+                                <div key={i} className="glass-panel hover-card testimonial-card" style={{
+                                    flex: '0 0 auto',
+                                    // Mobile default, overridden by CSS
+                                    width: '85vw',
+                                    padding: 'clamp(24px, 5vw, 32px)',
+                                    borderRadius: '24px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 16,
+                                    scrollSnapAlign: 'start',
+                                    backgroundColor: 'rgba(10, 10, 15, 0.4)'
+                                }}>
+                                    {/* Stars */}
+                                    <div style={{ display: 'flex', gap: 4 }}>
+                                        {[1, 2, 3, 4, 5].map(star => (
+                                            <span key={star} style={{ color: '#fbbf24', fontSize: '18px' }}>★</span>
+                                        ))}
+                                    </div>
+
+                                    <Text style={{
+                                        color: 'var(--lp-text-secondary)',
+                                        fontStyle: 'italic',
+                                        fontSize: '15px',
+                                        lineHeight: 1.6,
+                                        flex: 1
+                                    }}>
+                                        "{testimonial.text}"
+                                    </Text>
+
+                                    <div style={{ marginTop: 'auto', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: 12 }}>
+                                        <Text style={{
+                                            color: 'var(--lp-text-primary)',
+                                            fontWeight: 700,
+                                            display: 'block',
+                                            marginBottom: 2
+                                        }}>
+                                            {testimonial.author}
+                                        </Text>
+                                        <Text style={{
+                                            color: 'var(--lp-text-secondary)',
+                                            fontSize: '13px',
+                                            opacity: 0.8
+                                        }}>
+                                            {testimonial.role}
+                                        </Text>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </Container>
@@ -594,6 +607,24 @@ export function LandingPage({ products }: LandingPageProps) {
                 .hover-card:hover {
                     transform: translateY(-5px);
                 }
+                
+                /* Testimonial Card Width Logic */
+                .testimonial-card {
+                    --card-width: 85vw; /* Default mobile */
+                }
+                
+                @media (min-width: 768px) {
+                    .testimonial-card {
+                         --card-width: calc((100% - 24px) / 2); /* Tablet: 2 items */
+                    }
+                }
+                
+                @media (min-width: 1024px) {
+                    .testimonial-card {
+                        --card-width: calc((100% - 48px) / 3); /* Desktop: 3 items exactly (2 gaps of 24px) */
+                    }
+                }
+
                 @media (max-width: 480px) {
                     .w-full-mobile {
                         width: 100% !important;
@@ -602,6 +633,10 @@ export function LandingPage({ products }: LandingPageProps) {
                     }
                     .hidden-mobile {
                         display: none;
+                    }
+                    /* Hide arrows on mobile to prefer swipe */
+                    .desktop-arrows {
+                        display: none !important;
                     }
                 }
             `}} />
