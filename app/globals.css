@@ -19,10 +19,11 @@
 }
 
 body {
-  background: radial-gradient(circle at 50% 0%, #1a1b26 0%, #000000 100%);
-  color: var(--foreground);
+  background: var(--g-color-base-background);
+  color: var(--g-color-text-primary);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Glassmorphism Classes */

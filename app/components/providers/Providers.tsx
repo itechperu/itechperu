@@ -6,7 +6,7 @@ import { ThemeProvider } from '@gravity-ui/uikit';
 export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <SessionProvider>
-            <ThemeProvider theme="dark">
+            <ThemeProvider>
                 {children}
             </ThemeProvider>
         </SessionProvider>
