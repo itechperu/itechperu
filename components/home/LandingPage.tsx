@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Container, Text, Button } from '@gravity-ui/uikit';
+import { Container, Text, Button, Icon } from '@gravity-ui/uikit';
+import { ChevronLeft, ChevronRight } from '@gravity-ui/icons';
 import Link from 'next/link';
 import { ProductList } from '@/app/components/ProductList';
 
@@ -307,7 +308,7 @@ export function LandingPage({ products }: LandingPageProps) {
                         </Text>
                     </div>
                     <Text variant="display-2" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         fontWeight: 800,
                         display: 'block',
                         marginBottom: 16,
@@ -316,7 +317,7 @@ export function LandingPage({ products }: LandingPageProps) {
                         Selección Premium
                     </Text>
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(16px, 3vw, 18px)',
                         display: 'block',
                         maxWidth: '600px',
@@ -327,6 +328,154 @@ export function LandingPage({ products }: LandingPageProps) {
                 </div>
                 <ProductList products={products} />
             </div>
+
+            {/* --- TESTIMONIALS SECTION --- */}
+            <section style={{ padding: 'clamp(60px, 10vw, 100px) 20px', position: 'relative' }}>
+                <Container maxWidth="l">
+                    <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 60px)' }}>
+                        <Text variant="display-2" style={{
+                            color: 'var(--lp-text-primary)',
+                            fontWeight: 800,
+                            marginBottom: 20,
+                            display: 'block',
+                            fontSize: 'clamp(28px, 6vw, 48px)'
+                        }}>
+                            Lo que dicen nuestros usuarios
+                        </Text>
+                        <Text style={{
+                            color: 'var(--lp-text-secondary)',
+                            fontSize: 'clamp(16px, 3vw, 18px)',
+                            display: 'block',
+                            maxWidth: '600px',
+                            margin: '0 auto'
+                        }}>
+                            Miles de peruanos ya confían en iTech Peru
+                        </Text>
+                    </div>
+
+                    <div style={{ position: 'relative', overflow: 'hidden' }}>
+                        {/* Navigation Buttons - Desktop Outside Container if possible, or inside with absolute */}
+                        <div style={{
+                            display: 'flex',
+                            overflowX: 'auto',
+                            gap: '24px',
+                            padding: '20px 4px', // Space for shadows
+                            scrollSnapType: 'x mandatory',
+                            scrollbarWidth: 'none',
+                            justifyContent: 'center',
+                            flexWrap: 'wrap'
+                        }} className="testimonials-scroll">
+                            {[
+                                {
+                                    text: "Vendí mi iPhone sin preocuparme por estafas. El proceso fue super simple y el pago rápido.",
+                                    author: "María García",
+                                    role: "Vendedora"
+                                },
+                                {
+                                    text: "Compré una laptop usada y llegó exactamente como la describieron. ¡Excelente servicio de verificación!",
+                                    author: "Carlos López",
+                                    role: "Comprador"
+                                },
+                                {
+                                    text: "Ya hice 5 ventas con iTech Peru. Mis compradores confían más cuando uso la plataforma.",
+                                    author: "Ana Torres",
+                                    role: "Vendedora"
+                                }
+                            ].map((testimonial, i) => (
+                                <div key={i} className="glass-panel hover-card" style={{
+                                    flex: '0 0 auto',
+                                    width: 'clamp(280px, 80vw, 350px)',
+                                    padding: 'clamp(24px, 5vw, 32px)',
+                                    borderRadius: '24px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 16,
+                                    scrollSnapAlign: 'center',
+                                    backgroundColor: 'rgba(10, 10, 15, 0.4)' // Slightly darker background for contrast
+                                }}>
+                                    {/* Stars */}
+                                    <div style={{ display: 'flex', gap: 4 }}>
+                                        {[1, 2, 3, 4, 5].map(star => (
+                                            <span key={star} style={{ color: '#fbbf24', fontSize: '18px' }}>★</span>
+                                        ))}
+                                    </div>
+
+                                    <Text style={{
+                                        color: 'var(--lp-text-secondary)',
+                                        fontStyle: 'italic',
+                                        fontSize: '15px',
+                                        lineHeight: 1.6,
+                                        flex: 1
+                                    }}>
+                                        "{testimonial.text}"
+                                    </Text>
+
+                                    <div style={{ marginTop: 'auto' }}>
+                                        <Text style={{
+                                            color: 'var(--lp-text-primary)',
+                                            fontWeight: 700,
+                                            display: 'block',
+                                            marginBottom: 2
+                                        }}>
+                                            {testimonial.author}
+                                        </Text>
+                                        <Text style={{
+                                            color: 'var(--lp-text-secondary)',
+                                            fontSize: '13px',
+                                            opacity: 0.8
+                                        }}>
+                                            {testimonial.role}
+                                        </Text>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Navigation Arrows for context (Visual only as native scroll is used for simplicity/touch) */}
+                        <div className="desktop-arrows" style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: 0,
+                            right: 0,
+                            transform: 'translateY(-50%)',
+                            pointerEvents: 'none',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            padding: '0 10px',
+                            zIndex: 10
+                        }}>
+                            <Button view="flat" size="l" style={{
+                                pointerEvents: 'auto',
+                                borderRadius: '50%',
+                                width: 48,
+                                height: 48,
+                                background: 'rgba(255,255,255,0.05)',
+                                color: 'var(--lp-text-primary)',
+                                backdropFilter: 'blur(4px)'
+                            }} onClick={() => {
+                                const container = document.querySelector('.testimonials-scroll');
+                                if (container) container.scrollBy({ left: -300, behavior: 'smooth' });
+                            }}>
+                                <Icon data={ChevronLeft} size={24} />
+                            </Button>
+                            <Button view="flat" size="l" style={{
+                                pointerEvents: 'auto',
+                                borderRadius: '50%',
+                                width: 48,
+                                height: 48,
+                                background: 'rgba(255,255,255,0.05)',
+                                color: 'var(--lp-text-primary)',
+                                backdropFilter: 'blur(4px)'
+                            }} onClick={() => {
+                                const container = document.querySelector('.testimonials-scroll');
+                                if (container) container.scrollBy({ left: 300, behavior: 'smooth' });
+                            }}>
+                                <Icon data={ChevronRight} size={24} />
+                            </Button>
+                        </div>
+                    </div>
+                </Container>
+            </section>
 
             {/* --- FAQ SECTION --- */}
             <section style={{ padding: 'clamp(60px, 10vw, 100px) 20px', background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.5))' }}>
