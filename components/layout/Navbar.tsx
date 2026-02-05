@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { Button, Icon, Text } from '@gravity-ui/uikit';
@@ -43,7 +43,7 @@ export function Navbar() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: '#fff',
+                                color: 'var(--lp-text-primary)',
                                 fontWeight: 900,
                                 fontSize: 'clamp(16px, 3vw, 20px)',
                                 boxShadow: '0 0 15px rgba(34,197,94,0.3)'
@@ -147,7 +147,7 @@ export function Navbar() {
                                         padding: '0 clamp(16px, 3vw, 24px)'
                                     }}>
                                         <Icon data={Person} size={18} style={{ marginRight: 8 }} />
-                                        <span className="button-text">Iniciar Sesión</span>
+                                        <span className="button-text">Iniciar SesiÃ³n</span>
                                     </Button>
                                 </Link>
                             )}
@@ -156,7 +156,7 @@ export function Navbar() {
                         {/* Shopping Bag - Always visible */}
                         <Button view="action" size="l" style={{
                             background: 'linear-gradient(135deg, #22c55e, #10b981)',
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             borderRadius: '50px',
                             boxShadow: '0 0 20px rgba(34,197,94,0.3)',
                             minWidth: 'clamp(40px, 8vw, 48px)',
@@ -223,7 +223,7 @@ export function Navbar() {
                                     borderRadius: '12px'
                                 }}
                             >
-                                Cerrar Sesión
+                                Cerrar SesiÃ³n
                             </Button>
                         </>
                     ) : (
@@ -233,7 +233,7 @@ export function Navbar() {
                                 color: 'var(--lp-text-primary)',
                                 borderRadius: '12px'
                             }}>
-                                Iniciar Sesión
+                                Iniciar SesiÃ³n
                             </Button>
                         </Link>
                     )}

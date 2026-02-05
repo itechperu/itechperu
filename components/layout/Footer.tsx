@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { Text, Container } from '@gravity-ui/uikit';
@@ -8,7 +8,7 @@ export function Footer() {
     return (
         <footer style={{
             backgroundColor: '#0a0a0a',
-            color: '#fff',
+            color: 'var(--lp-text-primary)',
             padding: 'clamp(60px, 10vw, 80px) 0 20px',
             borderTop: '1px solid rgba(255,255,255,0.1)'
         }}>
@@ -30,13 +30,13 @@ export function Footer() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: '#fff',
+                                color: 'var(--lp-text-primary)',
                                 fontWeight: 900,
                                 fontSize: 'clamp(16px, 3vw, 20px)',
                                 boxShadow: '0 0 15px rgba(34,197,94,0.3)'
                             }}>iT</div>
                             <Text variant="header-2" style={{
-                                color: '#fff',
+                                color: 'var(--lp-text-primary)',
                                 fontWeight: 700,
                                 fontSize: 'clamp(18px, 3.5vw, 22px)'
                             }}>
@@ -44,11 +44,11 @@ export function Footer() {
                             </Text>
                         </div>
                         <Text style={{
-                            color: '#94a3b8',
+                            color: 'var(--lp-text-secondary)',
                             lineHeight: 1.6,
                             fontSize: 'clamp(13px, 2.5vw, 14px)'
                         }}>
-                            Tecnología premium reacondicionada. Compra inteligente, sostenible y con garantía.
+                            TecnologÃ­a premium reacondicionada. Compra inteligente, sostenible y con garantÃ­a.
                         </Text>
                         <div style={{ marginTop: 20, display: 'flex', gap: 12 }}>
                             <span style={{
@@ -56,26 +56,26 @@ export function Footer() {
                                 cursor: 'pointer',
                                 opacity: 0.7,
                                 transition: 'opacity 0.2s'
-                            }}>📱</span>
+                            }}>ðŸ“±</span>
                             <span style={{
                                 fontSize: 'clamp(20px, 4vw, 24px)',
                                 cursor: 'pointer',
                                 opacity: 0.7,
                                 transition: 'opacity 0.2s'
-                            }}>💬</span>
+                            }}>ðŸ’¬</span>
                             <span style={{
                                 fontSize: 'clamp(20px, 4vw, 24px)',
                                 cursor: 'pointer',
                                 opacity: 0.7,
                                 transition: 'opacity 0.2s'
-                            }}>📧</span>
+                            }}>ðŸ“§</span>
                         </div>
                     </div>
 
                     {/* Shop Links */}
                     <div>
                         <Text variant="subheader-2" style={{
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             marginBottom: 20,
                             display: 'block',
                             fontWeight: 700,
@@ -94,7 +94,7 @@ export function Footer() {
                             {['iPhone', 'MacBook', 'iPad', 'Watch'].map((item) => (
                                 <li key={item}>
                                     <Link href={`/shop?cat=${item}`} style={{
-                                        color: '#94a3b8',
+                                        color: 'var(--lp-text-secondary)',
                                         textDecoration: 'none',
                                         transition: 'color 0.2s',
                                         fontSize: 'clamp(13px, 2.5vw, 15px)'
@@ -109,7 +109,7 @@ export function Footer() {
                     {/* Support Links */}
                     <div>
                         <Text variant="subheader-2" style={{
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             marginBottom: 20,
                             display: 'block',
                             fontWeight: 700,
@@ -127,13 +127,13 @@ export function Footer() {
                         }}>
                             {[
                                 { label: 'Preguntas Frecuentes', href: '/info/faq' },
-                                { label: 'Garantía', href: '/info/garantia' },
-                                { label: 'Envíos', href: '/info/envios' },
+                                { label: 'GarantÃ­a', href: '/info/garantia' },
+                                { label: 'EnvÃ­os', href: '/info/envios' },
                                 { label: 'Contacto', href: '/info/contacto' }
                             ].map((item) => (
                                 <li key={item.href}>
                                     <Link href={item.href} style={{
-                                        color: '#94a3b8',
+                                        color: 'var(--lp-text-secondary)',
                                         textDecoration: 'none',
                                         transition: 'color 0.2s',
                                         fontSize: 'clamp(13px, 2.5vw, 15px)'
@@ -148,7 +148,7 @@ export function Footer() {
                     {/* Contact Info */}
                     <div>
                         <Text variant="subheader-2" style={{
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             marginBottom: 20,
                             display: 'block',
                             fontWeight: 700,
@@ -160,13 +160,13 @@ export function Footer() {
                             display: 'flex',
                             flexDirection: 'column',
                             gap: 12,
-                            color: '#94a3b8',
+                            color: 'var(--lp-text-secondary)',
                             fontSize: 'clamp(13px, 2.5vw, 14px)'
                         }}>
                             <div>
-                                <div style={{ marginBottom: 4, color: '#fff', fontWeight: 600 }}>Email</div>
+                                <div style={{ marginBottom: 4, color: 'var(--lp-text-primary)', fontWeight: 600 }}>Email</div>
                                 <a href="mailto:contacto@itech.pe" style={{
-                                    color: '#94a3b8',
+                                    color: 'var(--lp-text-secondary)',
                                     textDecoration: 'none',
                                     fontSize: 'clamp(13px, 2.5vw, 14px)'
                                 }}>
@@ -174,9 +174,9 @@ export function Footer() {
                                 </a>
                             </div>
                             <div>
-                                <div style={{ marginBottom: 4, color: '#fff', fontWeight: 600 }}>WhatsApp</div>
+                                <div style={{ marginBottom: 4, color: 'var(--lp-text-primary)', fontWeight: 600 }}>WhatsApp</div>
                                 <a href="https://wa.me/51999999999" style={{
-                                    color: '#94a3b8',
+                                    color: 'var(--lp-text-secondary)',
                                     textDecoration: 'none',
                                     fontSize: 'clamp(13px, 2.5vw, 14px)'
                                 }}>
@@ -184,7 +184,7 @@ export function Footer() {
                                 </a>
                             </div>
                             <div>
-                                <div style={{ marginBottom: 4, color: '#fff', fontWeight: 600 }}>Horario</div>
+                                <div style={{ marginBottom: 4, color: 'var(--lp-text-primary)', fontWeight: 600 }}>Horario</div>
                                 <div style={{ fontSize: 'clamp(13px, 2.5vw, 14px)' }}>Lun - Vie: 9AM - 7PM</div>
                             </div>
                         </div>
@@ -205,7 +205,7 @@ export function Footer() {
                         color: '#6b7280',
                         fontSize: 'clamp(12px, 2.5vw, 14px)'
                     }}>
-                        © 2024 iTech Peru. Todos los derechos reservados.
+                        Â© 2024 iTech Peru. Todos los derechos reservados.
                     </Text>
                     <div style={{
                         display: 'flex',
@@ -224,7 +224,7 @@ export function Footer() {
                             textDecoration: 'none',
                             fontSize: 'clamp(12px, 2.5vw, 14px)'
                         }}>
-                            Términos
+                            TÃ©rminos
                         </Link>
                     </div>
                 </div>

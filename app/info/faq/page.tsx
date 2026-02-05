@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { Container, Text } from '@gravity-ui/uikit';
@@ -7,36 +7,36 @@ import Link from 'next/link';
 export default function FAQPage() {
     const faqs = [
         {
-            question: "¿Qué significa 'Refurbished' o 'Reacondicionado'?",
-            answer: "Son equipos de segunda mano que han pasado por un riguroso proceso de inspección, limpieza y restauración. Cada dispositivo es probado en más de 50 puntos de control para garantizar que funcione como nuevo."
+            question: "Â¿QuÃ© significa 'Refurbished' o 'Reacondicionado'?",
+            answer: "Son equipos de segunda mano que han pasado por un riguroso proceso de inspecciÃ³n, limpieza y restauraciÃ³n. Cada dispositivo es probado en mÃ¡s de 50 puntos de control para garantizar que funcione como nuevo."
         },
         {
-            question: "¿Los equipos tienen garantía?",
-            answer: "Sí, todos nuestros productos incluyen 12 meses de garantía extendida. Esto cubre cualquier falla de hardware o defecto de fabricación."
+            question: "Â¿Los equipos tienen garantÃ­a?",
+            answer: "SÃ­, todos nuestros productos incluyen 12 meses de garantÃ­a extendida. Esto cubre cualquier falla de hardware o defecto de fabricaciÃ³n."
         },
         {
-            question: "¿Qué incluye el proceso de certificación?",
-            answer: "Nuestro proceso incluye: diagnóstico completo de hardware y software, limpieza profunda, reemplazo de batería (si es necesario), actualización de componentes desgastados, y pruebas de rendimiento exhaustivas."
+            question: "Â¿QuÃ© incluye el proceso de certificaciÃ³n?",
+            answer: "Nuestro proceso incluye: diagnÃ³stico completo de hardware y software, limpieza profunda, reemplazo de baterÃ­a (si es necesario), actualizaciÃ³n de componentes desgastados, y pruebas de rendimiento exhaustivas."
         },
         {
-            question: "¿Puedo devolver un producto?",
-            answer: "Sí, tienes 7 días desde la recepción del producto para devolverlo si no estás satisfecho. El equipo debe estar en las mismas condiciones en que lo recibiste."
+            question: "Â¿Puedo devolver un producto?",
+            answer: "SÃ­, tienes 7 dÃ­as desde la recepciÃ³n del producto para devolverlo si no estÃ¡s satisfecho. El equipo debe estar en las mismas condiciones en que lo recibiste."
         },
         {
-            question: "¿Los equipos son originales de Apple?",
-            answer: "Sí, todos nuestros productos son 100% originales de Apple. Verificamos la autenticidad de cada componente durante el proceso de certificación."
+            question: "Â¿Los equipos son originales de Apple?",
+            answer: "SÃ­, todos nuestros productos son 100% originales de Apple. Verificamos la autenticidad de cada componente durante el proceso de certificaciÃ³n."
         },
         {
-            question: "¿Cuál es la diferencia entre las condiciones (Excelente, Muy Bueno, etc.)?",
-            answer: "La condición se refiere al estado estético del equipo. 'Excelente' tiene mínimas marcas de uso, 'Muy Bueno' puede tener pequeños rayones, etc. Todos funcionan perfectamente independientemente de la condición estética."
+            question: "Â¿CuÃ¡l es la diferencia entre las condiciones (Excelente, Muy Bueno, etc.)?",
+            answer: "La condiciÃ³n se refiere al estado estÃ©tico del equipo. 'Excelente' tiene mÃ­nimas marcas de uso, 'Muy Bueno' puede tener pequeÃ±os rayones, etc. Todos funcionan perfectamente independientemente de la condiciÃ³n estÃ©tica."
         },
         {
-            question: "¿Puedo comprar en cuotas?",
-            answer: "Próximamente habilitaremos opciones de financiamiento. Por ahora aceptamos pago al contado mediante transferencia bancaria o tarjeta."
+            question: "Â¿Puedo comprar en cuotas?",
+            answer: "PrÃ³ximamente habilitaremos opciones de financiamiento. Por ahora aceptamos pago al contado mediante transferencia bancaria o tarjeta."
         },
         {
-            question: "¿Hacen envíos a provincias?",
-            answer: "Sí, realizamos envíos a todo el Perú. Los tiempos de entrega varían según la ubicación: Lima 24-48h, provincias 3-5 días hábiles."
+            question: "Â¿Hacen envÃ­os a provincias?",
+            answer: "SÃ­, realizamos envÃ­os a todo el PerÃº. Los tiempos de entrega varÃ­an segÃºn la ubicaciÃ³n: Lima 24-48h, provincias 3-5 dÃ­as hÃ¡biles."
         }
     ];
 
@@ -59,12 +59,12 @@ export default function FAQPage() {
                         textDecoration: 'none'
                     }}>
                         <Text style={{ color: '#22c55e', fontSize: '12px', fontWeight: 600 }}>
-                            ← Volver a la tienda
+                            â† Volver a la tienda
                         </Text>
                     </Link>
 
                     <Text variant="display-2" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         fontWeight: 800,
                         marginBottom: 20,
                         display: 'block',
@@ -74,7 +74,7 @@ export default function FAQPage() {
                     </Text>
 
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(16px, 3vw, 18px)',
                         display: 'block',
                         maxWidth: '600px',
@@ -94,7 +94,7 @@ export default function FAQPage() {
                             transition: 'all 0.3s'
                         }}>
                             <Text variant="header-2" style={{
-                                color: '#fff',
+                                color: 'var(--lp-text-primary)',
                                 marginBottom: 16,
                                 fontWeight: 700,
                                 fontSize: 'clamp(16px, 3.5vw, 20px)',
@@ -103,7 +103,7 @@ export default function FAQPage() {
                                 {faq.question}
                             </Text>
                             <Text style={{
-                                color: '#94a3b8',
+                                color: 'var(--lp-text-secondary)',
                                 lineHeight: 1.7,
                                 fontSize: 'clamp(14px, 2.5vw, 16px)'
                             }}>
@@ -122,27 +122,27 @@ export default function FAQPage() {
                     background: 'rgba(34,197,94,0.05)'
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         fontSize: 'clamp(20px, 4vw, 28px)',
                         display: 'block',
                         marginBottom: 20
                     }}>
-                        ¿Tienes más preguntas?
+                        Â¿Tienes mÃ¡s preguntas?
                     </Text>
 
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(14px, 2.5vw, 16px)',
                         display: 'block',
                         marginBottom: 28
                     }}>
-                        Estamos aquí para ayudarte
+                        Estamos aquÃ­ para ayudarte
                     </Text>
 
                     <Link href="/info/contacto">
                         <button style={{
                             background: 'linear-gradient(135deg, #22c55e, #10b981)',
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             padding: 'clamp(12px, 2vw, 14px) clamp(24px, 4vw, 32px)',
                             borderRadius: '50px',
                             border: 'none',
@@ -151,7 +151,7 @@ export default function FAQPage() {
                             cursor: 'pointer',
                             boxShadow: '0 0 30px rgba(34,197,94,0.3)'
                         }}>
-                            Contáctanos
+                            ContÃ¡ctanos
                         </button>
                     </Link>
                 </div>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { Container, Text } from '@gravity-ui/uikit';
@@ -24,31 +24,31 @@ export default function WarrantyPage() {
                         textDecoration: 'none'
                     }}>
                         <Text style={{ color: '#22c55e', fontSize: '12px', fontWeight: 600 }}>
-                            ← Volver a la tienda
+                            â† Volver a la tienda
                         </Text>
                     </Link>
 
-                    <div style={{ fontSize: 'clamp(48px, 10vw, 64px)', marginBottom: 20 }}>🛡️</div>
+                    <div style={{ fontSize: 'clamp(48px, 10vw, 64px)', marginBottom: 20 }}>ðŸ›¡ï¸</div>
 
                     <Text variant="display-2" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         fontWeight: 800,
                         marginBottom: 20,
                         display: 'block',
                         fontSize: 'clamp(28px, 6vw, 48px)'
                     }}>
-                        Garantía Premium
+                        GarantÃ­a Premium
                     </Text>
 
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(16px, 3vw, 18px)',
                         display: 'block',
                         maxWidth: '600px',
                         margin: '0 auto',
                         padding: '0 16px'
                     }}>
-                        12 meses de protección total para tu tranquilidad
+                        12 meses de protecciÃ³n total para tu tranquilidad
                     </Text>
                 </div>
 
@@ -59,20 +59,20 @@ export default function WarrantyPage() {
                     marginBottom: 32
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         marginBottom: 24,
                         fontSize: 'clamp(20px, 4vw, 28px)'
                     }}>
-                        ¿Qué cubre nuestra garantía?
+                        Â¿QuÃ© cubre nuestra garantÃ­a?
                     </Text>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                         {[
-                            { icon: '✅', title: 'Defectos de Hardware', desc: 'Cualquier falla en componentes internos (placa madre, procesador, memoria, etc.)' },
-                            { icon: '✅', title: 'Problemas de Batería', desc: 'Si la batería no mantiene la carga según especificaciones' },
-                            { icon: '✅', title: 'Pantalla y Display', desc: 'Píxeles muertos, manchas o problemas de visualización' },
-                            { icon: '✅', title: 'Conectividad', desc: 'Problemas con WiFi, Bluetooth, puertos USB o carga' },
-                            { icon: '✅', title: 'Sistema Operativo', desc: 'Fallos de software relacionados con el sistema' }
+                            { icon: 'âœ…', title: 'Defectos de Hardware', desc: 'Cualquier falla en componentes internos (placa madre, procesador, memoria, etc.)' },
+                            { icon: 'âœ…', title: 'Problemas de BaterÃ­a', desc: 'Si la baterÃ­a no mantiene la carga segÃºn especificaciones' },
+                            { icon: 'âœ…', title: 'Pantalla y Display', desc: 'PÃ­xeles muertos, manchas o problemas de visualizaciÃ³n' },
+                            { icon: 'âœ…', title: 'Conectividad', desc: 'Problemas con WiFi, Bluetooth, puertos USB o carga' },
+                            { icon: 'âœ…', title: 'Sistema Operativo', desc: 'Fallos de software relacionados con el sistema' }
                         ].map((item, i) => (
                             <div key={i} style={{
                                 display: 'flex',
@@ -86,14 +86,14 @@ export default function WarrantyPage() {
                                 <span style={{ fontSize: '24px', flexShrink: 0 }}>{item.icon}</span>
                                 <div style={{ flex: 1 }}>
                                     <Text variant="subheader-2" style={{
-                                        color: '#fff',
+                                        color: 'var(--lp-text-primary)',
                                         marginBottom: 8,
                                         fontSize: 'clamp(16px, 3vw, 18px)'
                                     }}>
                                         {item.title}
                                     </Text>
                                     <Text style={{
-                                        color: '#94a3b8',
+                                        color: 'var(--lp-text-secondary)',
                                         fontSize: 'clamp(14px, 2.5vw, 16px)',
                                         lineHeight: 1.6
                                     }}>
@@ -112,20 +112,20 @@ export default function WarrantyPage() {
                     marginBottom: 32
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         marginBottom: 24,
                         fontSize: 'clamp(20px, 4vw, 28px)'
                     }}>
-                        ¿Qué NO cubre la garantía?
+                        Â¿QuÃ© NO cubre la garantÃ­a?
                     </Text>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                         {[
-                            'Daños físicos por caídas, golpes o líquidos',
+                            'DaÃ±os fÃ­sicos por caÃ­das, golpes o lÃ­quidos',
                             'Modificaciones no autorizadas o apertura del equipo',
-                            'Daños causados por uso inadecuado o negligencia',
+                            'DaÃ±os causados por uso inadecuado o negligencia',
                             'Software de terceros o virus',
-                            'Desgaste estético normal (rayones superficiales)'
+                            'Desgaste estÃ©tico normal (rayones superficiales)'
                         ].map((item, i) => (
                             <div key={i} style={{
                                 display: 'flex',
@@ -133,9 +133,9 @@ export default function WarrantyPage() {
                                 alignItems: 'flex-start',
                                 padding: '8px 0'
                             }}>
-                                <span style={{ color: '#ef4444', fontSize: '20px', flexShrink: 0 }}>❌</span>
+                                <span style={{ color: '#ef4444', fontSize: '20px', flexShrink: 0 }}>âŒ</span>
                                 <Text style={{
-                                    color: '#94a3b8',
+                                    color: 'var(--lp-text-secondary)',
                                     fontSize: 'clamp(14px, 2.5vw, 16px)',
                                     lineHeight: 1.6
                                 }}>
@@ -153,19 +153,19 @@ export default function WarrantyPage() {
                     marginBottom: 32
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         marginBottom: 24,
                         fontSize: 'clamp(20px, 4vw, 28px)'
                     }}>
-                        ¿Cómo hacer válida la garantía?
+                        Â¿CÃ³mo hacer vÃ¡lida la garantÃ­a?
                     </Text>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                         {[
-                            { step: '1', title: 'Contacta con nosotros', desc: 'Envía un email a soporte@itech.pe o llámanos' },
-                            { step: '2', title: 'Describe el problema', desc: 'Explica detalladamente qué está fallando' },
-                            { step: '3', title: 'Envío del equipo', desc: 'Te daremos una dirección para enviar el dispositivo' },
-                            { step: '4', title: 'Reparación o reemplazo', desc: 'Evaluamos y reparamos o reemplazamos en 5-7 días' }
+                            { step: '1', title: 'Contacta con nosotros', desc: 'EnvÃ­a un email a soporte@itech.pe o llÃ¡manos' },
+                            { step: '2', title: 'Describe el problema', desc: 'Explica detalladamente quÃ© estÃ¡ fallando' },
+                            { step: '3', title: 'EnvÃ­o del equipo', desc: 'Te daremos una direcciÃ³n para enviar el dispositivo' },
+                            { step: '4', title: 'ReparaciÃ³n o reemplazo', desc: 'Evaluamos y reparamos o reemplazamos en 5-7 dÃ­as' }
                         ].map((item, i) => (
                             <div key={i} style={{
                                 display: 'flex',
@@ -183,20 +183,20 @@ export default function WarrantyPage() {
                                     justifyContent: 'center',
                                     flexShrink: 0,
                                     fontWeight: 900,
-                                    color: '#fff'
+                                    color: 'var(--lp-text-primary)'
                                 }}>
                                     {item.step}
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <Text variant="subheader-2" style={{
-                                        color: '#fff',
+                                        color: 'var(--lp-text-primary)',
                                         marginBottom: 8,
                                         fontSize: 'clamp(16px, 3vw, 18px)'
                                     }}>
                                         {item.title}
                                     </Text>
                                     <Text style={{
-                                        color: '#94a3b8',
+                                        color: 'var(--lp-text-secondary)',
                                         fontSize: 'clamp(14px, 2.5vw, 16px)',
                                         lineHeight: 1.6
                                     }}>
@@ -216,27 +216,27 @@ export default function WarrantyPage() {
                     background: 'rgba(34,197,94,0.05)'
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         fontSize: 'clamp(20px, 4vw, 28px)',
                         display: 'block',
                         marginBottom: 20
                     }}>
-                        ¿Necesitas hacer válida tu garantía?
+                        Â¿Necesitas hacer vÃ¡lida tu garantÃ­a?
                     </Text>
 
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(14px, 2.5vw, 16px)',
                         display: 'block',
                         marginBottom: 28
                     }}>
-                        Nuestro equipo está listo para ayudarte
+                        Nuestro equipo estÃ¡ listo para ayudarte
                     </Text>
 
                     <Link href="/info/contacto">
                         <button style={{
                             background: 'linear-gradient(135deg, #22c55e, #10b981)',
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             padding: 'clamp(12px, 2vw, 14px) clamp(24px, 4vw, 32px)',
                             borderRadius: '50px',
                             border: 'none',

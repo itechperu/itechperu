@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { Container, Text, TextInput, Button } from '@gravity-ui/uikit';
@@ -39,31 +39,31 @@ export default function ContactPage() {
                         textDecoration: 'none'
                     }}>
                         <Text style={{ color: '#22c55e', fontSize: '12px', fontWeight: 600 }}>
-                            ← Volver a la tienda
+                            â† Volver a la tienda
                         </Text>
                     </Link>
 
-                    <div style={{ fontSize: 'clamp(48px, 10vw, 64px)', marginBottom: 20 }}>💬</div>
+                    <div style={{ fontSize: 'clamp(48px, 10vw, 64px)', marginBottom: 20 }}>ðŸ’¬</div>
 
                     <Text variant="display-2" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         fontWeight: 800,
                         marginBottom: 20,
                         display: 'block',
                         fontSize: 'clamp(28px, 6vw, 48px)'
                     }}>
-                        Contáctanos
+                        ContÃ¡ctanos
                     </Text>
 
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(16px, 3vw, 18px)',
                         display: 'block',
                         maxWidth: '600px',
                         margin: '0 auto',
                         padding: '0 16px'
                     }}>
-                        Estamos aquí para ayudarte con cualquier consulta
+                        Estamos aquÃ­ para ayudarte con cualquier consulta
                     </Text>
                 </div>
 
@@ -78,11 +78,11 @@ export default function ContactPage() {
                         borderRadius: '24px'
                     }}>
                         <Text variant="header-1" style={{
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             marginBottom: 24,
                             fontSize: 'clamp(20px, 4vw, 28px)'
                         }}>
-                            Envíanos un mensaje
+                            EnvÃ­anos un mensaje
                         </Text>
 
                         {submitted && (
@@ -97,7 +97,7 @@ export default function ContactPage() {
                                     color: '#22c55e',
                                     fontSize: 'clamp(13px, 2.5vw, 15px)'
                                 }}>
-                                    ✅ Mensaje enviado exitosamente. Te responderemos pronto.
+                                    âœ… Mensaje enviado exitosamente. Te responderemos pronto.
                                 </Text>
                             </div>
                         )}
@@ -105,7 +105,7 @@ export default function ContactPage() {
                         <form onSubmit={handleSubmit}>
                             <div style={{ marginBottom: 20 }}>
                                 <Text style={{
-                                    color: '#fff',
+                                    color: 'var(--lp-text-primary)',
                                     marginBottom: 8,
                                     display: 'block',
                                     fontSize: 'clamp(14px, 2.5vw, 16px)'
@@ -116,14 +116,14 @@ export default function ContactPage() {
                                     size="xl"
                                     value={formData.name}
                                     onUpdate={(value) => setFormData({ ...formData, name: value })}
-                                    placeholder="Juan Pérez"
+                                    placeholder="Juan PÃ©rez"
                                     style={{ width: '100%' }}
                                 />
                             </div>
 
                             <div style={{ marginBottom: 20 }}>
                                 <Text style={{
-                                    color: '#fff',
+                                    color: 'var(--lp-text-primary)',
                                     marginBottom: 8,
                                     display: 'block',
                                     fontSize: 'clamp(14px, 2.5vw, 16px)'
@@ -142,12 +142,12 @@ export default function ContactPage() {
 
                             <div style={{ marginBottom: 20 }}>
                                 <Text style={{
-                                    color: '#fff',
+                                    color: 'var(--lp-text-primary)',
                                     marginBottom: 8,
                                     display: 'block',
                                     fontSize: 'clamp(14px, 2.5vw, 16px)'
                                 }}>
-                                    Teléfono
+                                    TelÃ©fono
                                 </Text>
                                 <TextInput
                                     size="xl"
@@ -160,7 +160,7 @@ export default function ContactPage() {
 
                             <div style={{ marginBottom: 24 }}>
                                 <Text style={{
-                                    color: '#fff',
+                                    color: 'var(--lp-text-primary)',
                                     marginBottom: 8,
                                     display: 'block',
                                     fontSize: 'clamp(14px, 2.5vw, 16px)'
@@ -170,7 +170,7 @@ export default function ContactPage() {
                                 <textarea
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                    placeholder="¿En qué podemos ayudarte?"
+                                    placeholder="Â¿En quÃ© podemos ayudarte?"
                                     rows={5}
                                     style={{
                                         width: '100%',
@@ -178,7 +178,7 @@ export default function ContactPage() {
                                         borderRadius: '8px',
                                         background: 'rgba(255,255,255,0.05)',
                                         border: '1px solid rgba(255,255,255,0.1)',
-                                        color: '#fff',
+                                        color: 'var(--lp-text-primary)',
                                         fontSize: 'clamp(14px, 2.5vw, 16px)',
                                         fontFamily: 'inherit',
                                         resize: 'vertical'
@@ -212,26 +212,26 @@ export default function ContactPage() {
                             marginBottom: 24
                         }}>
                             <Text variant="header-2" style={{
-                                color: '#fff',
+                                color: 'var(--lp-text-primary)',
                                 marginBottom: 20,
                                 fontSize: 'clamp(18px, 3.5vw, 22px)'
                             }}>
-                                Información de Contacto
+                                InformaciÃ³n de Contacto
                             </Text>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                                    <div style={{ fontSize: '24px', flexShrink: 0 }}>📧</div>
+                                    <div style={{ fontSize: '24px', flexShrink: 0 }}>ðŸ“§</div>
                                     <div style={{ flex: 1 }}>
                                         <Text style={{
-                                            color: '#94a3b8',
+                                            color: 'var(--lp-text-secondary)',
                                             fontSize: 'clamp(13px, 2.5vw, 14px)',
                                             marginBottom: 4
                                         }}>
                                             Email
                                         </Text>
                                         <Text style={{
-                                            color: '#fff',
+                                            color: 'var(--lp-text-primary)',
                                             fontWeight: 600,
                                             fontSize: 'clamp(14px, 2.5vw, 16px)'
                                         }}>
@@ -241,17 +241,17 @@ export default function ContactPage() {
                                 </div>
 
                                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                                    <div style={{ fontSize: '24px', flexShrink: 0 }}>📱</div>
+                                    <div style={{ fontSize: '24px', flexShrink: 0 }}>ðŸ“±</div>
                                     <div style={{ flex: 1 }}>
                                         <Text style={{
-                                            color: '#94a3b8',
+                                            color: 'var(--lp-text-secondary)',
                                             fontSize: 'clamp(13px, 2.5vw, 14px)',
                                             marginBottom: 4
                                         }}>
                                             WhatsApp
                                         </Text>
                                         <Text style={{
-                                            color: '#fff',
+                                            color: 'var(--lp-text-primary)',
                                             fontWeight: 600,
                                             fontSize: 'clamp(14px, 2.5vw, 16px)'
                                         }}>
@@ -261,45 +261,45 @@ export default function ContactPage() {
                                 </div>
 
                                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                                    <div style={{ fontSize: '24px', flexShrink: 0 }}>📍</div>
+                                    <div style={{ fontSize: '24px', flexShrink: 0 }}>ðŸ“</div>
                                     <div style={{ flex: 1 }}>
                                         <Text style={{
-                                            color: '#94a3b8',
+                                            color: 'var(--lp-text-secondary)',
                                             fontSize: 'clamp(13px, 2.5vw, 14px)',
                                             marginBottom: 4
                                         }}>
-                                            Dirección
+                                            DirecciÃ³n
                                         </Text>
                                         <Text style={{
-                                            color: '#fff',
+                                            color: 'var(--lp-text-primary)',
                                             fontWeight: 600,
                                             fontSize: 'clamp(14px, 2.5vw, 16px)',
                                             lineHeight: 1.5
                                         }}>
                                             Av. Javier Prado 123<br />
-                                            San Isidro, Lima - Perú
+                                            San Isidro, Lima - PerÃº
                                         </Text>
                                     </div>
                                 </div>
 
                                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                                    <div style={{ fontSize: '24px', flexShrink: 0 }}>🕐</div>
+                                    <div style={{ fontSize: '24px', flexShrink: 0 }}>ðŸ•</div>
                                     <div style={{ flex: 1 }}>
                                         <Text style={{
-                                            color: '#94a3b8',
+                                            color: 'var(--lp-text-secondary)',
                                             fontSize: 'clamp(13px, 2.5vw, 14px)',
                                             marginBottom: 4
                                         }}>
-                                            Horario de Atención
+                                            Horario de AtenciÃ³n
                                         </Text>
                                         <Text style={{
-                                            color: '#fff',
+                                            color: 'var(--lp-text-primary)',
                                             fontWeight: 600,
                                             fontSize: 'clamp(14px, 2.5vw, 16px)',
                                             lineHeight: 1.5
                                         }}>
                                             Lun - Vie: 9:00 AM - 7:00 PM<br />
-                                            Sáb: 10:00 AM - 2:00 PM
+                                            SÃ¡b: 10:00 AM - 2:00 PM
                                         </Text>
                                     </div>
                                 </div>
@@ -312,18 +312,18 @@ export default function ContactPage() {
                             background: 'rgba(34,197,94,0.05)'
                         }}>
                             <Text variant="header-2" style={{
-                                color: '#fff',
+                                color: 'var(--lp-text-primary)',
                                 marginBottom: 12,
                                 fontSize: 'clamp(18px, 3.5vw, 22px)'
                             }}>
-                                Respuesta Rápida
+                                Respuesta RÃ¡pida
                             </Text>
                             <Text style={{
-                                color: '#94a3b8',
+                                color: 'var(--lp-text-secondary)',
                                 lineHeight: 1.6,
                                 fontSize: 'clamp(14px, 2.5vw, 16px)'
                             }}>
-                                Respondemos todos los mensajes en menos de 24 horas. Para consultas urgentes, contáctanos por WhatsApp.
+                                Respondemos todos los mensajes en menos de 24 horas. Para consultas urgentes, contÃ¡ctanos por WhatsApp.
                             </Text>
                         </div>
                     </div>

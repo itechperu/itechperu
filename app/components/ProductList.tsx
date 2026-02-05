@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { Card, Button, Text, Container } from '@gravity-ui/uikit';
@@ -19,16 +19,16 @@ export function ProductList({ products }: { products: any[] }) {
             {products.length === 0 ? (
                 <div style={{ textAlign: 'center' }}>
                     <Text variant="display-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         marginBottom: 40,
                         fontWeight: 800
                     }}>
-                        Próximamente<span className="loading-dots"></span>
+                        PrÃ³ximamente<span className="loading-dots"></span>
                     </Text>
 
                     <div className="glass-panel" style={{ padding: '60px', borderRadius: '24px', maxWidth: '500px', margin: '0 auto' }}>
-                        <div style={{ fontSize: '64px', marginBottom: 20 }}>📦</div>
-                        <Text style={{ color: '#94a3b8' }}>
+                        <div style={{ fontSize: '64px', marginBottom: 20 }}>ðŸ“¦</div>
+                        <Text style={{ color: 'var(--lp-text-secondary)' }}>
                             Estamos preparando equipos premium para ti
                         </Text>
                     </div>
@@ -104,7 +104,7 @@ export function ProductList({ products }: { products: any[] }) {
                                                 backdropFilter: 'blur(10px)',
                                                 border: '1px solid rgba(34,197,94,0.3)'
                                             }}>
-                                                <span style={{ fontSize: '14px' }}>♻️</span>
+                                                <span style={{ fontSize: '14px' }}>â™»ï¸</span>
                                                 <Text style={{ color: '#22c55e', fontSize: '11px', fontWeight: 700, letterSpacing: '0.5px' }}>
                                                     REFURBISHED
                                                 </Text>
@@ -157,7 +157,7 @@ export function ProductList({ products }: { products: any[] }) {
                                             </div>
 
                                             <Text variant="header-2" style={{
-                                                color: '#fff',
+                                                color: 'var(--lp-text-primary)',
                                                 display: 'block',
                                                 marginBottom: 16,
                                                 fontWeight: 700,
@@ -170,10 +170,10 @@ export function ProductList({ products }: { products: any[] }) {
                                             {/* Features */}
                                             <div style={{ marginBottom: 20 }}>
                                                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                                                    {['✓ Certificado', '✓ Garantía 12M'].map((feature, i) => (
+                                                    {['âœ“ Certificado', 'âœ“ GarantÃ­a 12M'].map((feature, i) => (
                                                         <span key={i} style={{
                                                             fontSize: '11px',
-                                                            color: '#94a3b8',
+                                                            color: 'var(--lp-text-secondary)',
                                                             padding: '4px 8px',
                                                             borderRadius: '6px',
                                                             background: 'rgba(148,163,184,0.1)'
@@ -193,11 +193,11 @@ export function ProductList({ products }: { products: any[] }) {
                                                 borderTop: '1px solid rgba(255,255,255,0.1)'
                                             }}>
                                                 <div>
-                                                    <Text style={{ color: '#94a3b8', fontSize: '12px', marginBottom: 4 }}>
+                                                    <Text style={{ color: 'var(--lp-text-secondary)', fontSize: '12px', marginBottom: 4 }}>
                                                         Desde
                                                     </Text>
                                                     <Text variant="header-1" style={{
-                                                        color: '#fff',
+                                                        color: 'var(--lp-text-primary)',
                                                         textShadow: '0 0 20px rgba(255,255,255,0.2)',
                                                         fontWeight: 800
                                                     }}>
@@ -215,7 +215,7 @@ export function ProductList({ products }: { products: any[] }) {
                                                     boxShadow: '0 4px 12px rgba(34,197,94,0.3)',
                                                     transition: 'transform 0.2s'
                                                 }} className="cta-arrow">
-                                                    <span style={{ color: '#fff', fontSize: '18px', fontWeight: 700 }}>→</span>
+                                                    <span style={{ color: 'var(--lp-text-primary)', fontSize: '18px', fontWeight: 700 }}>â†’</span>
                                                 </div>
                                             </div>
                                         </div>

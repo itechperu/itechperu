@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { Container, Text } from '@gravity-ui/uikit';
@@ -24,31 +24,31 @@ export default function ShippingPage() {
                         textDecoration: 'none'
                     }}>
                         <Text style={{ color: '#22c55e', fontSize: '12px', fontWeight: 600 }}>
-                            ← Volver a la tienda
+                            â† Volver a la tienda
                         </Text>
                     </Link>
 
-                    <div style={{ fontSize: 'clamp(48px, 10vw, 64px)', marginBottom: 20 }}>🚀</div>
+                    <div style={{ fontSize: 'clamp(48px, 10vw, 64px)', marginBottom: 20 }}>ðŸš€</div>
 
                     <Text variant="display-2" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         fontWeight: 800,
                         marginBottom: 20,
                         display: 'block',
                         fontSize: 'clamp(28px, 6vw, 48px)'
                     }}>
-                        Envíos y Entregas
+                        EnvÃ­os y Entregas
                     </Text>
 
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(16px, 3vw, 18px)',
                         display: 'block',
                         maxWidth: '600px',
                         margin: '0 auto',
                         padding: '0 16px'
                     }}>
-                        Recibe tu equipo de forma rápida y segura
+                        Recibe tu equipo de forma rÃ¡pida y segura
                     </Text>
                 </div>
 
@@ -64,13 +64,13 @@ export default function ShippingPage() {
                         borderRadius: '20px',
                         textAlign: 'center'
                     }}>
-                        <div style={{ fontSize: 'clamp(40px, 8vw, 48px)', marginBottom: 16 }}>⚡</div>
+                        <div style={{ fontSize: 'clamp(40px, 8vw, 48px)', marginBottom: 16 }}>âš¡</div>
                         <Text variant="header-2" style={{
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             marginBottom: 12,
                             fontSize: 'clamp(18px, 3.5vw, 22px)'
                         }}>
-                            Envío Express Lima
+                            EnvÃ­o Express Lima
                         </Text>
                         <Text style={{
                             color: '#22c55e',
@@ -81,7 +81,7 @@ export default function ShippingPage() {
                             24-48 horas
                         </Text>
                         <Text style={{
-                            color: '#94a3b8',
+                            color: 'var(--lp-text-secondary)',
                             fontSize: 'clamp(13px, 2.5vw, 15px)'
                         }}>
                             Gratis en compras mayores a S/ 500
@@ -93,13 +93,13 @@ export default function ShippingPage() {
                         borderRadius: '20px',
                         textAlign: 'center'
                     }}>
-                        <div style={{ fontSize: 'clamp(40px, 8vw, 48px)', marginBottom: 16 }}>📦</div>
+                        <div style={{ fontSize: 'clamp(40px, 8vw, 48px)', marginBottom: 16 }}>ðŸ“¦</div>
                         <Text variant="header-2" style={{
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             marginBottom: 12,
                             fontSize: 'clamp(18px, 3.5vw, 22px)'
                         }}>
-                            Envío Nacional
+                            EnvÃ­o Nacional
                         </Text>
                         <Text style={{
                             color: '#22c55e',
@@ -107,13 +107,13 @@ export default function ShippingPage() {
                             fontWeight: 700,
                             marginBottom: 8
                         }}>
-                            3-5 días
+                            3-5 dÃ­as
                         </Text>
                         <Text style={{
-                            color: '#94a3b8',
+                            color: 'var(--lp-text-secondary)',
                             fontSize: 'clamp(13px, 2.5vw, 15px)'
                         }}>
-                            A todo el Perú vía courier certificado
+                            A todo el PerÃº vÃ­a courier certificado
                         </Text>
                     </div>
 
@@ -122,9 +122,9 @@ export default function ShippingPage() {
                         borderRadius: '20px',
                         textAlign: 'center'
                     }}>
-                        <div style={{ fontSize: 'clamp(40px, 8vw, 48px)', marginBottom: 16 }}>🏪</div>
+                        <div style={{ fontSize: 'clamp(40px, 8vw, 48px)', marginBottom: 16 }}>ðŸª</div>
                         <Text variant="header-2" style={{
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             marginBottom: 12,
                             fontSize: 'clamp(18px, 3.5vw, 22px)'
                         }}>
@@ -139,10 +139,10 @@ export default function ShippingPage() {
                             Inmediato
                         </Text>
                         <Text style={{
-                            color: '#94a3b8',
+                            color: 'var(--lp-text-secondary)',
                             fontSize: 'clamp(13px, 2.5vw, 15px)'
                         }}>
-                            Coordina tu visita y recoge el mismo día
+                            Coordina tu visita y recoge el mismo dÃ­a
                         </Text>
                     </div>
                 </div>
@@ -154,18 +154,18 @@ export default function ShippingPage() {
                     marginBottom: 32
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         marginBottom: 24,
                         fontSize: 'clamp(20px, 4vw, 28px)'
                     }}>
-                        Proceso de Envío
+                        Proceso de EnvÃ­o
                     </Text>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                         {[
-                            { step: '1', title: 'Confirmación de Pedido', desc: 'Recibirás un email con los detalles de tu compra' },
-                            { step: '2', title: 'Preparación', desc: 'Empacamos tu equipo con materiales premium de protección' },
-                            { step: '3', title: 'Envío', desc: 'Te enviamos el código de tracking para seguimiento en tiempo real' },
+                            { step: '1', title: 'ConfirmaciÃ³n de Pedido', desc: 'RecibirÃ¡s un email con los detalles de tu compra' },
+                            { step: '2', title: 'PreparaciÃ³n', desc: 'Empacamos tu equipo con materiales premium de protecciÃ³n' },
+                            { step: '3', title: 'EnvÃ­o', desc: 'Te enviamos el cÃ³digo de tracking para seguimiento en tiempo real' },
                             { step: '4', title: 'Entrega', desc: 'Recibes tu equipo con firma de conformidad' }
                         ].map((item, i) => (
                             <div key={i} style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
@@ -179,20 +179,20 @@ export default function ShippingPage() {
                                     justifyContent: 'center',
                                     flexShrink: 0,
                                     fontWeight: 900,
-                                    color: '#fff'
+                                    color: 'var(--lp-text-primary)'
                                 }}>
                                     {item.step}
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <Text variant="subheader-2" style={{
-                                        color: '#fff',
+                                        color: 'var(--lp-text-primary)',
                                         marginBottom: 8,
                                         fontSize: 'clamp(16px, 3vw, 18px)'
                                     }}>
                                         {item.title}
                                     </Text>
                                     <Text style={{
-                                        color: '#94a3b8',
+                                        color: 'var(--lp-text-secondary)',
                                         fontSize: 'clamp(14px, 2.5vw, 16px)',
                                         lineHeight: 1.6
                                     }}>
@@ -211,11 +211,11 @@ export default function ShippingPage() {
                     marginBottom: 32
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         marginBottom: 24,
                         fontSize: 'clamp(20px, 4vw, 28px)'
                     }}>
-                        Costos de Envío
+                        Costos de EnvÃ­o
                     </Text>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -235,7 +235,7 @@ export default function ShippingPage() {
                                 flexWrap: 'wrap'
                             }}>
                                 <Text style={{
-                                    color: '#fff',
+                                    color: 'var(--lp-text-primary)',
                                     fontSize: 'clamp(14px, 2.5vw, 16px)'
                                 }}>
                                     {item.zone}
@@ -259,7 +259,7 @@ export default function ShippingPage() {
                     marginBottom: 32
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         marginBottom: 24,
                         fontSize: 'clamp(20px, 4vw, 28px)'
                     }}>
@@ -267,12 +267,12 @@ export default function ShippingPage() {
                     </Text>
 
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         marginBottom: 20,
                         lineHeight: 1.7,
                         fontSize: 'clamp(14px, 2.5vw, 16px)'
                     }}>
-                        Cada equipo se envía en una caja reforzada con:
+                        Cada equipo se envÃ­a en una caja reforzada con:
                     </Text>
 
                     <div style={{
@@ -281,12 +281,12 @@ export default function ShippingPage() {
                         gap: 16
                     }}>
                         {[
-                            '📦 Caja doble pared',
-                            '🛡️ Protección de burbujas',
-                            '📱 Funda protectora',
-                            '🔒 Sello de seguridad',
-                            '📄 Documentación incluida',
-                            '♻️ Materiales reciclables'
+                            'ðŸ“¦ Caja doble pared',
+                            'ðŸ›¡ï¸ ProtecciÃ³n de burbujas',
+                            'ðŸ“± Funda protectora',
+                            'ðŸ”’ Sello de seguridad',
+                            'ðŸ“„ DocumentaciÃ³n incluida',
+                            'â™»ï¸ Materiales reciclables'
                         ].map((item, i) => (
                             <div key={i} style={{
                                 padding: 'clamp(10px, 2vw, 12px)',
@@ -296,7 +296,7 @@ export default function ShippingPage() {
                                 textAlign: 'center'
                             }}>
                                 <Text style={{
-                                    color: '#fff',
+                                    color: 'var(--lp-text-primary)',
                                     fontSize: 'clamp(13px, 2.5vw, 14px)'
                                 }}>
                                     {item}
@@ -314,27 +314,27 @@ export default function ShippingPage() {
                     background: 'rgba(34,197,94,0.05)'
                 }}>
                     <Text variant="header-1" style={{
-                        color: '#fff',
+                        color: 'var(--lp-text-primary)',
                         fontSize: 'clamp(20px, 4vw, 28px)',
                         display: 'block',
                         marginBottom: 20
                     }}>
-                        ¿Tienes dudas sobre tu envío?
+                        Â¿Tienes dudas sobre tu envÃ­o?
                     </Text>
 
                     <Text style={{
-                        color: '#94a3b8',
+                        color: 'var(--lp-text-secondary)',
                         fontSize: 'clamp(14px, 2.5vw, 16px)',
                         display: 'block',
                         marginBottom: 28
                     }}>
-                        Contáctanos para más información
+                        ContÃ¡ctanos para mÃ¡s informaciÃ³n
                     </Text>
 
                     <Link href="/info/contacto">
                         <button style={{
                             background: 'linear-gradient(135deg, #22c55e, #10b981)',
-                            color: '#fff',
+                            color: 'var(--lp-text-primary)',
                             padding: 'clamp(12px, 2vw, 14px) clamp(24px, 4vw, 32px)',
                             borderRadius: '50px',
                             border: 'none',
@@ -343,7 +343,7 @@ export default function ShippingPage() {
                             cursor: 'pointer',
                             boxShadow: '0 0 30px rgba(34,197,94,0.3)'
                         }}>
-                            Contáctanos
+                            ContÃ¡ctanos
                         </button>
                     </Link>
                 </div>
