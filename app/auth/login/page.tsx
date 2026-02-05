@@ -62,13 +62,30 @@ export default function LoginPage() {
                     }}>
                         <span style={{ fontSize: '32px', fontWeight: 900, color: '#fff' }}>iT</span>
                     </div>
-                    <Text variant="display-1" style={{ color: '#fff', fontWeight: 800, marginBottom: 8 }}>
+                    <Text variant="display-1" style={{
+                        display: 'block',
+                        fontWeight: 800,
+                        marginBottom: 12,
+                        background: 'linear-gradient(to right, #FFD700, #FDB931, #FFD700)',
+                        backgroundSize: '200% auto',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.3))',
+                        animation: 'shine 3s linear infinite'
+                    }}>
                         Super Admin
                     </Text>
-                    <Text style={{ color: '#94a3b8' }}>
+                    <Text variant="body-2" style={{ color: '#94a3b8', display: 'block', fontSize: '16px' }}>
                         Panel de administración iTech Peru
                     </Text>
                 </div>
+                <style jsx global>{`
+                    @keyframes shine {
+                        to {
+                            background-position: 200% center;
+                        }
+                    }
+                `}</style>
 
                 <Card className="glass-panel" style={{ padding: '40px', borderRadius: '24px' }}>
                     <form onSubmit={handleSubmit}>
