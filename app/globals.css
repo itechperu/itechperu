@@ -1,15 +1,5 @@
 :root {
-  /* Default Gravity UI vars should handle most, but we define specific ones for the Landing Page */
-  --lp-text-primary: #0f172a;
-  --lp-text-secondary: #475569;
-  --lp-text-gradient-start: #0f172a;
-  --lp-text-gradient-end: #64748b;
-  --lp-glass-bg: rgba(255, 255, 255, 0.8);
-  --lp-glass-border: rgba(0, 0, 0, 0.1);
-  --lp-card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-}
-
-.yc-root_theme_dark {
+  /* Dark mode as default */
   --lp-text-primary: #ffffff;
   --lp-text-secondary: #94a3b8;
   --lp-text-gradient-start: #ffffff;
@@ -19,17 +9,33 @@
   --lp-card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
+.yc-root_theme_light {
+  --lp-text-primary: #0f172a;
+  --lp-text-secondary: #475569;
+  --lp-text-gradient-start: #0f172a;
+  --lp-text-gradient-end: #64748b;
+  --lp-glass-bg: rgba(255, 255, 255, 0.8);
+  --lp-glass-border: rgba(0, 0, 0, 0.1);
+  --lp-card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
 @theme inline {
   --color-background: var(--g-color-base-background);
   --color-foreground: var(--lp-text-primary);
 }
 
 body {
-  background: var(--g-color-base-background);
   color: var(--lp-text-primary);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   transition: background 0.3s ease, color 0.3s ease;
+  /* Dark mode gradient by default */
+  background: radial-gradient(circle at 50% 0%, #1a1b26 0%, #000000 100%);
+}
+
+.yc-root_theme_light body {
+  /* Light mode gradient */
+  background: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #e2e8f0 100%);
 }
 
 /* Glassmorphism Classes */

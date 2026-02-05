@@ -2,7 +2,7 @@
 
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as GravityThemeProvider } from '@gravity-ui/uikit';
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -21,11 +21,12 @@ export function useThemeContext() {
     return context;
 }
 
-export function Providers({ children }: { children: React.ReactNode }) {
+function ThemeProviderWrapper({ children }: { children: ReactNode }) {
     const [theme, setTheme] = useState<Theme>('dark');
+    const [mounted, setMounted] = useState(false);
 
-    // Load theme from localStorage on mount
     useEffect(() => {
+        setMounted(true);
         const savedTheme = localStorage.getItem('app-theme') as Theme | null;
         if (savedTheme) {
             setTheme(savedTheme);
@@ -38,13 +39,32 @@ export function Providers({ children }: { children: React.ReactNode }) {
         localStorage.setItem('app-theme', newTheme);
     };
 
-    return (
-        <SessionProvider>
-            <ThemeContext.Provider value={{ theme, toggleTheme }}>
-                <GravityThemeProvider theme={theme}>
+    // Prevent flash of wrong theme
+    if (!mounted) {
+        return (
+            <ThemeContext.Provider value={{ theme: 'dark', toggleTheme: () => { } }}>
+                <GravityThemeProvider theme="dark">
                     {children}
                 </GravityThemeProvider>
             </ThemeContext.Provider>
+        );
+    }
+
+    return (
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+            <GravityThemeProvider theme={theme}>
+                {children}
+            </GravityThemeProvider>
+        </ThemeContext.Provider>
+    );
+}
+
+export function Providers({ children }: { children: React.ReactNode }) {
+    return (
+        <SessionProvider>
+            <ThemeProviderWrapper>
+                {children}
+            </ThemeProviderWrapper>
         </SessionProvider>
     );
 }
