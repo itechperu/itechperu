@@ -35,6 +35,7 @@ function ThemeProviderWrapper({ children }: { children: ReactNode }) {
 
     const toggleTheme = () => {
         const newTheme: Theme = theme === 'dark' ? 'light' : 'dark';
+        console.log('🎨 Changing theme from', theme, 'to', newTheme);
         setTheme(newTheme);
         localStorage.setItem('app-theme', newTheme);
     };

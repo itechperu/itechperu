@@ -9,7 +9,10 @@
   --lp-card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
-.yc-root_theme_light {
+/* Light mode - support multiple class naming conventions */
+.yc-root_theme_light,
+.g-root_theme_light,
+[data-theme="light"] {
   --lp-text-primary: #0f172a;
   --lp-text-secondary: #475569;
   --lp-text-gradient-start: #0f172a;
@@ -33,7 +36,10 @@ body {
   background: radial-gradient(circle at 50% 0%, #1a1b26 0%, #000000 100%);
 }
 
-.yc-root_theme_light body {
+/* Light mode body - support multiple selectors */
+.yc-root_theme_light body,
+.g-root_theme_light body,
+[data-theme="light"] body {
   /* Light mode gradient */
   background: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #e2e8f0 100%);
 }
