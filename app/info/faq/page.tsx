@@ -32,7 +32,7 @@ export default function FAQPage() {
         },
         {
             question: "Â¿Puedo comprar en cuotas?",
-            answer: "PrÃ³ximamente habilitaremos opciones de financiamiento. Por ahora aceptamos pago al contado mediante transferencia bancaria o tarjeta."
+            answer: "Próximamente habilitaremos opciones de financiamiento. Por ahora aceptamos pago al contado mediante transferencia bancaria o tarjeta."
         },
         {
             question: "Â¿Hacen envÃ­os a provincias?",

@@ -23,7 +23,7 @@ export function ProductList({ products }: { products: any[] }) {
                         marginBottom: 40,
                         fontWeight: 800
                     }}>
-                        PrÃ³ximamente<span className="loading-dots"></span>
+                        Próximamente<span className="loading-dots"></span>
                     </Text>
 
                     <div className="glass-panel" style={{ padding: '60px', borderRadius: '24px', maxWidth: '500px', margin: '0 auto' }}>
