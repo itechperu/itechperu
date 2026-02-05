@@ -1,16 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Icon, Text, useTheme } from '@gravity-ui/uikit';
+import { Button, Icon, Text } from '@gravity-ui/uikit';
 import { ShoppingBag, Person, Magnifier, Bars, Sun, Moon } from '@gravity-ui/icons';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
+import { useThemeContext } from '@/app/components/providers/Providers';
 
 export function Navbar() {
     const { data: session } = useSession();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const theme = useTheme() as any;
-    const isDark = theme.theme === 'dark';
+    const { theme, toggleTheme } = useThemeContext();
+    const isDark = theme === 'dark';
 
     return (
         <>
@@ -92,7 +93,7 @@ export function Navbar() {
                             view="flat"
                             size="l"
                             style={{ color: 'var(--lp-text-primary)' }}
-                            onClick={() => theme.setTheme(isDark ? 'light' : 'dark')}
+                            onClick={toggleTheme}
                         >
                             <Icon data={isDark ? Sun : Moon} size={20} />
                         </Button>
