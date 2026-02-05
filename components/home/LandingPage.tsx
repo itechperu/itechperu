@@ -410,11 +410,10 @@ export function LandingPage({ products }: LandingPageProps) {
                             display: 'flex',
                             overflowX: 'auto',
                             gap: '24px',
-                            padding: '20px 4px',
                             scrollSnapType: 'x mandatory',
                             scrollbarWidth: 'none',
                             alignItems: 'stretch'
-                        }} className="testimonials-scroll">
+                        }} className="testimonials-scroll testimonials-scroll-container">
                             {[
                                 { text: "Vendí mi iPhone 13 Pro Max al toque. Me ofrecieron un precio justo y la transferencia fue inmediata. ¡Súper seguro!", author: "Javier M.", role: "Vendedor" },
                                 { text: "Compré una MacBook Air M1 y está impecable, parece nueva. La atención por WhatsApp fue A1 en todo momento.", author: "Sofía R.", role: "Comprador" },
@@ -606,6 +605,10 @@ export function LandingPage({ products }: LandingPageProps) {
                 }
                 
                 /* Testimonial Card Width Logic */
+                .testimonials-scroll-container {
+                    padding: 20px 4px !important;
+                }
+
                 .testimonial-card {
                     width: 100%; /* Default mobile */
                     flex: 0 0 100%; /* Critical: prevents shrinking/growing */
@@ -620,6 +623,9 @@ export function LandingPage({ products }: LandingPageProps) {
                 }
                 
                 @media (min-width: 1024px) {
+                    .testimonials-scroll-container {
+                        padding: 20px 60px !important; /* Space for arrows */
+                    }
                     .testimonial-card {
                         width: calc((100% - 48px) / 3); /* Desktop: 3 items exactly */
                         flex: 0 0 calc((100% - 48px) / 3);
