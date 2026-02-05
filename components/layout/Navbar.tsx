@@ -65,7 +65,7 @@ export function Navbar() {
                         {['iPhone', 'MacBook', 'iPad', 'Watch'].map((item) => (
                             <Link key={item} href={`/shop?cat=${item}`} style={{ textDecoration: 'none' }}>
                                 <Text className="nav-link" style={{
-                                    color: 'rgba(255,255,255,0.7)',
+                                    color: 'var(--lp-text-secondary)',
                                     transition: 'color 0.2s',
                                     fontSize: 'clamp(14px, 2.5vw, 16px)'
                                 }}>
@@ -99,7 +99,7 @@ export function Navbar() {
                         </Button>
 
                         {/* Search - Hidden on mobile */}
-                        <Button view="flat" size="l" style={{ color: '#fff' }} className="desktop-action">
+                        <Button view="flat" size="l" style={{ color: 'var(--lp-text-primary)' }} className="desktop-action">
                             <Icon data={Magnifier} size={20} />
                         </Button>
 
@@ -126,8 +126,8 @@ export function Navbar() {
                                         size="l"
                                         onClick={() => signOut()}
                                         style={{
-                                            borderColor: 'rgba(255,255,255,0.2)',
-                                            color: '#fff',
+                                            borderColor: 'var(--lp-glass-border)',
+                                            color: 'var(--lp-text-primary)',
                                             borderRadius: '50px',
                                             fontSize: 'clamp(13px, 2.5vw, 15px)',
                                             padding: '0 clamp(16px, 3vw, 24px)'
@@ -140,8 +140,8 @@ export function Navbar() {
                             ) : (
                                 <Link href="/auth/login">
                                     <Button view="outlined" size="l" style={{
-                                        borderColor: 'rgba(255,255,255,0.2)',
-                                        color: '#fff',
+                                        borderColor: 'var(--lp-glass-border)',
+                                        color: 'var(--lp-text-primary)',
                                         borderRadius: '50px',
                                         fontSize: 'clamp(13px, 2.5vw, 15px)',
                                         padding: '0 clamp(16px, 3vw, 24px)'
@@ -190,12 +190,12 @@ export function Navbar() {
                                 background: 'rgba(255,255,255,0.05)',
                                 transition: 'all 0.2s'
                             }}>
-                                <Text style={{ color: '#fff', fontSize: '16px' }}>{item}</Text>
+                                <Text style={{ color: 'var(--lp-text-primary)', fontSize: '16px' }}>{item}</Text>
                             </div>
                         </Link>
                     ))}
 
-                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '8px 0' }} />
+                    <div style={{ height: '1px', background: 'var(--lp-glass-border)', margin: '8px 0' }} />
 
                     {session ? (
                         <>
@@ -218,8 +218,8 @@ export function Navbar() {
                                     setMobileMenuOpen(false);
                                 }}
                                 style={{
-                                    borderColor: 'rgba(255,255,255,0.2)',
-                                    color: '#fff',
+                                    borderColor: 'var(--lp-glass-border)',
+                                    color: 'var(--lp-text-primary)',
                                     borderRadius: '12px'
                                 }}
                             >
@@ -229,8 +229,8 @@ export function Navbar() {
                     ) : (
                         <Link href="/auth/login">
                             <Button view="outlined" width="max" style={{
-                                borderColor: 'rgba(255,255,255,0.2)',
-                                color: '#fff',
+                                borderColor: 'var(--lp-glass-border)',
+                                color: 'var(--lp-text-primary)',
                                 borderRadius: '12px'
                             }}>
                                 Iniciar Sesión
