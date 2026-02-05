@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { Container, Card, TextInput, Button, Text } from '@gravity-ui/uikit';
+import { Container, Card, TextInput, Button, Text, Icon } from '@gravity-ui/uikit';
+import { Eye, EyeSlash } from '@gravity-ui/icons';
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -12,6 +13,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -111,9 +113,19 @@ export default function LoginPage() {
                                 size="xl"
                                 value={password}
                                 onUpdate={setPassword}
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 placeholder="••••••••"
                                 style={{ width: '100%' }}
+                                endContent={
+                                    <Button
+                                        view="flat"
+                                        size="l"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        style={{ border: 'none', background: 'transparent' }}
+                                    >
+                                        <Icon data={showPassword ? EyeSlash : Eye} />
+                                    </Button>
+                                }
                             />
                         </div>
 

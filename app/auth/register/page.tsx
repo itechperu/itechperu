@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Container, Card, TextInput, Button, Text } from '@gravity-ui/uikit';
+import { Container, Card, TextInput, Button, Text, Icon } from '@gravity-ui/uikit';
+import { Eye, EyeSlash } from '@gravity-ui/icons';
 import Link from 'next/link';
 import { registerUser } from '@/lib/actions/auth';
 
@@ -14,6 +15,8 @@ export default function RegisterPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -116,9 +119,19 @@ export default function RegisterPage() {
                                 size="xl"
                                 value={password}
                                 onUpdate={setPassword}
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 placeholder="••••••••"
                                 style={{ width: '100%' }}
+                                endContent={
+                                    <Button
+                                        view="flat"
+                                        size="l"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        style={{ border: 'none', background: 'transparent' }}
+                                    >
+                                        <Icon data={showPassword ? EyeSlash : Eye} />
+                                    </Button>
+                                }
                             />
                         </div>
 
@@ -130,9 +143,19 @@ export default function RegisterPage() {
                                 size="xl"
                                 value={confirmPassword}
                                 onUpdate={setConfirmPassword}
-                                type="password"
+                                type={showConfirmPassword ? 'text' : 'password'}
                                 placeholder="••••••••"
                                 style={{ width: '100%' }}
+                                endContent={
+                                    <Button
+                                        view="flat"
+                                        size="l"
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        style={{ border: 'none', background: 'transparent' }}
+                                    >
+                                        <Icon data={showConfirmPassword ? EyeSlash : Eye} />
+                                    </Button>
+                                }
                             />
                         </div>
 
