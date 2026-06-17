@@ -3,23 +3,35 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Search, ShoppingBag, User, ChevronDown, Heart, LayoutGrid, SlidersHorizontal, MessageCircle, Menu, X } from "lucide-react";
+import { useScrollSpy } from "@/hooks/use-scroll-spy";
 
 /**
- * Header Deluxe — itechperu.shop (100% responsivo)
+ * Header Deluxe — itechperu.shop (100% responsivo + Scroll Spy)
  *
- * Breakpoints:
- *  - Mobile (< sm, 640px): header flotante compacto con búsqueda, carrito y perfil.
- *    Categorías en sub-nav horizontal scrollable.
- *  - Tablet (sm..lg, 640-1024px): header full-width con más espacio, kbd ⌘K visible.
- *  - Desktop (≥ lg, 1024px): header con logo + nav principal inline + search ancho fijo.
- *    El bottom tab bar desaparece en desktop.
+ * En desktop, los links de navegación se resaltan automáticamente
+ * cuando el usuario hace scroll a la sección correspondiente.
  */
+const SECTION_IDS = ["inicio", "ofertas", "catalogo", "categorias", "confianza"];
+
 export function HeaderDeluxe() {
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartCount] = useState(2);
 
+  // Scroll Spy: detecta qué sección está visible
+  const { activeId, scrollToId } = useScrollSpy({
+    sectionIds: SECTION_IDS,
+    updateHash: true,
+    smoothScroll: true,
+  });
+
   const categories = ["iPads", "MacBooks", "Laptops", "Ropa USA", "Accesorios", "Ofertas"];
+
+  const handleNavClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    scrollToId(id);
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 pt-safe">
@@ -31,6 +43,7 @@ export function HeaderDeluxe() {
             href="/"
             className="flex items-center gap-1.5 lg:gap-2 flex-shrink-0"
             aria-label="iTECH Peru inicio"
+            onClick={(e) => handleNavClick(e, "inicio")}
           >
             <span className="flex h-7 w-7 lg:h-9 lg:w-9 items-center justify-center rounded-lg bg-[#1D1D1F]">
               <span className="text-[10px] lg:text-[12px] font-bold tracking-tight text-[#D4AF37]">
@@ -43,32 +56,35 @@ export function HeaderDeluxe() {
             </span>
           </Link>
 
-          {/* Navegación principal en desktop */}
+          {/* Navegación principal en desktop con Scroll Spy activo */}
           <nav className="hidden lg:flex items-center gap-1 ml-2">
-            <Link
-              href="/"
-              className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors"
-            >
-              Inicio
-            </Link>
-            <Link
-              href="#catalogo"
-              className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-colors"
-            >
-              Catálogo
-            </Link>
-            <Link
-              href="#"
-              className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-colors"
-            >
-              Ofertas
-            </Link>
-            <Link
-              href="#"
-              className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-colors"
-            >
-              Garantía
-            </Link>
+            {SECTION_IDS.map((id) => {
+              const labels: Record<string, string> = {
+                inicio: "Inicio",
+                ofertas: "Ofertas",
+                catalogo: "Catálogo",
+                categorias: "Categorías",
+                confianza: "Garantía",
+              };
+              const isActive = activeId === id;
+              return (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) => handleNavClick(e, id)}
+                  className={`relative px-3 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 ${
+                    isActive
+                      ? "text-[#1D1D1F] bg-[#F5F5F7]"
+                      : "text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F]"
+                  }`}
+                >
+                  {labels[id]}
+                  {isActive && (
+                    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-[#D4AF37]" />
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Search */}
@@ -122,8 +138,9 @@ export function HeaderDeluxe() {
             )}
           </button>
 
-          {/* Perfil */}
-          <button
+          {/* Perfil — ahora link a /auth/login */}
+          <Link
+            href="/auth/login"
             className="flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-full hover:bg-[#F5F5F7] transition-colors tap-scale"
             aria-label="Mi cuenta"
           >
@@ -131,7 +148,7 @@ export function HeaderDeluxe() {
               className="h-[18px] w-[18px] lg:h-5 lg:w-5 text-[#1D1D1F]"
               strokeWidth={1.5}
             />
-          </button>
+          </Link>
 
           {/* Botón menú móvil (hamburguesa) */}
           <button
@@ -150,29 +167,48 @@ export function HeaderDeluxe() {
 
         {/* Sub-nav categorías (mobile + tablet) */}
         <nav className="mt-1.5 lg:hidden flex items-center gap-1 overflow-x-auto no-scrollbar max-w-[440px] sm:max-w-3xl mx-auto">
-          <Link
-            href="/"
-            className="flex items-center gap-1 whitespace-nowrap rounded-full bg-[#1D1D1F] px-3 py-1 text-[11px] font-medium text-white tap-scale"
-          >
-            Todo <ChevronDown className="h-3 w-3 opacity-60" strokeWidth={1.5} />
-          </Link>
-          {categories.map((cat) => (
-            <Link
+          {SECTION_IDS.slice(0, 3).map((id, i) => {
+            const labels: Record<string, string> = {
+              inicio: "Inicio",
+              ofertas: "Ofertas",
+              catalogo: "Catálogo",
+            };
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={(e) => handleNavClick(e, id)}
+                className={`whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-medium transition-colors tap-scale ${
+                  i === 0
+                    ? "bg-[#1D1D1F] text-white"
+                    : activeId === id
+                      ? "bg-[#D4AF37] text-white"
+                      : "bg-white/60 text-[#1D1D1F]/70 backdrop-blur-md border border-white/20 hover:text-[#1D1D1F]"
+                }`}
+              >
+                {labels[id]}
+              </a>
+            );
+          })}
+          {categories.slice(3).map((cat) => (
+            <a
               key={cat}
-              href="/"
+              href="#catalogo"
+              onClick={(e) => handleNavClick(e, "catalogo")}
               className="whitespace-nowrap rounded-full bg-white/60 px-3 py-1 text-[11px] font-medium text-[#1D1D1F]/70 backdrop-blur-md border border-white/20 tap-scale hover:text-[#1D1D1F] transition-colors"
             >
               {cat}
-            </Link>
+            </a>
           ))}
         </nav>
 
         {/* Categorías en desktop: barra horizontal elegante */}
         <nav className="hidden lg:flex mt-2 max-w-7xl mx-auto items-center gap-1.5">
           {categories.map((cat, i) => (
-            <Link
+            <a
               key={cat}
               href="#catalogo"
+              onClick={(e) => handleNavClick(e, "catalogo")}
               className={`whitespace-nowrap rounded-full px-3 py-1 text-[12px] font-medium transition-colors tap-scale ${
                 i === 0
                   ? "bg-[#1D1D1F] text-white"
@@ -180,7 +216,7 @@ export function HeaderDeluxe() {
               }`}
             >
               {cat}
-            </Link>
+            </a>
           ))}
         </nav>
 
@@ -189,18 +225,31 @@ export function HeaderDeluxe() {
           <div className="lg:hidden mt-2 mx-auto max-w-[440px] sm:max-w-3xl rounded-3xl border border-white/40 bg-white/95 backdrop-blur-xl p-4 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.18)]">
             <div className="grid grid-cols-2 gap-2">
               {[
-                { label: "Inicio", icon: Home_Icon, href: "/" },
-                { label: "Catálogo", icon: LayoutGrid, href: "#catalogo" },
-                { label: "Favoritos", icon: Heart, href: "#" },
-                { label: "Filtros", icon: SlidersHorizontal, href: "#" },
-                { label: "WhatsApp VIP", icon: MessageCircle, href: "https://wa.me/51987654321" },
-                { label: "Mi Cuenta", icon: User, href: "#" },
+                { label: "Inicio", id: "inicio", icon: Home_Icon },
+                { label: "Catálogo", id: "catalogo", icon: LayoutGrid },
+                { label: "Ofertas", id: "ofertas", icon: ChevronDown },
+                { label: "Categorías", id: "categorias", icon: LayoutGrid },
+                { label: "Garantía", id: "confianza", icon: Heart },
+                { label: "Mi Cuenta", href: "/auth/login", icon: User },
               ].map((item) => {
                 const Icon = item.icon;
+                if ("id" in item) {
+                  return (
+                    <a
+                      key={item.label}
+                      href={`#${item.id}`}
+                      onClick={(e) => handleNavClick(e, item.id)}
+                      className="flex items-center gap-2.5 rounded-2xl bg-[#F5F5F7] px-3 py-3 text-[13px] font-medium text-[#1D1D1F] tap-scale hover:bg-[#E5E5E7] transition-colors"
+                    >
+                      <Icon className="h-4 w-4 text-[#1D1D1F]" strokeWidth={1.5} />
+                      {item.label}
+                    </a>
+                  );
+                }
                 return (
                   <Link
                     key={item.label}
-                    href={item.href}
+                    href={item.href!}
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center gap-2.5 rounded-2xl bg-[#F5F5F7] px-3 py-3 text-[13px] font-medium text-[#1D1D1F] tap-scale hover:bg-[#E5E5E7] transition-colors"
                   >
@@ -209,6 +258,15 @@ export function HeaderDeluxe() {
                   </Link>
                 );
               })}
+              <a
+                href="https://wa.me/51987654321"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-2 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-[#D4AF37] to-[#B8941F] px-3 py-3 text-[13px] font-semibold text-white tap-scale"
+              >
+                <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
+                WhatsApp VIP
+              </a>
             </div>
           </div>
         )}

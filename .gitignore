@@ -78,3 +78,12 @@ download/*.jpeg
 download/*.webm
 download/*.pdf
 !download/README.md
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Uploads from chat (user-provided images)
+/upload/

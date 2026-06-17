@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { products, formatPEN } from "@/data/products";
 import { ShieldCheck, Truck, Star, Sparkles, ChevronRight, Flame, MessageCircle } from "lucide-react";
+import { AnimatedCounter } from "@/components/deluxe/animated-counter";
+import { PageTransition } from "@/components/deluxe/page-transition";
 
 /**
  * Home page — itechperu.shop (100% responsiva)
@@ -15,9 +17,10 @@ export default function HomePage() {
   const offers = products.slice(0, 3);
 
   return (
+    <PageTransition>
     <div className="space-y-8 lg:space-y-12">
-      {/* ====== Hero Deluxe ====== */}
-      <section className="relative overflow-hidden rounded-3xl lg:rounded-[2rem] bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#1D1D1F] p-5 sm:p-8 lg:p-12 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.3)]">
+      {/* ====== Hero Deluxe (#inicio) ====== */}
+      <section id="inicio" data-section="inicio" className="relative overflow-hidden rounded-3xl lg:rounded-[2rem] bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#1D1D1F] p-5 sm:p-8 lg:p-12 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.3)] scroll-mt-[140px] lg:scroll-mt-[180px]">
         {/* Detalle oro */}
         <div className="absolute -top-12 -right-12 h-40 w-40 lg:h-64 lg:w-64 rounded-full bg-[#D4AF37]/20 blur-3xl" />
         <div className="absolute -bottom-12 -left-12 h-32 w-32 lg:h-48 lg:w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
@@ -73,9 +76,9 @@ export default function HomePage() {
           {/* Stats Deluxe en desktop */}
           <div className="hidden lg:flex flex-col gap-3 lg:w-[280px]">
             {[
-              { label: "Equipos verificados", value: "+500", accent: false },
-              { label: "Calificación promedio", value: "4.9/5", accent: true },
-              { label: "Garantía real", value: "3-6 meses", accent: false },
+              { label: "Equipos verificados", num: 500, prefix: "+", accent: false },
+              { label: "Calificación promedio", num: 4.9, prefix: "", suffix: "/5", accent: true, decimals: 1 },
+              { label: "Garantía real (meses)", num: 6, prefix: "3-", accent: false },
             ].map((stat) => (
               <div
                 key={stat.label}
@@ -89,7 +92,13 @@ export default function HomePage() {
                   {stat.label}
                 </p>
                 <p className={`text-[24px] font-bold mt-1 ${stat.accent ? "text-[#D4AF37]" : "text-white"}`}>
-                  {stat.value}
+                  <AnimatedCounter
+                    value={stat.num}
+                    prefix={stat.prefix}
+                    suffix={stat.suffix}
+                    decimals={stat.decimals ?? 0}
+                    format={false}
+                  />
                 </p>
               </div>
             ))}
@@ -121,8 +130,8 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* ====== Ofertas relámpago ====== */}
-      <section>
+      {/* ====== Ofertas relámpago (#ofertas) ====== */}
+      <section id="ofertas" data-section="ofertas" className="scroll-mt-[140px] lg:scroll-mt-[180px]">
         <div className="flex items-center justify-between mb-3 lg:mb-4">
           <div className="flex items-center gap-2">
             <Flame className="h-4 w-4 lg:h-5 lg:w-5 text-[#D4AF37]" strokeWidth={1.5} />
@@ -170,8 +179,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ====== Catálogo principal ====== */}
-      <section id="catalogo">
+      {/* ====== Catálogo principal (#catalogo) ====== */}
+      <section id="catalogo" data-section="catalogo" className="scroll-mt-[140px] lg:scroll-mt-[180px]">
         <div className="flex items-center justify-between mb-3 lg:mb-4">
           <h2 className="text-[15px] lg:text-[20px] font-bold tracking-tight text-[#1D1D1F]">
             Destacados
@@ -227,8 +236,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ====== Categorías Deluxe ====== */}
-      <section>
+      {/* ====== Categorías Deluxe (#categorias) ====== */}
+      <section id="categorias" data-section="categorias" className="scroll-mt-[140px] lg:scroll-mt-[180px]">
         <h2 className="text-[15px] lg:text-[20px] font-bold tracking-tight text-[#1D1D1F] mb-3 lg:mb-4">
           Categorías
         </h2>
@@ -258,8 +267,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ====== Sello de confianza ====== */}
-      <section className="rounded-3xl lg:rounded-[2rem] bg-gradient-to-br from-[#1D1D1F] to-[#2A2A2D] p-5 sm:p-8 lg:p-12 text-center">
+      {/* ====== Sello de confianza (#confianza) ====== */}
+      <section id="confianza" data-section="confianza" className="rounded-3xl lg:rounded-[2rem] bg-gradient-to-br from-[#1D1D1F] to-[#2A2A2D] p-5 sm:p-8 lg:p-12 text-center scroll-mt-[140px] lg:scroll-mt-[180px]">
         <div className="inline-flex items-center justify-center h-12 w-12 lg:h-16 lg:w-16 rounded-full bg-[#D4AF37]/20 backdrop-blur-md mb-2 lg:mb-3">
           <ShieldCheck className="h-6 w-6 lg:h-8 lg:w-8 text-[#D4AF37]" strokeWidth={1.5} />
         </div>
@@ -286,5 +295,6 @@ export default function HomePage() {
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }

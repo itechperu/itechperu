@@ -43,12 +43,31 @@ bun run dev
 # Lint
 bun run lint
 
+# Tests E2E con Playwright
+bun run test                 # todos los tests (mobile + tablet + desktop)
+bun run test:mobile          # solo mobile
+bun run test:tablet          # solo tablet
+bun run test:desktop         # solo desktop
+bun run test:ui              # modo interactivo
+bun run test:headed          # ver el browser
+bun run test:report          # ver reporte HTML
+
 # Base de datos (Prisma)
 bun run db:push
 bun run db:generate
 ```
 
 Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+### 🧪 Tests E2E con Playwright
+
+Los tests cubren **84 escenarios** en mobile + desktop:
+
+| Archivo | Tests | Cobertura |
+|---------|-------|-----------|
+| `tests/home-scroll-spy.spec.ts` | 9 | Home, Scroll Spy, Deep Linking, Responsividad |
+| `tests/product-detail.spec.ts` | 9 | Galería, Lightbox, Selector de grado, Cantidad, Favoritos |
+| `tests/auth.spec.ts` | 24 | Login, Register, Forgot, Reset, OTP, Layout responsivo |
 
 ---
 
@@ -104,9 +123,48 @@ src/
 ## 🗺️ Roadmap
 
 - [x] **Sprint 1:** Layout Deluxe + Detalle de producto + Lightbox + Selector de grados
-- [ ] **Sprint 2:** Checkout (Google Sign-In + Mercado Pago + Contraentrega Lima)
+- [x] **Sprint 1.5:** Layout 100% responsivo (mobile/tablet/desktop) + Vercel
+- [x] **Sprint 1.6:** Deep Linking + Scroll Spy + Auth Deluxe (Login/Register/Forgot/Reset/OTP) + Tests Playwright (84 tests)
+- [ ] **Sprint 2:** Checkout (Mercado Pago + Contraentrega Lima) + NextAuth real con Google
 - [ ] **Sprint 3:** Integración Prisma/Postgres + admin de inventario
 - [ ] **Sprint 4:** Favoritos persistentes + carrito real con Zustand
+
+## 🔗 Deep Linking + Scroll Spy
+
+Cada sección de la home tiene un ID único y URL navegable:
+- `/#inicio` → Hero
+- `/#ofertas` → Ofertas Deluxe
+- `/#catalogo` → Productos destacados
+- `/#categorias` → Categorías
+- `/#confianza` → Sello de confianza
+
+**Características:**
+- Al hacer scroll, la URL se actualiza automáticamente via History API (sin recargar)
+- Al cargar una URL con `#seccion`, hace smooth scroll con offset de header
+- En desktop, el header resalta la sección activa con un indicador dorado
+- Hook reutilizable: `useScrollSpy({ sectionIds: [...] })` en `src/hooks/use-scroll-spy.ts`
+
+## 🔐 Sistema de Auth Deluxe
+
+Páginas disponibles (URLs directas):
+
+| URL | Descripción |
+|-----|-------------|
+| `/auth/login` | Login con email + Google + Recordarme |
+| `/auth/register` | Registro con medidor de fortaleza de contraseña |
+| `/auth/forgot-password` | Recuperar contraseña (estado de éxito animado) |
+| `/auth/reset-password` | Crear nueva contraseña |
+| `/auth/verify-email` | Verificación OTP 6 dígitos con auto-submit |
+
+**Features:**
+- Layout split 2 columnas en desktop (panel brand + formulario)
+- Mobile: solo formulario centrado
+- Animaciones Framer Motion (entrada, transiciones, micro-interacciones)
+- Validación en tiempo real con feedback visual (rojo error, verde success)
+- Toggle de visibilidad de password
+- Medidor de fortaleza animado (0-100%)
+- OTP con auto-advance y navegación por teclado
+- Google Sign-In con logo oficial multi-color
 
 ---
 
