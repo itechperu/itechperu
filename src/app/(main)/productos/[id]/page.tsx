@@ -1,27 +1,22 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { products, getProductById, getRelatedProducts } from "@/data/products";
+import { getProductById, getRelatedProducts } from "@/data/products";
 import { ProductDetailClient } from "@/components/deluxe/product-detail-client";
 
 /**
  * Página de Detalle de Producto Inmersiva — itechperu.shop
  *
  * Server Component (SSR) para SEO impecable.
- * Renderiza metadata, breadcrumb y pasa data al cliente
- * para los componentes interactivos (Lightbox, GradeSelector, CTA).
+ * Lee el producto desde Prisma (DB) con fallback a datos estáticos.
  */
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export async function generateStaticParams() {
-  return products.map((p) => ({ id: p.id }));
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const product = getProductById(id);
+  const product = await getProductById(id);
 
   if (!product) {
     return {
@@ -53,13 +48,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductPage({ params }: PageProps) {
   const { id } = await params;
-  const product = getProductById(id);
+  const product = await getProductById(id);
 
   if (!product) {
     notFound();
   }
 
-  const related = getRelatedProducts(product.id, 4);
+  const related = await getRelatedProducts(product.id, 4);
 
   // JSON-LD para SEO estructurado
   const jsonLd = {
@@ -78,7 +73,7 @@ export default async function ProductPage({ params }: PageProps) {
     },
     offers: {
       "@type": "Offer",
-      price: product.basePrice,
+      price: product.basePrice / 100, // centavos a soles para schema.org
       priceCurrency: "PEN",
       availability: "https://schema.org/InStock",
       seller: { "@type": "Organization", name: "itechperu.shop" },

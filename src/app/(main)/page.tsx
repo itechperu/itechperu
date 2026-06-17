@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { products, formatPEN } from "@/data/products";
+import { getProducts, formatPEN, type Product } from "@/data/products";
 import { ShieldCheck, Truck, Star, Sparkles, ChevronRight, Flame, MessageCircle } from "lucide-react";
 import { AnimatedCounter } from "@/components/deluxe/animated-counter";
 import { PageTransition } from "@/components/deluxe/page-transition";
@@ -7,12 +7,15 @@ import { PageTransition } from "@/components/deluxe/page-transition";
 /**
  * Home page — itechperu.shop (100% responsiva)
  *
+ * Lee los productos desde Prisma (DB). Si la DB no está disponible, usa fallback estático.
+ *
  * Breakpoints:
  *  - Mobile (< sm): 1-2 columnas, hero compacto, scroll horizontal en ofertas
  *  - Tablet (sm..lg): 2-3 columnas, hero mediano
  *  - Desktop (≥ lg): 4 columnas, hero amplio con badge lateral, sidebar de confianza
  */
-export default function HomePage() {
+export default async function HomePage() {
+  const products: Product[] = await getProducts();
   const featured = products.slice(0, 4);
   const offers = products.slice(0, 3);
 
@@ -166,7 +169,7 @@ export default function HomePage() {
                 </span>
                 <div className="absolute bottom-2 right-2 lg:bottom-3 lg:right-3 rounded-full bg-white/80 backdrop-blur-md px-2 lg:px-3 py-1">
                   <span className="text-[10px] lg:text-[12px] font-bold text-[#1D1D1F]">
-                    {formatPEN(p.basePrice - 500)}
+                    {formatPEN(p.basePrice - 50000)}
                   </span>
                 </div>
               </div>

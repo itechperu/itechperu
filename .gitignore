@@ -40,6 +40,10 @@ yarn-error.log*
 # but DO commit the example template
 !.env.example
 
+# SQLite databases (dev only)
+/db/*.db
+/db/*.db-journal
+
 # vercel
 .vercel
 
@@ -87,3 +91,6 @@ download/*.pdf
 
 # Uploads from chat (user-provided images)
 /upload/
+
+# Tool results (sandbox artifacts)
+/tool-results/

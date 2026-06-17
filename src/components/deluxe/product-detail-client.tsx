@@ -23,6 +23,8 @@ import { GradeSelectorDeluxe } from "./grade-selector-deluxe";
 import { ProductGalleryDeluxe } from "./product-gallery-deluxe";
 import type { Product, ProductGrade } from "@/data/products";
 import { formatPEN } from "@/data/products";
+import { useCart } from "@/store/use-cart";
+import { toast } from "sonner";
 
 const ICONS: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
   battery: Battery,
@@ -60,6 +62,24 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
 
   const finalUnitPrice = product.basePrice + currentGrade.priceModifier;
   const finalTotal = finalUnitPrice * quantity;
+
+  const addItem = useCart((s) => s.addItem);
+
+  const handleAddToCart = () => {
+    addItem({
+      productId: product.id,
+      slug: product.slug,
+      title: product.title,
+      image: product.images[0],
+      grade: selectedGrade,
+      unitPrice: finalUnitPrice,
+      quantity,
+    });
+    toast.success(`Agregado: ${product.title}`, {
+      description: `Grado ${selectedGrade} × ${quantity} · ${formatPEN(finalTotal)}`,
+      duration: 3000,
+    });
+  };
 
   return (
     <div className="space-y-5 lg:space-y-0">
@@ -158,7 +178,7 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
               </div>
               <div className="text-right">
                 <span className="inline-flex items-center rounded-full bg-[#D4AF37]/10 px-2 py-1 text-[10px] lg:text-[11px] font-semibold text-[#D4AF37]">
-                  Ahorra hasta {formatPEN(500)}
+                  Ahorra hasta {formatPEN(50000)}
                 </span>
               </div>
             </div>
@@ -204,6 +224,7 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
               </div>
 
               <button
+                onClick={handleAddToCart}
                 className="flex items-center gap-1.5 rounded-2xl bg-[#1D1D1F] px-5 py-3 text-white tap-scale hover:bg-[#1D1D1F]/90 transition-colors"
                 aria-label="Agregar al carrito"
               >
@@ -393,6 +414,7 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
           </div>
 
           <button
+            onClick={handleAddToCart}
             className="flex items-center gap-1.5 rounded-2xl bg-[#1D1D1F] px-4 py-2.5 text-white tap-scale hover:bg-[#1D1D1F]/90 transition-colors"
             aria-label="Agregar al carrito"
           >

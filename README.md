@@ -79,10 +79,23 @@ Los tests cubren **84 escenarios** en mobile + desktop:
 | Lenguaje | TypeScript 5 |
 | Estilos | Tailwind CSS 4 + utilidades Deluxe custom |
 | UI | shadcn/ui + Lucide icons + Framer Motion |
-| ORM | Prisma (SQLite en dev, Postgres en prod) |
-| Auth | NextAuth.js v4 (Google + Email) |
-| Estado | Zustand + TanStack Query |
-| Pasarela | Mercado Pago (Sprint 2) |
+| DB | Prisma + SQLite (dev) / PostgreSQL (prod en Vercel) |
+| Auth | NextAuth.js v4 (Google + Credentials email/password con bcrypt) |
+| Estado | Zustand (carrito persistente) + TanStack Query |
+| Pasarela | Mercado Pago (Preferencias + Webhooks + IPN) |
+| Tests | Playwright (84+ tests E2E en mobile + desktop) |
+
+### ¿Por qué NO Firebase?
+
+| Criterio | Firebase | Prisma + Postgres + NextAuth |
+|----------|----------|------------------------------|
+| Costo en Perú | Caro: cobra por lectura/escritura | Gratis: Neon/Vercel tier gratuito |
+| Vendor lock-in | Total | Bajo (Postgres estándar) |
+| SEO | Client-side, malo para e-commerce | Server Components, SEO perfecto |
+| Mercado Pago | Sin integración nativa | Webhooks serverless nativos |
+| TypeScript | Tipos frágiles | Tipos 100% seguros desde schema |
+
+Para este e-commerce, **Prisma + Postgres + NextAuth es objetivamente superior**.
 
 ---
 
@@ -124,10 +137,53 @@ src/
 
 - [x] **Sprint 1:** Layout Deluxe + Detalle de producto + Lightbox + Selector de grados
 - [x] **Sprint 1.5:** Layout 100% responsivo (mobile/tablet/desktop) + Vercel
-- [x] **Sprint 1.6:** Deep Linking + Scroll Spy + Auth Deluxe (Login/Register/Forgot/Reset/OTP) + Tests Playwright (84 tests)
-- [ ] **Sprint 2:** Checkout (Mercado Pago + Contraentrega Lima) + NextAuth real con Google
-- [ ] **Sprint 3:** Integración Prisma/Postgres + admin de inventario
-- [ ] **Sprint 4:** Favoritos persistentes + carrito real con Zustand
+- [x] **Sprint 1.6:** Deep Linking + Scroll Spy + Auth Deluxe (Login/Register/Forgot/Reset/OTP) + Tests Playwright
+- [x] **Sprint 2:** ✅ DB Prisma + NextAuth real (Google + Credentials) + Mercado Pago (Preferencias + Webhooks) + Checkout Deluxe (Carrito + MP + Contraentrega Lima)
+- [ ] **Sprint 3:** Panel admin de inventario + gestión de pedidos
+- [ ] **Sprint 4:** Favoritos persistentes + wishlist + sistema de reviews
+
+## 💳 Mercado Pago — Configuración
+
+1. Crea una app en [Mercado Pago Developers](https://www.mercadopago.com.pe/developers/panel/app)
+2. Copia `MERCADO_PAGO_ACCESS_TOKEN` y `MERCADO_PAGO_PUBLIC_KEY` (usa credenciales TEST para sandbox)
+3. Configura el webhook URL: `https://itechperu.shop/api/mercadopago/webhook`
+4. Eventos a suscribir: `payment`
+5. Para producción, verifica tu cuenta con RUC
+
+**Flujo:**
+1. Usuario agrega al carrito → Cart Drawer Deluxe
+2. Click "Finalizar compra" → `/checkout`
+3. Selecciona Mercado Pago o Contraentrega
+4. **MP:** redirige a `init_point` de MP → paga → vuelve a `/checkout/success`
+5. **COD:** crea orden directamente → va a `/checkout/success?cod=1`
+6. Webhook de MP actualiza el estado del pedido en DB
+
+## 🔐 NextAuth.js — Configuración
+
+1. **Google OAuth:** Crea OAuth 2.0 Client ID en [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+   - Authorized redirect URIs: `http://localhost:3000/api/auth/callback/google` y `https://itechperu.shop/api/auth/callback/google`
+2. **NEXTAUTH_SECRET:** Genera con `openssl rand -base64 32`
+3. **Credenciales demo:** `demo@itechperu.shop` / `admin123` (seed automático con `bun run db:seed`)
+
+## 🗄️ Base de datos
+
+```bash
+# Desarrollo (SQLite)
+bun run db:push     # Crea/migra tablas
+bun run db:seed     # Puebla con 4 productos + admin user
+
+# Producción (PostgreSQL en Vercel)
+# 1. Cambia DATABASE_URL en Vercel env vars
+# 2. Cambia provider a "postgresql" en prisma/schema.prisma
+# 3. bun run db:push && bun run db:seed
+```
+
+**Modelos:**
+- `User` + `Account` + `Session` (NextAuth)
+- `Product` + `Spec` + `Grade` (catálogo)
+- `CartItem` + `Favorite` (usuario)
+- `Order` + `OrderItem` + `PaymentLog` (pedidos y pagos)
+- `Address` (direcciones de envío)
 
 ## 🔗 Deep Linking + Scroll Spy
 

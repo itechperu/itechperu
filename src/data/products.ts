@@ -1,5 +1,11 @@
-// Catálogo Deluxe — itechperu.shop
-// Mock data para Sprint 1. En producción se conecta a Prisma/SQLite.
+import { db } from "@/lib/db";
+
+/**
+ * Acceso a catálogo — itechperu.shop
+ *
+ * En runtime, lee de Prisma (DB real).
+ * Si la DB no está disponible (ej. build time), retorna productos estáticos.
+ */
 
 export type ProductGrade = "A+" | "A" | "B";
 
@@ -7,7 +13,7 @@ export interface GradeInfo {
   grade: ProductGrade;
   label: string;
   description: string;
-  priceModifier: number; // ajuste en soles respecto al precio base
+  priceModifier: number;
   warranty: string;
 }
 
@@ -20,12 +26,12 @@ export interface ProductSpec {
 export interface Product {
   id: string;
   slug: string;
-  category: "iPad" | "MacBook" | "Laptop" | "Ropa";
+  category: "iPad" | "MacBook" | "Laptop" | "Ropa" | "Accesorio";
   brand: string;
   model: string;
   title: string;
   subtitle: string;
-  basePrice: number; // precio en PEN
+  basePrice: number; // En centavos (S/ 3,499 = 349900)
   condition: string;
   storage?: string;
   color?: string;
@@ -40,31 +46,158 @@ export interface Product {
   includes: string[];
 }
 
-const GOLD: GradeInfo = {
-  grade: "A+",
-  label: "Como Nuevo",
-  description: "Sin marcas de uso. Batería ≥ 95%. Caja original.",
-  priceModifier: 0,
-  warranty: "6 meses",
-};
+/**
+ * Mapea una entidad Prisma Product a nuestra interfaz Product (cliente).
+ */
+function mapProduct(p: {
+  id: string;
+  slug: string;
+  category: string;
+  brand: string;
+  model: string;
+  title: string;
+  subtitle: string;
+  basePrice: number;
+  condition: string;
+  storage: string | null;
+  color: string | null;
+  rating: number;
+  reviewCount: number;
+  soldCount: number;
+  description: string;
+  images: string;
+  highlights: string;
+  includes: string;
+  specs: { icon: string; label: string; value: string }[];
+  grades: { grade: string; label: string; description: string; priceModifier: number; warranty: string }[];
+}): Product {
+  const categoryMap: Record<string, Product["category"]> = {
+    IPAD: "iPad",
+    MACBOOK: "MacBook",
+    LAPTOP: "Laptop",
+    ROPA: "Ropa",
+    ACCESORIO: "Accesorio",
+  };
 
-const SILVER: GradeInfo = {
-  grade: "A",
-  label: "Excelente",
-  description: "Microdesgaste imperceptible. Batería ≥ 90%.",
-  priceModifier: -250,
-  warranty: "4 meses",
-};
+  return {
+    id: p.id,
+    slug: p.slug,
+    category: categoryMap[p.category] || "iPad",
+    brand: p.brand,
+    model: p.model,
+    title: p.title,
+    subtitle: p.subtitle,
+    basePrice: p.basePrice,
+    condition: p.condition,
+    storage: p.storage || undefined,
+    color: p.color || undefined,
+    rating: p.rating,
+    reviewCount: p.reviewCount,
+    soldCount: p.soldCount,
+    images: JSON.parse(p.images),
+    highlights: JSON.parse(p.highlights),
+    includes: JSON.parse(p.includes),
+    description: p.description,
+    specs: p.specs,
+    grades: p.grades.map((g) => ({
+      grade: g.grade as ProductGrade,
+      label: g.label,
+      description: g.description,
+      priceModifier: g.priceModifier,
+      warranty: g.warranty,
+    })),
+  };
+}
 
-const BRONZE: GradeInfo = {
-  grade: "B",
-  label: "Muy Bueno",
-  description: "Uso visible en bordes. Batería ≥ 85%. 100% funcional.",
-  priceModifier: -500,
-  warranty: "3 meses",
-};
+/**
+ * Obtiene todos los productos activos del catálogo.
+ */
+export async function getProducts(): Promise<Product[]> {
+  try {
+    const products = await db.product.findMany({
+      where: { isActive: true },
+      include: { specs: true, grades: true },
+      orderBy: { soldCount: "desc" },
+    });
+    return products.map(mapProduct);
+  } catch (error) {
+    console.error("Error leyendo productos de DB, usando fallback estático:", error);
+    return getStaticProducts();
+  }
+}
 
-export const products: Product[] = [
+/**
+ * Obtiene un producto por ID o slug.
+ */
+export async function getProductById(id: string): Promise<Product | null> {
+  try {
+    const product = await db.product.findFirst({
+      where: {
+        OR: [{ id }, { slug: id }],
+        isActive: true,
+      },
+      include: { specs: true, grades: true },
+    });
+    if (!product) return null;
+    return mapProduct(product);
+  } catch (error) {
+    console.error("Error leyendo producto de DB:", error);
+    const staticProducts = getStaticProducts();
+    return staticProducts.find((p) => p.id === id || p.slug === id) || null;
+  }
+}
+
+/**
+ * Obtiene productos relacionados (misma categoría, distinto ID).
+ */
+export async function getRelatedProducts(
+  currentId: string,
+  limit = 4
+): Promise<Product[]> {
+  try {
+    const current = await db.product.findFirst({
+      where: { OR: [{ id: currentId }, { slug: currentId }] },
+      select: { category: true },
+    });
+
+    const products = await db.product.findMany({
+      where: {
+        isActive: true,
+        id: { not: currentId },
+        ...(current ? { category: current.category } : {}),
+      },
+      include: { specs: true, grades: true },
+      take: limit,
+      orderBy: { soldCount: "desc" },
+    });
+    return products.map(mapProduct);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Formatea centavos a soles.
+ * Ej: 349900 → "S/ 3,499"
+ */
+export function formatPEN(cents: number): string {
+  return new Intl.NumberFormat("es-PE", {
+    style: "currency",
+    currency: "PEN",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(cents / 100);
+}
+
+// ============================
+// FALLBACK ESTÁTICO (para build time)
+// ============================
+
+function getStaticProducts(): Product[] {
+  return STATIC_PRODUCTS;
+}
+
+export const STATIC_PRODUCTS: Product[] = [
   {
     id: "1",
     slug: "ipad-pro-129-m2-2022",
@@ -73,7 +206,7 @@ export const products: Product[] = [
     model: "iPad Pro 12.9” M2 (2022)",
     title: "iPad Pro 12.9” M2 Wi-Fi 256GB",
     subtitle: "Pantalla Liquid Retina XDR · 2022 · Space Gray",
-    basePrice: 3499,
+    basePrice: 349900,
     condition: "Reacondicionado Certificado",
     storage: "256 GB",
     color: "Space Gray",
@@ -86,7 +219,11 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=1200&q=80",
     ],
-    grades: [GOLD, SILVER, BRONZE],
+    grades: [
+      { grade: "A+", label: "Como Nuevo", description: "Sin marcas de uso. Batería ≥ 95%. Caja original.", priceModifier: 0, warranty: "6 meses" },
+      { grade: "A", label: "Excelente", description: "Microdesgaste imperceptible. Batería ≥ 90%.", priceModifier: -25000, warranty: "4 meses" },
+      { grade: "B", label: "Muy Bueno", description: "Uso visible en bordes. Batería ≥ 85%.", priceModifier: -50000, warranty: "3 meses" },
+    ],
     specs: [
       { icon: "battery", label: "Batería", value: "95% · 10,728 mAh" },
       { icon: "cpu", label: "Procesador", value: "Apple M2 · 8 núcleos" },
@@ -102,13 +239,12 @@ export const products: Product[] = [
       "Verificado por técnicos Apple Certificados",
     ],
     description:
-      "El iPad Pro 12.9” con chip M2 redefine lo que una tablet puede hacer. Su pantalla Liquid Retina XDR con tecnología mini-LED entrega negros profundos y brillo deslumbrante, ideal para edición de foto y video, diseño 3D o maratones de streaming en alta dinámica. Cada unidad pasa por nuestro protocolo de 47 puntos de inspección en Lima, garantizando desempeño idéntico al de un equipo nuevo. Incluye Apple Pencil 2 de regalo en grado A+.",
+      "El iPad Pro 12.9” con chip M2 redefine lo que una tablet puede hacer. Su pantalla Liquid Retina XDR con tecnología mini-LED entrega negros profundos y brillo deslumbrante.",
     includes: [
       "iPad Pro 12.9” M2",
       "Cable USB-C trenzado de 1m",
       "Cargador 20W original",
       "Manual Deluxe itechperu",
-      "Caja premium con sello de garantía",
     ],
   },
   {
@@ -119,7 +255,7 @@ export const products: Product[] = [
     model: "MacBook Air M2 (2022)",
     title: "MacBook Air 13.6” M2 8/256GB",
     subtitle: "Midnight · 2022 · Sin ventilador",
-    basePrice: 4299,
+    basePrice: 429900,
     condition: "Reacondicionado Certificado",
     storage: "256 GB",
     color: "Midnight",
@@ -132,9 +268,13 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80",
     ],
-    grades: [GOLD, SILVER, BRONZE],
+    grades: [
+      { grade: "A+", label: "Como Nuevo", description: "Sin marcas de uso. Batería ≥ 95%.", priceModifier: 0, warranty: "6 meses" },
+      { grade: "A", label: "Excelente", description: "Microdesgaste imperceptible. Batería ≥ 90%.", priceModifier: -25000, warranty: "4 meses" },
+      { grade: "B", label: "Muy Bueno", description: "Uso visible en bordes. Batería ≥ 85%.", priceModifier: -50000, warranty: "3 meses" },
+    ],
     specs: [
-      { icon: "battery", label: "Batería", value: "92% · 18 hrs reproducción" },
+      { icon: "battery", label: "Batería", value: "92% · 18 hrs" },
       { icon: "cpu", label: "Procesador", value: "Apple M2 · 8 núcleos" },
       { icon: "display", label: "Pantalla", value: "13.6” Liquid Retina" },
       { icon: "storage", label: "Almacenamiento", value: "256 GB SSD" },
@@ -143,12 +283,12 @@ export const products: Product[] = [
     ],
     highlights: [
       "Diseño ultradelgado sin ventilador, totalmente silencioso",
-      "Hasta 18 horas de batería real para jornada laboral completa",
+      "Hasta 18 horas de batería real",
       "Cámara FaceTime HD 1080p con procesamiento neuronal",
       "MagSafe 3 para carga segura y rápida",
     ],
     description:
-      "El MacBook Air M2 combina potencia de nivel profesional con un chasis de 1.24 kg que desaparece en la mochila. Su chip M2 ejecuta edición en 4K, desarrollo de software y multitarea pesada sin sudar. La pantalla Liquid Retina de 13.6 pulgadas cubre P3 wide color, perfecta para diseñadores y creadores de contenido. Reacondicionado en Lima con piezas originales Apple y protocolo de 47 puntos.",
+      "El MacBook Air M2 combina potencia de nivel profesional con un chasis de 1.24 kg que desaparece en la mochila.",
     includes: [
       "MacBook Air 13.6” M2",
       "Cargador USB-C 30W + cable MagSafe 3",
@@ -164,7 +304,7 @@ export const products: Product[] = [
     model: "iPad Air 5 M1 (2022)",
     title: "iPad Air 5 10.9” M1 64GB Wi-Fi",
     subtitle: "Starlight · 2022 · Touch ID",
-    basePrice: 2199,
+    basePrice: 219900,
     condition: "Reacondicionado Certificado",
     storage: "64 GB",
     color: "Starlight",
@@ -177,7 +317,11 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1623126908029-58cb08a2b272?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1511034104901-a16e0854c2ca?auto=format&fit=crop&w=1200&q=80",
     ],
-    grades: [GOLD, SILVER, BRONZE],
+    grades: [
+      { grade: "A+", label: "Como Nuevo", description: "Sin marcas de uso. Batería ≥ 97%.", priceModifier: 0, warranty: "6 meses" },
+      { grade: "A", label: "Excelente", description: "Microdesgaste imperceptible.", priceModifier: -25000, warranty: "4 meses" },
+      { grade: "B", label: "Muy Bueno", description: "Uso visible en bordes.", priceModifier: -50000, warranty: "3 meses" },
+    ],
     specs: [
       { icon: "battery", label: "Batería", value: "97% · 28Wh" },
       { icon: "cpu", label: "Procesador", value: "Apple M1 · 8 núcleos" },
@@ -192,8 +336,7 @@ export const products: Product[] = [
       "Touch ID integrado en botón superior",
       "Carga USB-C rápida",
     ],
-    description:
-      "El iPad Air 5 trae el poder del chip M1 al formato más versátil de Apple. Perfecto para estudiantes, profesionales creativos y cualquiera que necesite una máquina de productividad portátil. La pantalla de 10.9 pulgadas ofrece espacio amplio para multitarea con Stage Manager. Cada unidad es verificada en Lima con protocolo de 47 puntos.",
+    description: "El iPad Air 5 trae el poder del chip M1 al formato más versátil de Apple.",
     includes: [
       "iPad Air 5 10.9” M1",
       "Cable USB-C de 1m",
@@ -209,7 +352,7 @@ export const products: Product[] = [
     model: "MacBook Pro 14” M3 Pro (2023)",
     title: "MacBook Pro 14” M3 Pro 18/512GB",
     subtitle: "Space Black · 2023 · Pantalla XDR",
-    basePrice: 8499,
+    basePrice: 849900,
     condition: "Reacondicionado Premium",
     storage: "512 GB",
     color: "Space Black",
@@ -222,7 +365,11 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=1200&q=80",
     ],
-    grades: [GOLD, SILVER, BRONZE],
+    grades: [
+      { grade: "A+", label: "Como Nuevo", description: "Sin marcas de uso.", priceModifier: 0, warranty: "6 meses" },
+      { grade: "A", label: "Excelente", description: "Microdesgaste imperceptible.", priceModifier: -25000, warranty: "4 meses" },
+      { grade: "B", label: "Muy Bueno", description: "Uso visible en bordes.", priceModifier: -50000, warranty: "3 meses" },
+    ],
     specs: [
       { icon: "battery", label: "Batería", value: "94% · 12 hrs vídeo" },
       { icon: "cpu", label: "Procesador", value: "Apple M3 Pro · 12 núcleos" },
@@ -233,12 +380,11 @@ export const products: Product[] = [
     ],
     highlights: [
       "Rendimiento pro para edición 8K y renderizado 3D",
-      "Pantalla XDR con 1,600 nits HDR y negros OLED",
+      "Pantalla XDR con 1,600 nits HDR",
       "Sistema de 6 parlantes con audio espacial",
       "Cuerpo de aluminio reciclado Space Black exclusivo",
     ],
-    description:
-      "El MacBook Pro 14” con M3 Pro es la herramienta definitiva para profesionales del audio, vídeo y desarrollo. Su pantalla Liquid Retina XDR reproduce HDR con precisión de estudio, y los 18 GB de memoria unificada manejan flujos de trabajo intensivos sin pestañear. Reacondicionado en Lima con estándares de joyería técnica, inspección de 47 puntos y garantía extendida.",
+    description: "El MacBook Pro 14” con M3 Pro es la herramienta definitiva para profesionales del audio, vídeo y desarrollo.",
     includes: [
       "MacBook Pro 14” M3 Pro Space Black",
       "Cargador USB-C 70W + cable MagSafe 3",
@@ -248,20 +394,3 @@ export const products: Product[] = [
     ],
   },
 ];
-
-export function getProductById(id: string): Product | undefined {
-  return products.find((p) => p.id === id || p.slug === id);
-}
-
-export function getRelatedProducts(currentId: string, limit = 3): Product[] {
-  return products.filter((p) => p.id !== currentId).slice(0, limit);
-}
-
-export function formatPEN(value: number): string {
-  return new Intl.NumberFormat("es-PE", {
-    style: "currency",
-    currency: "PEN",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(value);
-}

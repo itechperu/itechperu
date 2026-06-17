@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, ShoppingBag, User, ChevronDown, Heart, LayoutGrid, SlidersHorizontal, MessageCircle, Menu, X } from "lucide-react";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
+import { useCart } from "@/store/use-cart";
 
 /**
  * Header Deluxe — itechperu.shop (100% responsivo + Scroll Spy)
@@ -16,7 +17,18 @@ const SECTION_IDS = ["inicio", "ofertas", "catalogo", "categorias", "confianza"]
 export function HeaderDeluxe() {
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [cartCount] = useState(2);
+  const [mounted, setMounted] = useState(false);
+
+  // Evitar hydration mismatch: el contador del carrito solo se lee en cliente
+  const cartCount = useCart((s) => s.getTotalItems());
+  const openCart = useCart((s) => s.openCart);
+
+  useEffect(() => {
+    // Marcar como montado en el próximo tick para sincronizar con persistencia
+    // de Zustand (que solo se hidrata en cliente)
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   // Scroll Spy: detecta qué sección está visible
   const { activeId, scrollToId } = useScrollSpy({
@@ -124,14 +136,15 @@ export function HeaderDeluxe() {
 
           {/* Carrito */}
           <button
+            onClick={openCart}
             className="relative flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-full hover:bg-[#F5F5F7] transition-colors tap-scale"
-            aria-label={`Carrito con ${cartCount} productos`}
+            aria-label={`Carrito con ${mounted ? cartCount : 0} productos`}
           >
             <ShoppingBag
               className="h-[18px] w-[18px] lg:h-5 lg:w-5 text-[#1D1D1F]"
               strokeWidth={1.5}
             />
-            {cartCount > 0 && (
+            {mounted && cartCount > 0 && (
               <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#D4AF37] px-1 text-[9px] font-bold text-white shadow-[0_2px_6px_rgb(212,175,55,0.5)]">
                 {cartCount}
               </span>

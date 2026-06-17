@@ -1,32 +1,319 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// ===========================================
+// itechperu.shop — Prisma Schema
+// ===========================================
+// DB:
+//   - Dev: SQLite (file:./dev.db)
+//   - Prod (Vercel): PostgreSQL (Neon/Supabase)
+// Para migrar a Postgres en prod, solo cambia DATABASE_URL y
+// comenta/descomenta el provider en datasource.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
+  // ⚠️ Para producción (Vercel + Neon Postgres), cambia "sqlite" por "postgresql"
+  //   provider = "postgresql"
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
+// ============================
+// USUARIOS Y AUTENTICACIÓN
+// ============================
+
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  password      String? // Hash bcrypt para credentials provider
+  phone         String? // WhatsApp para confirmaciones
+  role          Role      @default(CUSTOMER)
+  // Referencias NextAuth (Accounts para OAuth como Google)
+  accounts      Account[]
+  sessions      Session[]
+
+  // Relaciones e-commerce
+  cartItems     CartItem[]
+  orders        Order[]
+  favorites     Favorite[]
+  addresses     Address[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([email])
 }
 
-model Post {
+enum Role {
+  CUSTOMER
+  ADMIN
+  SUPER_ADMIN
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String // oauth, credentials
+  provider          String // google, credentials
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================
+// CATÁLOGO DE PRODUCTOS
+// ============================
+
+model Product {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  category    Category
+  brand       String
+  model       String
+  title       String
+  subtitle    String
+  description String
+  basePrice   Int // Precio en centavos (S/ 3,499 = 349900)
+  condition   String       @default("Reacondicionado Certificado")
+  storage     String?
+  color       String?
+  rating      Float        @default(5.0)
+  reviewCount Int          @default(0)
+  soldCount   Int          @default(0)
+  highlights  String       // JSON array de strings
+  includes    String       // JSON array de strings
+  images      String       // JSON array de URLs
+  isActive    Boolean      @default(true)
+  stock       Int          @default(10)
+
+  specs       Spec[]
+  grades      Grade[]
+  cartItems   CartItem[]
+  favorites   Favorite[]
+  orderItems  OrderItem[]
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([category])
+  @@index([isActive])
+}
+
+enum Category {
+  IPAD
+  MACBOOK
+  LAPTOP
+  ROPA
+  ACCESORIO
+}
+
+model Spec {
+  id        String  @id @default(cuid())
+  productId String
+  icon      String // battery, cpu, display, storage, camera, wifi, memory, weight, ports
+  label     String
+  value     String
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model Grade {
+  id            String  @id @default(cuid())
+  productId     String
+  grade         String // "A+", "A", "B"
+  label         String // "Como Nuevo", "Excelente", "Muy Bueno"
+  description   String
+  priceModifier Int     // Ajuste en centavos (ej. -25000 = -S/250)
+  warranty      String  // "6 meses"
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+// ============================
+// CARRITO Y FAVORITOS
+// ============================
+
+model CartItem {
   id        String   @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  authorId  String
+  userId    String
+  productId String
+  grade     String   // "A+", "A", "B"
+  quantity  Int      @default(1)
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId, grade])
+  @@index([userId])
+}
+
+model Favorite {
+  id        String @id @default(cuid())
+  userId    String
+  productId String
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+  @@index([userId])
+}
+
+model Address {
+  id        String  @id @default(cuid())
+  userId    String
+  label     String  @default("Casa") // Casa, Trabajo, etc.
+  fullName  String
+  phone     String
+  street    String
+  city      String  // Lima, Arequipa, etc.
+  district  String  // Miraflores, Surco, etc.
+  postalCode String?
+  reference String? // Referencia para el delivery
+  isDefault Boolean @default(false)
+
+  user  User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ============================
+// PEDIDOS Y PAGOS (MERCADO PAGO)
+// ============================
+
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique // "ITP-2026-00001"
+  userId        String
+  status        OrderStatus @default(PENDING)
+  paymentMethod PaymentMethod
+  // Totales en centavos
+  subtotal      Int
+  discount      Int          @default(0)
+  shipping      Int          @default(0)
+  total         Int
+  currency      String       @default("PEN")
+
+  // Mercado Pago
+  mpPreferenceId String? // ID de la preferencia creada
+  mpPaymentId    String? // ID del pago tras webhook
+  mpStatus       String? // approved, pending, rejected
+  mpInitPoint    String? // URL de checkout de MP
+
+  // Cliente (snapshot al momento de la compra)
+  customerName  String
+  customerEmail String
+  customerPhone String?
+
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Envío
+  addressId     String?
+  address       Address?    @relation(fields: [addressId], references: [id], onDelete: SetNull)
+  notes         String?
+
+  items         OrderItem[]
+  payments      PaymentLog[]
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([mpPaymentId])
+}
+
+enum OrderStatus {
+  PENDING        // Esperando pago
+  PAID           // Pago aprobado (Mercado Pago)
+  PROCESSING     // En preparación
+  SHIPPED        // Enviado
+  DELIVERED      // Entregado
+  CANCELLED      // Cancelado
+  REFUNDED       // Reembolsado
+  COD_CONFIRMED  // Contraentrega confirmada (sin pago online)
+}
+
+enum PaymentMethod {
+  MERCADO_PAGO    // Pago online con tarjeta / Yape / PLIN
+  CASH_ON_DELIVERY // Contraentrega (solo Lima)
+  BANK_TRANSFER   // Transferencia bancaria
+}
+
+model OrderItem {
+  id          String  @id @default(cuid())
+  orderId     String
+  productId   String
+  // Snapshot del producto al momento de la compra (para historial)
+  productTitle String
+  productImage String?
+  grade       String  // "A+", "A", "B"
+  unitPrice   Int     // Precio unitario en centavos
+  quantity    Int
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+}
+
+model PaymentLog {
+  id          String   @id @default(cuid())
+  orderId     String
+  // Tipo de evento: preference_created, payment_approved, payment_rejected, etc.
+  event       String
+  payload     String   // JSON completo del webhook/evento
+  mpPaymentId String?
+  mpStatus    String?
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([mpPaymentId])
 }

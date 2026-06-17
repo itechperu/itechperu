@@ -1,5 +1,7 @@
 import { HeaderDeluxe } from "@/components/deluxe/header-deluxe";
 import { BottomTabBarDeluxe } from "@/components/deluxe/bottom-tab-bar-deluxe";
+import { CartDrawerDeluxe } from "@/components/deluxe/cart-drawer-deluxe";
+import { Toaster as SonnerToaster } from "sonner";
 
 /**
  * Layout para el route group (main) — itechperu.shop
@@ -29,6 +31,23 @@ export default function MainLayout({
 
       {/* Tab Bar flotante inferior (oculta en desktop) */}
       <BottomTabBarDeluxe />
+
+      {/* Cart Drawer lateral */}
+      <CartDrawerDeluxe />
+
+      {/* Toaster para notificaciones (sonner) */}
+      <SonnerToaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: "#1D1D1F",
+            color: "white",
+            border: "1px solid rgba(212, 175, 55, 0.3)",
+            borderRadius: "16px",
+            fontSize: "13px",
+          },
+        }}
+      />
     </div>
   );
 }

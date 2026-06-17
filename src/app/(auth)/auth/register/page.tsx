@@ -2,8 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Mail, Lock, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { User, Mail, Lock, ArrowRight, Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
 import { AuthLayoutDeluxe } from "@/components/auth/auth-layout-deluxe";
 import { InputDeluxe } from "@/components/auth/input-deluxe";
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
@@ -27,6 +29,7 @@ function getPasswordStrength(pwd: string): PasswordStrength {
 }
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,6 +37,7 @@ export default function RegisterPage() {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const strength = getPasswordStrength(password);
 
@@ -55,10 +59,50 @@ export default function RegisterPage() {
 
   const handleSubmit = async (ev: FormEvent) => {
     ev.preventDefault();
+    setAuthError(null);
     if (!validate()) return;
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setLoading(false);
+
+    try {
+      // 1. Crear el usuario en la DB via API
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setAuthError(data.error || "Error al crear la cuenta");
+        setLoading(false);
+        return;
+      }
+
+      // 2. Login automático con credentials
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setAuthError("Cuenta creada pero no se pudo iniciar sesión automáticamente. Inicia sesión manualmente.");
+        setLoading(false);
+        return;
+      }
+
+      // 3. Redirigir a verificación de email (en Sprint 3 real, enviaríamos email)
+      router.push("/auth/verify-email");
+      router.refresh();
+    } catch {
+      setAuthError("Error de conexión. Intenta de nuevo.");
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl: "/" });
   };
 
   return (
@@ -100,9 +144,21 @@ export default function RegisterPage() {
             </p>
           </div>
 
+          {/* Auth error */}
+          {authError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-4 flex items-center gap-2 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/30 px-4 py-2.5 text-[12px] text-[#EF4444]"
+            >
+              <AlertCircle className="h-4 w-4 flex-shrink-0" strokeWidth={2} />
+              {authError}
+            </motion.div>
+          )}
+
           {/* Google */}
           <div className="mb-5">
-            <GoogleSignInButton label="Registrarme con Google" />
+            <GoogleSignInButton label="Registrarme con Google" onClick={handleGoogleSignIn} />
           </div>
 
           {/* Divider */}

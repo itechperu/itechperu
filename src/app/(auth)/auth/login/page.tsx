@@ -2,8 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Lock, ArrowRight, Sparkles } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { Mail, Lock, ArrowRight, Sparkles, AlertCircle } from "lucide-react";
 import { AuthLayoutDeluxe } from "@/components/auth/auth-layout-deluxe";
 import { InputDeluxe } from "@/components/auth/input-deluxe";
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
@@ -11,10 +13,15 @@ import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 type Mode = "login" | "loading";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [mode, setMode] = useState<Mode>("login");
+  const [authError, setAuthError] = useState<string | null>(null);
   const [rememberMe, setRememberMe] = useState(true);
 
   const validate = () => {
@@ -30,11 +37,34 @@ export default function LoginPage() {
 
   const handleSubmit = async (ev: FormEvent) => {
     ev.preventDefault();
+    setAuthError(null);
     if (!validate()) return;
     setMode("loading");
-    // Simulación de login (Sprint 3: integrar NextAuth.js)
-    await new Promise((r) => setTimeout(r, 1500));
-    setMode("login");
+
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setAuthError("Correo o contraseña incorrectos");
+        setMode("login");
+        return;
+      }
+
+      // Login exitoso → redirigir
+      router.push(callbackUrl);
+      router.refresh();
+    } catch {
+      setAuthError("Error al iniciar sesión. Intenta de nuevo.");
+      setMode("login");
+    }
+  };
+
+  const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl });
   };
 
   return (
@@ -76,9 +106,21 @@ export default function LoginPage() {
             </p>
           </div>
 
+          {/* Auth error global */}
+          {authError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-4 flex items-center gap-2 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/30 px-4 py-2.5 text-[12px] text-[#EF4444]"
+            >
+              <AlertCircle className="h-4 w-4 flex-shrink-0" strokeWidth={2} />
+              {authError}
+            </motion.div>
+          )}
+
           {/* Google Sign-In */}
           <div className="mb-5">
-            <GoogleSignInButton />
+            <GoogleSignInButton onClick={handleGoogleSignIn} />
           </div>
 
           {/* Divider */}
@@ -181,18 +223,15 @@ export default function LoginPage() {
             </motion.button>
           </form>
 
-          {/* Footer trust */}
-          <p className="mt-6 text-center text-[10px] text-[#86868B] leading-relaxed">
-            Al continuar aceptas nuestros{" "}
-            <Link href="/" className="underline hover:text-[#1D1D1F]">
-              Términos
-            </Link>{" "}
-            y{" "}
-            <Link href="/" className="underline hover:text-[#1D1D1F]">
-              Política de Privacidad
-            </Link>
-            .
-          </p>
+          {/* Demo credentials hint */}
+          <div className="mt-6 rounded-2xl bg-[#F5F5F7] p-3 text-center">
+            <p className="text-[10px] text-[#86868B] uppercase tracking-wider font-medium mb-1">
+              Cuenta demo
+            </p>
+            <p className="text-[11px] text-[#1D1D1F] font-mono">
+              demo@itechperu.shop · admin123
+            </p>
+          </div>
         </motion.div>
       </AnimatePresence>
     </AuthLayoutDeluxe>
