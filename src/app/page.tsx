@@ -1,110 +1,150 @@
 import Link from "next/link";
 import { products, formatPEN } from "@/data/products";
-import { ShieldCheck, Truck, Star, Sparkles, ChevronRight, Flame } from "lucide-react";
+import { ShieldCheck, Truck, Star, Sparkles, ChevronRight, Flame, MessageCircle } from "lucide-react";
 
 /**
- * Home page — itechperu.shop
+ * Home page — itechperu.shop (100% responsiva)
  *
- * Catálogo Deluxe mobile-first con:
- *  - Hero premium con promesa de confianza
- *  - Cinta de garantías y beneficios
- *  - Grid de productos destacados (link a /productos/[id])
- *  - Categorías Deluxe
- *  - Sello de confianza itechperu
+ * Breakpoints:
+ *  - Mobile (< sm): 1-2 columnas, hero compacto, scroll horizontal en ofertas
+ *  - Tablet (sm..lg): 2-3 columnas, hero mediano
+ *  - Desktop (≥ lg): 4 columnas, hero amplio con badge lateral, sidebar de confianza
  */
 export default function HomePage() {
   const featured = products.slice(0, 4);
-  const offers = products.slice(0, 2);
+  const offers = products.slice(0, 3);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 lg:space-y-12">
       {/* ====== Hero Deluxe ====== */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#1D1D1F] p-5 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.3)]">
+      <section className="relative overflow-hidden rounded-3xl lg:rounded-[2rem] bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#1D1D1F] p-5 sm:p-8 lg:p-12 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.3)]">
         {/* Detalle oro */}
-        <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-[#D4AF37]/20 blur-3xl" />
-        <div className="absolute -bottom-12 -left-12 h-32 w-32 rounded-full bg-[#D4AF37]/10 blur-3xl" />
+        <div className="absolute -top-12 -right-12 h-40 w-40 lg:h-64 lg:w-64 rounded-full bg-[#D4AF37]/20 blur-3xl" />
+        <div className="absolute -bottom-12 -left-12 h-32 w-32 lg:h-48 lg:w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
 
-        <div className="relative">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-2.5 py-1">
-            <Sparkles className="h-3 w-3 text-[#D4AF37]" strokeWidth={1.5} />
-            <span className="text-[10px] font-medium text-white/90 tracking-wide">
-              Reacondicionado Premium · Lima, Perú
-            </span>
+        <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="flex-1 max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-2.5 py-1">
+              <Sparkles className="h-3 w-3 text-[#D4AF37]" strokeWidth={1.5} />
+              <span className="text-[10px] lg:text-[11px] font-medium text-white/90 tracking-wide">
+                Reacondicionado Premium · Lima, Perú 🇵🇪
+              </span>
+            </div>
+
+            <h1 className="mt-3 text-[24px] sm:text-[32px] lg:text-[48px] font-bold tracking-tight leading-[1.1] text-white">
+              Tecnología de alta gama
+              <br />
+              <span className="bg-gradient-to-r from-[#D4AF37] via-[#F5E7A1] to-[#D4AF37] bg-clip-text text-transparent">
+                al precio inteligente
+              </span>
+            </h1>
+
+            <p className="mt-2 lg:mt-4 text-[12.5px] lg:text-[16px] text-white/70 leading-relaxed max-w-[280px] sm:max-w-md lg:max-w-lg">
+              iPads, MacBooks y Laptops corporativas verificadas con protocolo de
+              47 puntos. Garantía real y experiencia Deluxe en cada compra.
+            </p>
+
+            <div className="mt-4 lg:mt-6 flex flex-wrap items-center gap-2 lg:gap-3">
+              <Link
+                href={`/productos/${featured[0].id}`}
+                className="flex items-center gap-1.5 rounded-full bg-white px-4 lg:px-6 py-2 lg:py-2.5 text-[12px] lg:text-[14px] font-semibold text-[#1D1D1F] tap-scale hover:bg-[#F5F5F7] transition-colors"
+              >
+                Ver destacado
+                <ChevronRight className="h-3.5 w-3.5 lg:h-4 lg:w-4" strokeWidth={2} />
+              </Link>
+              <Link
+                href="#catalogo"
+                className="rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-4 lg:px-6 py-2 lg:py-2.5 text-[12px] lg:text-[14px] font-medium text-white tap-scale hover:bg-white/15 transition-colors"
+              >
+                Ver catálogo
+              </Link>
+              <a
+                href="https://wa.me/51987654321?text=Hola%20iTECH%20Peru%2C%20quiero%20info%20VIP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] px-4 lg:px-6 py-2 lg:py-2.5 text-[12px] lg:text-[14px] font-semibold text-white tap-scale shadow-[0_4px_16px_rgba(212,175,55,0.4)]"
+              >
+                <MessageCircle className="h-3.5 w-3.5 lg:h-4 lg:w-4" strokeWidth={2} />
+                WhatsApp VIP
+              </a>
+            </div>
           </div>
 
-          <h1 className="mt-3 text-[24px] font-bold tracking-tight leading-tight text-white">
-            Tecnología de alta gama
-            <br />
-            <span className="bg-gradient-to-r from-[#D4AF37] via-[#F5E7A1] to-[#D4AF37] bg-clip-text text-transparent">
-              al precio inteligente
-            </span>
-          </h1>
-
-          <p className="mt-2 text-[12.5px] text-white/70 leading-relaxed max-w-[280px]">
-            iPads, MacBooks y Laptops corporativas verificadas con protocolo de
-            47 puntos. Garantía real y experiencia Deluxe.
-          </p>
-
-          <div className="mt-4 flex items-center gap-2">
-            <Link
-              href={`/productos/${featured[0].id}`}
-              className="flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-[12px] font-semibold text-[#1D1D1F] tap-scale hover:bg-[#F5F5F7] transition-colors"
-            >
-              Ver destacado
-              <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
-            </Link>
-            <Link
-              href="#catalogo"
-              className="rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 text-[12px] font-medium text-white tap-scale hover:bg-white/15 transition-colors"
-            >
-              Catálogo
-            </Link>
+          {/* Stats Deluxe en desktop */}
+          <div className="hidden lg:flex flex-col gap-3 lg:w-[280px]">
+            {[
+              { label: "Equipos verificados", value: "+500", accent: false },
+              { label: "Calificación promedio", value: "4.9/5", accent: true },
+              { label: "Garantía real", value: "3-6 meses", accent: false },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className={`rounded-2xl border p-4 backdrop-blur-md ${
+                  stat.accent
+                    ? "bg-[#D4AF37]/10 border-[#D4AF37]/30"
+                    : "bg-white/5 border-white/10"
+                }`}
+              >
+                <p className="text-[11px] text-white/60 uppercase tracking-wider">
+                  {stat.label}
+                </p>
+                <p className={`text-[24px] font-bold mt-1 ${stat.accent ? "text-[#D4AF37]" : "text-white"}`}>
+                  {stat.value}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ====== Cinta de garantías ====== */}
-      <section className="grid grid-cols-3 gap-2">
-        <div className="flex flex-col items-center text-center gap-1 rounded-2xl bg-[#F5F5F7] p-3">
-          <ShieldCheck className="h-5 w-5 text-[#D4AF37]" strokeWidth={1.5} />
-          <span className="text-[10px] font-semibold text-[#1D1D1F]">Garantía</span>
-          <span className="text-[9px] text-[#86868B]">3-6 meses</span>
-        </div>
-        <div className="flex flex-col items-center text-center gap-1 rounded-2xl bg-[#F5F5F7] p-3">
-          <Truck className="h-5 w-5 text-[#1D1D1F]" strokeWidth={1.5} />
-          <span className="text-[10px] font-semibold text-[#1D1D1F]">Envío</span>
-          <span className="text-[9px] text-[#86868B]">24-48h Lima</span>
-        </div>
-        <div className="flex flex-col items-center text-center gap-1 rounded-2xl bg-[#F5F5F7] p-3">
-          <Star className="h-5 w-5 text-[#D4AF37] fill-[#D4AF37]" strokeWidth={1.5} />
-          <span className="text-[10px] font-semibold text-[#1D1D1F]">4.9/5</span>
-          <span className="text-[9px] text-[#86868B]">+500 ventas</span>
-        </div>
+      <section className="grid grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
+        {[
+          { icon: ShieldCheck, label: "Garantía", value: "3-6 meses", accent: true },
+          { icon: Truck, label: "Envío", value: "24-48h Lima", accent: false },
+          { icon: Star, label: "4.9/5", value: "+500 ventas", accent: true },
+          { icon: ShieldCheck, label: "Verificado", value: "47 pts", accent: false, desktopOnly: true },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className={`${item.desktopOnly ? "hidden lg:flex" : "flex"} flex-col items-center text-center gap-1 rounded-2xl bg-[#F5F5F7] p-3 lg:p-4`}
+          >
+            <item.icon
+              className={`h-5 w-5 lg:h-6 lg:w-6 ${item.accent ? "text-[#D4AF37]" : "text-[#1D1D1F]"}`}
+              strokeWidth={1.5}
+            />
+            <span className="text-[10px] lg:text-[12px] font-semibold text-[#1D1D1F]">
+              {item.label}
+            </span>
+            <span className="text-[9px] lg:text-[11px] text-[#86868B]">{item.value}</span>
+          </div>
+        ))}
       </section>
 
       {/* ====== Ofertas relámpago ====== */}
       <section>
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-3 lg:mb-4">
           <div className="flex items-center gap-2">
-            <Flame className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5} />
-            <h2 className="text-[15px] font-bold tracking-tight text-[#1D1D1F]">
+            <Flame className="h-4 w-4 lg:h-5 lg:w-5 text-[#D4AF37]" strokeWidth={1.5} />
+            <h2 className="text-[15px] lg:text-[20px] font-bold tracking-tight text-[#1D1D1F]">
               Ofertas Deluxe
             </h2>
           </div>
           <Link
             href="#catalogo"
-            className="text-[11px] font-medium text-[#86868B] hover:text-[#1D1D1F] transition-colors"
+            className="text-[11px] lg:text-[13px] font-medium text-[#86868B] hover:text-[#1D1D1F] transition-colors"
           >
-            Ver todo
+            Ver todo →
           </Link>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1">
+        {/* En móvil: scroll horizontal. En desktop: grid de 3 */}
+        <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 sm:mx-0 px-4 sm:px-0 pb-1 lg:grid lg:grid-cols-3 lg:gap-4">
           {offers.map((p) => (
             <Link
               key={p.id}
               href={`/productos/${p.id}`}
-              className="group flex-shrink-0 w-[260px]"
+              className="group flex-shrink-0 w-[260px] sm:w-[280px] lg:w-auto"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[#F5F5F7] shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
                 <img
@@ -112,19 +152,19 @@ export default function HomePage() {
                   alt={p.title}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <span className="absolute top-2 left-2 inline-flex items-center rounded-full bg-[#D4AF37] px-2 py-0.5 text-[10px] font-bold text-white shadow-[0_2px_8px_rgba(212,175,55,0.4)]">
+                <span className="absolute top-2 left-2 lg:top-3 lg:left-3 inline-flex items-center rounded-full bg-[#D4AF37] px-2 lg:px-2.5 py-0.5 lg:py-1 text-[10px] lg:text-[11px] font-bold text-white shadow-[0_2px_8px_rgba(212,175,55,0.4)]">
                   −S/500
                 </span>
-                <div className="absolute bottom-2 right-2 rounded-full bg-white/80 backdrop-blur-md px-2 py-1">
-                  <span className="text-[10px] font-bold text-[#1D1D1F]">
+                <div className="absolute bottom-2 right-2 lg:bottom-3 lg:right-3 rounded-full bg-white/80 backdrop-blur-md px-2 lg:px-3 py-1">
+                  <span className="text-[10px] lg:text-[12px] font-bold text-[#1D1D1F]">
                     {formatPEN(p.basePrice - 500)}
                   </span>
                 </div>
               </div>
-              <p className="mt-2 text-[12px] font-semibold text-[#1D1D1F] truncate">
+              <p className="mt-2 text-[12px] lg:text-[14px] font-semibold text-[#1D1D1F] truncate">
                 {p.title}
               </p>
-              <p className="text-[10px] text-[#86868B] truncate">{p.subtitle}</p>
+              <p className="text-[10px] lg:text-[12px] text-[#86868B] truncate">{p.subtitle}</p>
             </Link>
           ))}
         </div>
@@ -132,19 +172,22 @@ export default function HomePage() {
 
       {/* ====== Catálogo principal ====== */}
       <section id="catalogo">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-[15px] font-bold tracking-tight text-[#1D1D1F]">
+        <div className="flex items-center justify-between mb-3 lg:mb-4">
+          <h2 className="text-[15px] lg:text-[20px] font-bold tracking-tight text-[#1D1D1F]">
             Destacados
           </h2>
-          <span className="text-[11px] text-[#86868B]">{products.length} productos</span>
+          <span className="text-[11px] lg:text-[13px] text-[#86868B]">
+            {products.length} productos
+          </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        {/* Grid responsivo: 2 cols móvil → 3 cols tablet → 4 cols desktop */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-5">
           {featured.map((p) => (
             <Link
               key={p.id}
               href={`/productos/${p.id}`}
-              className="group rounded-3xl overflow-hidden bg-white border border-[#E5E5E7] shadow-[0_8px_30px_rgb(0,0,0,0.04)] tap-scale hover:shadow-[0_12px_40px_-8px_rgb(0_0_0/0.12)] transition-all duration-300"
+              className="group rounded-3xl overflow-hidden bg-white border border-[#E5E5E7] shadow-[0_8px_30px_rgb(0,0,0,0.04)] tap-scale hover:shadow-[0_12px_40px_-8px_rgb(0_0_0/0.12)] hover:border-[#D4AF37]/30 transition-all duration-300"
             >
               <div className="relative aspect-square overflow-hidden bg-[#F5F5F7]">
                 <img
@@ -152,30 +195,30 @@ export default function HomePage() {
                   alt={p.title}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute top-2 left-2 inline-flex items-center rounded-full bg-white/80 backdrop-blur-md px-1.5 py-0.5">
-                  <span className="text-[9px] font-bold text-[#1D1D1F] uppercase tracking-wider">
+                <div className="absolute top-2 left-2 lg:top-3 lg:left-3 inline-flex items-center rounded-full bg-white/80 backdrop-blur-md px-1.5 lg:px-2 py-0.5">
+                  <span className="text-[9px] lg:text-[10px] font-bold text-[#1D1D1F] uppercase tracking-wider">
                     Grado A+
                   </span>
                 </div>
-                <div className="absolute top-2 right-2 inline-flex items-center gap-0.5 rounded-full bg-white/80 backdrop-blur-md px-1.5 py-0.5">
-                  <Star className="h-2.5 w-2.5 fill-[#D4AF37] text-[#D4AF37]" strokeWidth={1.5} />
-                  <span className="text-[9px] font-bold text-[#1D1D1F]">
+                <div className="absolute top-2 right-2 lg:top-3 lg:right-3 inline-flex items-center gap-0.5 rounded-full bg-white/80 backdrop-blur-md px-1.5 lg:px-2 py-0.5">
+                  <Star className="h-2.5 w-2.5 lg:h-3 lg:w-3 fill-[#D4AF37] text-[#D4AF37]" strokeWidth={1.5} />
+                  <span className="text-[9px] lg:text-[10px] font-bold text-[#1D1D1F]">
                     {p.rating.toFixed(1)}
                   </span>
                 </div>
               </div>
 
-              <div className="p-3">
-                <p className="text-[10px] text-[#86868B] uppercase tracking-wider font-medium">
+              <div className="p-3 lg:p-4">
+                <p className="text-[10px] lg:text-[11px] text-[#86868B] uppercase tracking-wider font-medium">
                   {p.category}
                 </p>
-                <h3 className="mt-0.5 text-[12px] font-semibold text-[#1D1D1F] leading-tight line-clamp-2 min-h-[28px]">
+                <h3 className="mt-0.5 text-[12px] lg:text-[14px] font-semibold text-[#1D1D1F] leading-tight line-clamp-2 min-h-[32px] lg:min-h-[40px]">
                   {p.title}
                 </h3>
-                <p className="mt-1.5 text-[14px] font-bold text-[#1D1D1F]">
+                <p className="mt-1.5 lg:mt-2 text-[14px] lg:text-[18px] font-bold text-[#1D1D1F]">
                   {formatPEN(p.basePrice)}
                 </p>
-                <p className="text-[9px] text-[#86868B] mt-0.5">
+                <p className="text-[9px] lg:text-[10px] text-[#86868B] mt-0.5">
                   O 12 cuotas de {formatPEN(Math.round(p.basePrice / 12))}
                 </p>
               </div>
@@ -186,10 +229,10 @@ export default function HomePage() {
 
       {/* ====== Categorías Deluxe ====== */}
       <section>
-        <h2 className="text-[15px] font-bold tracking-tight text-[#1D1D1F] mb-3">
+        <h2 className="text-[15px] lg:text-[20px] font-bold tracking-tight text-[#1D1D1F] mb-3 lg:mb-4">
           Categorías
         </h2>
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-4">
           {[
             { name: "iPads", desc: "Pro, Air, mini", icon: "📱", color: "from-[#D4AF37]/10 to-[#D4AF37]/5" },
             { name: "MacBooks", desc: "Air y Pro M1-M3", icon: "💻", color: "from-[#1D1D1F]/5 to-[#1D1D1F]/2" },
@@ -199,35 +242,46 @@ export default function HomePage() {
             <Link
               key={cat.name}
               href="#catalogo"
-              className={`group flex items-center gap-3 rounded-2xl bg-gradient-to-br ${cat.color} border border-[#E5E5E7] p-3.5 tap-scale hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] transition-all`}
+              className={`group flex items-center gap-3 rounded-2xl bg-gradient-to-br ${cat.color} border border-[#E5E5E7] p-3.5 lg:p-5 tap-scale hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:border-[#D4AF37]/30 transition-all`}
             >
-              <span className="text-[24px]">{cat.icon}</span>
+              <span className="text-[24px] lg:text-[32px]">{cat.icon}</span>
               <div className="flex-1 min-w-0">
-                <p className="text-[12px] font-semibold text-[#1D1D1F]">{cat.name}</p>
-                <p className="text-[10px] text-[#86868B] truncate">{cat.desc}</p>
+                <p className="text-[12px] lg:text-[15px] font-semibold text-[#1D1D1F]">{cat.name}</p>
+                <p className="text-[10px] lg:text-[11px] text-[#86868B] truncate">{cat.desc}</p>
               </div>
-              <ChevronRight className="h-4 w-4 text-[#86868B] group-hover:text-[#1D1D1F] group-hover:translate-x-0.5 transition-all" strokeWidth={1.5} />
+              <ChevronRight
+                className="h-4 w-4 lg:h-5 lg:w-5 text-[#86868B] group-hover:text-[#1D1D1F] group-hover:translate-x-0.5 transition-all"
+                strokeWidth={1.5}
+              />
             </Link>
           ))}
         </div>
       </section>
 
       {/* ====== Sello de confianza ====== */}
-      <section className="rounded-3xl bg-gradient-to-br from-[#1D1D1F] to-[#2A2A2D] p-5 text-center">
-        <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-[#D4AF37]/20 backdrop-blur-md mb-2">
-          <ShieldCheck className="h-6 w-6 text-[#D4AF37]" strokeWidth={1.5} />
+      <section className="rounded-3xl lg:rounded-[2rem] bg-gradient-to-br from-[#1D1D1F] to-[#2A2A2D] p-5 sm:p-8 lg:p-12 text-center">
+        <div className="inline-flex items-center justify-center h-12 w-12 lg:h-16 lg:w-16 rounded-full bg-[#D4AF37]/20 backdrop-blur-md mb-2 lg:mb-3">
+          <ShieldCheck className="h-6 w-6 lg:h-8 lg:w-8 text-[#D4AF37]" strokeWidth={1.5} />
         </div>
-        <h3 className="text-[14px] font-bold text-white">Confianza Absoluta</h3>
-        <p className="mt-1 text-[11px] text-white/70 leading-relaxed max-w-[300px] mx-auto">
-          Cada equipo pasa por 47 puntos de inspección técnica. Si no queda
+        <h3 className="text-[14px] lg:text-[20px] font-bold text-white">
+          Confianza Absoluta
+        </h3>
+        <p className="mt-1 lg:mt-2 text-[11px] lg:text-[14px] text-white/70 leading-relaxed max-w-[300px] lg:max-w-2xl mx-auto">
+          Cada equipo pasa por 47 puntos de inspección técnica en Lima. Si no queda
           perfecto, no se vende. Garantía real sin letra pequeña.
         </p>
-        <div className="mt-3 flex items-center justify-center gap-2">
-          <span className="rounded-full bg-white/10 px-2.5 py-1 text-[10px] text-white/80">
+        <div className="mt-3 lg:mt-5 flex flex-wrap items-center justify-center gap-2">
+          <span className="rounded-full bg-white/10 px-2.5 lg:px-3 py-1 lg:py-1.5 text-[10px] lg:text-[12px] text-white/80">
             🛡️ Póliza física
           </span>
-          <span className="rounded-full bg-white/10 px-2.5 py-1 text-[10px] text-white/80">
+          <span className="rounded-full bg-white/10 px-2.5 lg:px-3 py-1 lg:py-1.5 text-[10px] lg:text-[12px] text-white/80">
             📦 Empaque Deluxe
+          </span>
+          <span className="rounded-full bg-white/10 px-2.5 lg:px-3 py-1 lg:py-1.5 text-[10px] lg:text-[12px] text-white/80">
+            🚚 Envío a todo Perú
+          </span>
+          <span className="rounded-full bg-white/10 px-2.5 lg:px-3 py-1 lg:py-1.5 text-[10px] lg:text-[12px] text-white/80">
+            ↩️ 7 días de devolución
           </span>
         </div>
       </section>

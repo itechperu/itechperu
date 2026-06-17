@@ -5,16 +5,16 @@ import { usePathname } from "next/navigation";
 import { Home, LayoutGrid, Heart, MessageCircle, SlidersHorizontal } from "lucide-react";
 
 /**
- * Tab Bar Flotante Deluxe — itechperu.shop
- * - Flota a ~16px del borde inferior
- * - Esquinas rounded-full
- * - Sombra difuminada tipo hardware premium
- * - 5 botones con micro-animaciones
+ * Tab Bar Flotante Deluxe — itechperu.shop (responsivo)
+ *
+ * - Visible solo en mobile y tablet (< lg, 1024px)
+ * - Oculto en desktop (≥ lg) donde la navegación ya está en el header
+ * - Flota a ~16px del borde inferior con rounded-full y sombra difuminada
  * - El botón central (WhatsApp VIP) destacado en Oro Champagne
  */
 const TABS = [
   { id: "home", label: "Inicio", icon: Home, href: "/", highlight: false },
-  { id: "catalog", label: "Catálogo", icon: LayoutGrid, href: "/", highlight: false },
+  { id: "catalog", label: "Catálogo", icon: LayoutGrid, href: "#catalogo", highlight: false },
   { id: "whatsapp", label: "VIP", icon: MessageCircle, href: "https://wa.me/51987654321?text=Hola%20iTECH%20Peru%2C%20quiero%20info%20VIP", highlight: true, external: true },
   { id: "favorites", label: "Favoritos", icon: Heart, href: "/", highlight: false },
   { id: "filters", label: "Filtros", icon: SlidersHorizontal, href: "/", highlight: false },
@@ -24,11 +24,10 @@ export function BottomTabBarDeluxe() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 pb-safe">
-      <div className="flex items-center gap-1 rounded-full border border-white/40 bg-white/80 backdrop-blur-xl px-2 py-2 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.18)]">
-        {TABS.map((tab, idx) => {
+    <nav className="lg:hidden fixed bottom-4 left-1/2 z-50 -translate-x-1/2 pb-safe w-full max-w-[440px] px-4">
+      <div className="flex items-center gap-1 sm:gap-2 justify-center rounded-full border border-white/40 bg-white/80 backdrop-blur-xl px-2 py-2 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.18)]">
+        {TABS.map((tab) => {
           const Icon = tab.icon;
-          // El tab central (WhatsApp VIP) va al medio del array
           const isCenter = tab.highlight;
           const isActive = pathname === tab.href && !("external" in tab && tab.external);
 
@@ -40,7 +39,7 @@ export function BottomTabBarDeluxe() {
                 target={"external" in tab && tab.external ? "_blank" : undefined}
                 rel={"external" in tab && tab.external ? "noopener noreferrer" : undefined}
                 aria-label={tab.label}
-                className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] shadow-[0_6px_20px_-2px_rgb(212_175_55/0.5)] transition-all duration-300 hover:scale-105 active:scale-95 -mx-1"
+                className="group relative flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] shadow-[0_6px_20px_-2px_rgb(212_175_55/0.5)] transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 <Icon
                   className="h-[22px] w-[22px] text-white transition-transform duration-300 group-hover:scale-110"
@@ -58,7 +57,7 @@ export function BottomTabBarDeluxe() {
               key={tab.id}
               href={tab.href}
               aria-label={tab.label}
-              className="group relative flex h-11 w-11 flex-col items-center justify-center gap-0.5 rounded-full transition-all duration-300 tap-scale"
+              className="group relative flex h-11 w-11 sm:h-12 sm:w-12 flex-col items-center justify-center gap-0.5 rounded-full transition-all duration-300 tap-scale"
             >
               <Icon
                 className={`h-[20px] w-[20px] transition-colors duration-200 ${
@@ -67,7 +66,7 @@ export function BottomTabBarDeluxe() {
                 strokeWidth={1.5}
               />
               <span
-                className={`text-[8.5px] font-medium leading-none transition-colors duration-200 ${
+                className={`text-[8.5px] sm:text-[9px] font-medium leading-none transition-colors duration-200 ${
                   isActive ? "text-[#1D1D1F]" : "text-[#86868B] group-hover:text-[#1D1D1F]"
                 }`}
               >

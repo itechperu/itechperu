@@ -55,11 +55,11 @@ export function GradeSelectorDeluxe({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-[14px] font-semibold tracking-tight text-[#1D1D1F]">
+        <h3 className="text-[14px] lg:text-[16px] font-semibold tracking-tight text-[#1D1D1F]">
           Selecciona el Grado
         </h3>
-        <div className="flex items-center gap-1 text-[10px] font-medium text-[#86868B]">
-          <Shield className="h-3 w-3" strokeWidth={1.5} />
+        <div className="flex items-center gap-1 text-[10px] lg:text-[11px] font-medium text-[#86868B]">
+          <Shield className="h-3 w-3 lg:h-3.5 lg:w-3.5" strokeWidth={1.5} />
           <span>Garantía incluida</span>
         </div>
       </div>

@@ -70,12 +70,16 @@ export default function RootLayout({
           {/* Header translúcido sticky */}
           <HeaderDeluxe />
 
-          {/* Contenido principal — padding-top para no chocar con header (altura ~120px) y padding-bottom para no chocar con tab bar (altura ~96px) */}
-          <main className="mx-auto max-w-[440px] px-4 pt-[120px] pb-[120px] min-h-screen">
+          {/* Contenido principal — padding responsivo:
+              - Mobile/tablet (con tab bar flotante): pt-[120px] pb-[120px]
+              - Desktop (sin tab bar, header más alto): pt-[140px] pb-[40px]
+              - Max width crece por breakpoint: 440px móvil → 768px tablet → 1280px desktop
+          */}
+          <main className="mx-auto w-full max-w-[440px] sm:max-w-3xl lg:max-w-7xl px-4 sm:px-6 lg:px-8 pt-[120px] sm:pt-[130px] lg:pt-[160px] pb-[120px] lg:pb-[60px] min-h-screen">
             {children}
           </main>
 
-          {/* Tab Bar flotante inferior */}
+          {/* Tab Bar flotante inferior (oculta en desktop) */}
           <BottomTabBarDeluxe />
         </div>
 
