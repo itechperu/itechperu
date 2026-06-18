@@ -8,12 +8,12 @@ import { PageTransition } from "@/components/deluxe/page-transition";
  * Home page — itechperu.shop (100% responsiva)
  *
  * Lee los productos desde Prisma (DB). Si la DB no está disponible, usa fallback estático.
- *
- * Breakpoints:
- *  - Mobile (< sm): 1-2 columnas, hero compacto, scroll horizontal en ofertas
- *  - Tablet (sm..lg): 2-3 columnas, hero mediano
- *  - Desktop (≥ lg): 4 columnas, hero amplio con badge lateral, sidebar de confianza
  */
+
+// Render dinámico: la home lee de DB en runtime, no en build time.
+// Esto evita errores de prerendering cuando la DB no está disponible en Vercel build.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const products: Product[] = await getProducts();
   const featured = products.slice(0, 4);

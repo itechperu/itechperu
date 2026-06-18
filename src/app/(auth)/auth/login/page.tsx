@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, Suspense, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +12,29 @@ import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 
 type Mode = "login" | "loading";
 
+/**
+ * Wrapper export default que envuelve el contenido en <Suspense>.
+ * Esto es obligatorio en Next.js 16 cuando se usa useSearchParams()
+ * durante el prerendering estático.
+ */
 export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-white">
+          <div className="flex flex-col items-center gap-3">
+            <div className="h-8 w-8 border-2 border-[#E5E5E7] border-t-[#D4AF37] rounded-full animate-spin" />
+            <p className="text-[12px] text-[#86868B]">Cargando…</p>
+          </div>
+        </div>
+      }
+    >
+      <LoginContent />
+    </Suspense>
+  );
+}
+
+function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";

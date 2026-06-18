@@ -10,6 +10,9 @@ import { ProductDetailClient } from "@/components/deluxe/product-detail-client";
  * Lee el producto desde Prisma (DB) con fallback a datos estáticos.
  */
 
+// Render dinámico: la página lee de DB en runtime.
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }
