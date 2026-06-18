@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { Search, ShoppingBag, User, ChevronDown, Heart, LayoutGrid, SlidersHorizontal, MessageCircle, Menu, X } from "lucide-react";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { useCart } from "@/store/use-cart";
+import { useSessionDeluxe } from "@/hooks/use-session-deluxe";
+import { SearchOverlayDeluxe } from "@/components/search/search-overlay-deluxe";
+import { STATIC_PRODUCTS } from "@/data/products";
 
 /**
  * Header Deluxe — itechperu.shop (100% responsivo + Scroll Spy)
@@ -17,17 +20,32 @@ const SECTION_IDS = ["inicio", "ofertas", "catalogo", "categorias", "confianza"]
 export function HeaderDeluxe() {
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   // Evitar hydration mismatch: el contador del carrito solo se lee en cliente
   const cartCount = useCart((s) => s.getTotalItems());
   const openCart = useCart((s) => s.openCart);
+  const { data: session } = useSessionDeluxe();
+  const isAdmin = session?.user?.role === "ADMIN" || session?.user?.role === "SUPER_ADMIN";
 
   useEffect(() => {
     // Marcar como montado en el próximo tick para sincronizar con persistencia
     // de Zustand (que solo se hidrata en cliente)
     const id = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(id);
+  }, []);
+
+  // ⌘K para abrir búsqueda
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   // Scroll Spy: detecta qué sección está visible
@@ -99,32 +117,25 @@ export function HeaderDeluxe() {
             })}
           </nav>
 
-          {/* Search */}
-          <div
-            className={`flex flex-1 items-center gap-1.5 rounded-xl bg-[#F5F5F7] px-2.5 py-1.5 lg:py-2 transition-all duration-300 ${
-              searchFocused
-                ? "ring-2 ring-[#D4AF37]/30 bg-white shadow-[0_4px_12px_rgb(0,0,0,0.04)]"
-                : ""
+          {/* Search — botón que abre overlay inmersivo */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className={`flex flex-1 items-center gap-1.5 rounded-xl bg-[#F5F5F7] px-2.5 py-1.5 lg:py-2 transition-all duration-300 hover:bg-white hover:ring-2 hover:ring-[#D4AF37]/30 hover:shadow-[0_4px_12px_rgb(0,0,0,0.04)] text-left ${
+              searchFocused ? "ring-2 ring-[#D4AF37]/30 bg-white" : ""
             }`}
+            aria-label="Buscar productos"
           >
             <Search
-              className={`h-3.5 w-3.5 lg:h-4 lg:w-4 transition-colors duration-200 ${
-                searchFocused ? "text-[#D4AF37]" : "text-[#86868B]"
-              }`}
+              className="h-3.5 w-3.5 lg:h-4 lg:w-4 text-[#86868B] flex-shrink-0"
               strokeWidth={1.5}
             />
-            <input
-              type="text"
-              placeholder="Buscar iPad, MacBook…"
-              onFocus={() => setSearchFocused(true)}
-              onBlur={() => setSearchFocused(false)}
-              className="w-full bg-transparent text-[12px] lg:text-[13px] font-normal text-[#1D1D1F] placeholder:text-[#86868B] focus:outline-none"
-              aria-label="Buscar productos"
-            />
+            <span className="flex-1 text-[12px] lg:text-[13px] font-normal text-[#86868B] truncate">
+              Buscar iPad, MacBook…
+            </span>
             <kbd className="hidden sm:flex items-center justify-center rounded-md bg-white border border-[#E5E5E7] px-1.5 py-0.5 text-[9px] font-medium text-[#86868B]">
               ⌘K
             </kbd>
-          </div>
+          </button>
 
           {/* Acciones: Favoritos (desktop) */}
           <button
@@ -151,16 +162,39 @@ export function HeaderDeluxe() {
             )}
           </button>
 
-          {/* Perfil — ahora link a /auth/login */}
+          {/* Admin link (visible solo si es admin) */}
+          {mounted && isAdmin && (
+            <Link
+              href="/admin"
+              className="hidden lg:flex h-9 w-9 items-center justify-center rounded-full bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 transition-colors tap-scale"
+              aria-label="Panel de administración"
+              title="Panel Admin"
+            >
+              <LayoutGrid className="h-[18px] text-[#D4AF37]" strokeWidth={1.5} />
+            </Link>
+          )}
+
+          {/* Perfil — link a /cuenta si logueado, /auth/login si no */}
           <Link
-            href="/auth/login"
-            className="flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-full hover:bg-[#F5F5F7] transition-colors tap-scale"
+            href={mounted && session?.user ? "/cuenta" : "/auth/login"}
+            className="flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-full hover:bg-[#F5F5F7] transition-colors tap-scale relative"
             aria-label="Mi cuenta"
           >
-            <User
-              className="h-[18px] w-[18px] lg:h-5 lg:w-5 text-[#1D1D1F]"
-              strokeWidth={1.5}
-            />
+            {mounted && session?.user?.image ? (
+              <img
+                src={session.user.image}
+                alt={session.user.name || "Avatar"}
+                className="h-8 w-8 lg:h-9 lg:w-9 rounded-full object-cover"
+              />
+            ) : (
+              <User
+                className="h-[18px] w-[18px] lg:h-5 lg:w-5 text-[#1D1D1F]"
+                strokeWidth={1.5}
+              />
+            )}
+            {mounted && session?.user && (
+              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-[#10B981] border-2 border-white" />
+            )}
           </Link>
 
           {/* Botón menú móvil (hamburguesa) */}
@@ -284,6 +318,13 @@ export function HeaderDeluxe() {
           </div>
         )}
       </div>
+
+      {/* Search Overlay inmersivo */}
+      <SearchOverlayDeluxe
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        products={STATIC_PRODUCTS}
+      />
     </header>
   );
 }

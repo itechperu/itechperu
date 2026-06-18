@@ -38,29 +38,38 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Contraseña", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Email y contraseña son obligatorios");
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            console.log("❌ authorize: faltan credenciales");
+            return null;
+          }
+
+          const user = await db.user.findUnique({
+            where: { email: credentials.email.toLowerCase() },
+          });
+
+          if (!user || !user.password) {
+            console.log("❌ authorize: usuario no encontrado:", credentials.email);
+            return null;
+          }
+
+          const isValid = await compare(credentials.password, user.password);
+          if (!isValid) {
+            console.log("❌ authorize: password inválida para:", credentials.email);
+            return null;
+          }
+
+          console.log("✅ authorize: login exitoso para:", credentials.email);
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            image: user.image,
+          };
+        } catch (error) {
+          console.error("❌ authorize error:", error);
+          return null;
         }
-
-        const user = await db.user.findUnique({
-          where: { email: credentials.email.toLowerCase() },
-        });
-
-        if (!user || !user.password) {
-          throw new Error("Credenciales inválidas");
-        }
-
-        const isValid = await compare(credentials.password, user.password);
-        if (!isValid) {
-          throw new Error("Credenciales inválidas");
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          image: user.image,
-        };
       },
     }),
   ],

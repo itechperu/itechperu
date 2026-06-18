@@ -52,7 +52,7 @@ export default async function HomePage() {
 
             <div className="mt-4 lg:mt-6 flex flex-wrap items-center gap-2 lg:gap-3">
               <Link
-                href={`/productos/${featured[0].id}`}
+                href={featured[0] ? `/productos/${featured[0].id}` : "/#catalogo"}
                 className="flex items-center gap-1.5 rounded-full bg-white px-4 lg:px-6 py-2 lg:py-2.5 text-[12px] lg:text-[14px] font-semibold text-[#1D1D1F] tap-scale hover:bg-[#F5F5F7] transition-colors"
               >
                 Ver destacado
