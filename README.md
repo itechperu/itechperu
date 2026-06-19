@@ -167,16 +167,44 @@ src/
 
 ## 🗄️ Base de datos
 
+### ¿Por qué Supabase?
+
+| Criterio | Supabase ✅ | Neon | Turso |
+|----------|------------|------|-------|
+| Latencia Perú | **~80ms (São Paulo)** | 140ms (US) | 40ms (edge) |
+| Prisma | ✅ Perfecto | ✅ Perfecto | ⚠️ Experimental |
+| Storage imágenes | ✅ 1GB gratis | ❌ | ❌ |
+| Backups diarios | ✅ | ✅ PITR | ❌ Manual |
+| Realtime | ✅ | ❌ | ⚠️ Parcial |
+| Auth (opcional) | ✅ Coexiste con NextAuth | ❌ | ❌ |
+
+**Supabase gana** por latencia desde Perú, storage de imágenes incluido y experiencia previa del equipo.
+
+### Setup desarrollo (SQLite — automático)
+
 ```bash
-# Desarrollo (SQLite)
+# El script detecta SQLite automáticamente si DATABASE_URL empieza con "file:"
 bun run db:push     # Crea/migra tablas
 bun run db:seed     # Puebla con 4 productos + admin user
-
-# Producción (PostgreSQL en Vercel)
-# 1. Cambia DATABASE_URL en Vercel env vars
-# 2. Cambia provider a "postgresql" en prisma/schema.prisma
-# 3. bun run db:push && bun run db:seed
 ```
+
+### Setup producción (Supabase PostgreSQL — automático)
+
+```bash
+# 1. Crea cuenta en https://supabase.com (región São Paulo)
+# 2. Project Settings → Database → Connection string → URI
+# 3. En Vercel, configura DATABASE_URL con esa URL (postgres://...)
+# 4. El script detecta Postgres automáticamente y cambia el provider
+# 5. Ejecuta una sola vez (localmente, con DATABASE_URL apuntando a Supabase):
+DATABASE_URL="postgresql://..." bun run db:push
+DATABASE_URL="postgresql://..." bun run db:seed
+```
+
+**Cómo funciona la detección automática:**
+- `scripts/select-prisma-provider.js` se ejecuta antes de cada `prisma generate`, `db:push`, `next build`
+- Lee `DATABASE_URL` y modifica `prisma/schema.prisma` con el provider correcto (`sqlite` o `postgresql`)
+- En Vercel build, el `postinstall` + `build` scripts ya lo ejecutan automáticamente
+- **No necesitas cambiar manualmente nada** entre dev y prod
 
 **Modelos:**
 - `User` + `Account` + `Session` (NextAuth)

@@ -2,18 +2,22 @@
 // itechperu.shop — Prisma Schema
 // ===========================================
 // DB:
-//   - Dev: SQLite (file:./dev.db)
-//   - Prod (Vercel): PostgreSQL (Neon/Supabase)
-// Para migrar a Postgres en prod, solo cambia DATABASE_URL y
-// comenta/descomenta el provider en datasource.
+//   - Dev local: SQLite (file:./dev.db)
+//   - Producción (Vercel): Supabase PostgreSQL
+//
+// El provider se detecta automáticamente según DATABASE_URL:
+//   - Si empieza con "file:" → SQLite (dev)
+//   - Si empieza con "postgres" → PostgreSQL (Supabase prod)
+//
+// Esto se logra con el script prebuild:prisma en package.json que copia
+// el schema correcto antes de prisma generate.
+// Ver: scripts/select-prisma-provider.js
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  // ⚠️ Para producción (Vercel + Neon Postgres), cambia "sqlite" por "postgresql"
-  //   provider = "postgresql"
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
