@@ -151,20 +151,22 @@ export async function getProductById(id: string): Promise<Product | null> {
  * Obtiene productos relacionados (misma categoría, distinto ID).
  */
 export async function getRelatedProducts(
-  currentId: string,
+  currentSlug: string,
   limit = 4
 ): Promise<Product[]> {
   try {
     const current = await db.product.findFirst({
-      where: { OR: [{ id: currentId }, { slug: currentId }] },
-      select: { category: true },
+      where: { OR: [{ id: currentSlug }, { slug: currentSlug }] },
+      select: { id: true, slug: true, category: true },
     });
+
+    if (!current) return [];
 
     const products = await db.product.findMany({
       where: {
         isActive: true,
-        id: { not: currentId },
-        ...(current ? { category: current.category } : {}),
+        id: { not: current.id },
+        category: current.category,
       },
       include: { specs: true, grades: true },
       take: limit,
@@ -172,7 +174,8 @@ export async function getRelatedProducts(
     });
     return products.map(mapProduct);
   } catch {
-    return [];
+    // Fallback estático: productos del mismo slug excluyendo el actual
+    return STATIC_PRODUCTS.filter((p) => p.slug !== currentSlug).slice(0, limit);
   }
 }
 

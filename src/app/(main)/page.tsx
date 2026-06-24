@@ -7,12 +7,13 @@ import { PageTransition } from "@/components/deluxe/page-transition";
 /**
  * Home page — itechperu.shop (100% responsiva)
  *
- * Lee los productos desde Prisma (DB). Si la DB no está disponible, usa fallback estático.
+ * ISR (Incremental Static Regeneration):
+ *  - Se pre-renderiza en build time (Google indexa contenido completo)
+ *  - Se revalida cada hora (precio/stock actualizado sin redeploy)
  */
 
-// Render dinámico: la home lee de DB en runtime, no en build time.
-// Esto evita errores de prerendering cuando la DB no está disponible en Vercel build.
-export const dynamic = "force-dynamic";
+// ISR: revalidar cada hora
+export const revalidate = 3600;
 
 export default async function HomePage() {
   const products: Product[] = await getProducts();
@@ -52,7 +53,7 @@ export default async function HomePage() {
 
             <div className="mt-4 lg:mt-6 flex flex-wrap items-center gap-2 lg:gap-3">
               <Link
-                href={featured[0] ? `/productos/${featured[0].id}` : "/#catalogo"}
+                href={featured[0] ? `/productos/${featured[0].slug}` : "/#catalogo"}
                 className="flex items-center gap-1.5 rounded-full bg-white px-4 lg:px-6 py-2 lg:py-2.5 text-[12px] lg:text-[14px] font-semibold text-[#1D1D1F] tap-scale hover:bg-[#F5F5F7] transition-colors"
               >
                 Ver destacado
@@ -155,7 +156,7 @@ export default async function HomePage() {
           {offers.map((p) => (
             <Link
               key={p.id}
-              href={`/productos/${p.id}`}
+              href={`/productos/${p.slug}`}
               className="group flex-shrink-0 w-[260px] sm:w-[280px] lg:w-auto"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[#F5F5F7] shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
@@ -198,7 +199,7 @@ export default async function HomePage() {
           {featured.map((p) => (
             <Link
               key={p.id}
-              href={`/productos/${p.id}`}
+              href={`/productos/${p.slug}`}
               className="group rounded-3xl overflow-hidden bg-white border border-[#E5E5E7] shadow-[0_8px_30px_rgb(0,0,0,0.04)] tap-scale hover:shadow-[0_12px_40px_-8px_rgb(0_0_0/0.12)] hover:border-[#D4AF37]/30 transition-all duration-300"
             >
               <div className="relative aspect-square overflow-hidden bg-[#F5F5F7]">

@@ -357,7 +357,7 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
             {related.map((rp) => (
               <a
                 key={rp.id}
-                href={`/productos/${rp.id}`}
+                href={`/productos/${rp.slug}`}
                 className="group"
               >
                 <div className="aspect-square overflow-hidden rounded-2xl lg:rounded-3xl bg-[#F5F5F7] shadow-[0_8px_30px_rgb(0,0,0,0.04)]">

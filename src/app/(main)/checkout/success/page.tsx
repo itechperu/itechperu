@@ -15,8 +15,15 @@ interface Props {
  * URL: /checkout/success?order=<orderId>        (Mercado Pago aprobado)
  */
 
-// Render dinámico: lee la orden de DB en runtime.
+// No indexar páginas de success (contienen datos del pedido)
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export async function generateMetadata() {
+  return {
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function CheckoutSuccessPage({ searchParams }: Props) {
   const { order: orderId, cod } = await searchParams;

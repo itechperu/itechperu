@@ -1,0 +1,78 @@
+# itechperu.shop
+
+> Tecnología premium reacondicionada en Lima, Perú. iPads, MacBooks y Laptops corporativas verificadas con garantía real.
+
+## Sobre itechperu.shop
+
+itechperu.shop es una tienda online peruana especializada en tecnología de alta gama reacondicionada (90% iPads, MacBooks y Laptops corporativas) y ropa americana nueva seleccionada. Diferenciador: confianza absoluta, transparencia en el estado del producto y experiencia de usuario premium (Deluxe).
+
+## Catálogo de productos
+
+Cada producto es verificado con un protocolo de 47 puntos de inspección técnica en Lima. Garantía real de 3 a 6 meses. Envío a todo Perú (24-48h en Lima).
+
+### iPad Pro 12.9" M2 (2022)
+- Pantalla Liquid Retina XDR con tecnología mini-LED
+- Chip Apple M2 con Neural Engine de 16 núcleos
+- Compatible con Apple Pencil 2 y Magic Keyboard
+- URL: https://itechperu.shop/productos/ipad-pro-129-m2-2022
+
+### MacBook Air 13.6" M2 (2022)
+- Diseño ultradelgado sin ventilador, totalmente silencioso
+- Hasta 18 horas de batería real
+- Cámara FaceTime HD 1080p con procesamiento neuronal
+- MagSafe 3 para carga segura y rápida
+- URL: https://itechperu.shop/productos/macbook-air-m2-2022
+
+### iPad Air 5 10.9" M1 (2022)
+- Chip M1 desktop-class en un cuerpo de 6.1 mm
+- Compatible con Apple Pencil 2 y Magic Keyboard
+- Touch ID integrado en botón superior
+- URL: https://itechperu.shop/productos/ipad-air-5-m1-2022
+
+### MacBook Pro 14" M3 Pro (2023)
+- Rendimiento pro para edición 8K y renderizado 3D
+- Pantalla XDR con 1,600 nits HDR y negros OLED
+- Sistema de 6 parlantes con audio espacial
+- Cuerpo de aluminio reciclado Space Black exclusivo
+- URL: https://itechperu.shop/productos/macbook-pro-14-m3-pro-2023
+
+## Sistema de Grados
+
+Cada producto está disponible en 3 grados de condición:
+- **Grado A+ (Como Nuevo)**: Sin marcas de uso. Batería ≥ 95%. Caja original. Garantía 6 meses.
+- **Grado A (Excelente)**: Microdesgaste imperceptible. Batería ≥ 90%. Garantía 4 meses.
+- **Grado B (Muy Bueno)**: Uso visible en bordes. Batería ≥ 85%. 100% funcional. Garantía 3 meses.
+
+## Métodos de pago
+
+- **Mercado Pago**: Tarjeta, Yape, PLIN, Efectivo
+- **Pago Contraentrega**: Solo Lima Metropolitana
+- Cuotas desde 12 meses con Mercado Pago
+
+## Garantía y confianza
+
+- 47 puntos de inspección técnica por equipo
+- Garantía real de 3 a 6 meses (sin letra pequeña)
+- 7 días de devolución
+- +500 clientes satisfechos
+- Calificación promedio 4.9/5
+
+## Ubicación y cobertura
+
+- Base: Lima, Perú
+- Envío: 24-48h en Lima Metropolitana, 3-5 días provincias
+- WhatsApp VIP: +51 987 654 321
+
+## Contacto
+
+- Website: https://itechperu.shop
+- WhatsApp: https://wa.me/51987654321
+- Email: hola@itechperu.shop
+
+## Links importantes
+
+- [Inicio](https://itechperu.shop)
+- [Catálogo completo](https://itechperu.shop#catalogo)
+- [Iniciar sesión](https://itechperu.shop/auth/login)
+- [Crear cuenta](https://itechperu.shop/auth/register)
+- [Sitemap XML](https://itechperu.shop/sitemap.xml)
