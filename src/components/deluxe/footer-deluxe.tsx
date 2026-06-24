@@ -37,7 +37,7 @@ export function FooterDeluxe() {
             icon={RefreshCw}
             title="7 días devolución"
             desc="Sin preguntas, sin letra pequeña"
-            href="/faq"
+            href="/preguntas-frecuentes"
           />
         </div>
       </div>
@@ -99,11 +99,11 @@ export function FooterDeluxe() {
               </h3>
               <ul className="space-y-2">
                 <li><FooterLink href="/coleccion">Catálogo completo</FooterLink></li>
-                <li><FooterLink href="/coleccion?cat=IPAD">iPads</FooterLink></li>
-                <li><FooterLink href="/coleccion?cat=MACBOOK">MacBooks</FooterLink></li>
-                <li><FooterLink href="/coleccion?cat=LAPTOP">Laptops</FooterLink></li>
-                <li><FooterLink href="/coleccion?cat=ROPA">Ropa USA</FooterLink></li>
-                <li><FooterLink href="/coleccion?ofertas=1">Ofertas Deluxe</FooterLink></li>
+                <li><FooterLink href="/categoria/ipads">iPads</FooterLink></li>
+                <li><FooterLink href="/categoria/macbooks">MacBooks</FooterLink></li>
+                <li><FooterLink href="/categoria/laptops">Laptops</FooterLink></li>
+                <li><FooterLink href="/categoria/accesorios">Ropa USA</FooterLink></li>
+                <li><FooterLink href="/coleccion/ofertas">Ofertas Deluxe</FooterLink></li>
               </ul>
             </div>
 
@@ -116,7 +116,8 @@ export function FooterDeluxe() {
                 <li><FooterLink href="/nosotros">Sobre nosotros</FooterLink></li>
                 <li><FooterLink href="/garantia">Garantía Deluxe</FooterLink></li>
                 <li><FooterLink href="/envios">Envíos y cobertura</FooterLink></li>
-                <li><FooterLink href="/faq">Preguntas frecuentes</FooterLink></li>
+                <li><FooterLink href="/blog">Blog</FooterLink></li>
+                <li><FooterLink href="/preguntas-frecuentes">Preguntas frecuentes</FooterLink></li>
                 <li><FooterLink href="/contacto">Contacto</FooterLink></li>
               </ul>
             </div>
