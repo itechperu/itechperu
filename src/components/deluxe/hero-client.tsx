@@ -19,7 +19,7 @@ export function HeroClient({ featuredProduct }: HeroClientProps) {
     <section
       id="inicio"
       data-section="inicio"
-      className="relative min-h-[100svh] flex items-center overflow-hidden bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#000000] scroll-mt-0"
+      className="relative min-h-[100svh] flex items-center overflow-hidden bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#000000] scroll-mt-0 -mt-16 lg:-mt-20"
     >
       {/* Detalles oro difuminados */}
       <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-[#D4AF37]/20 blur-[120px]" />

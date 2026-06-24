@@ -61,10 +61,10 @@ export function HeaderDeluxe() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Scroll Spy solo en home
+  // Scroll Spy solo en home — SIN hash routing (no actualiza URL)
   const { activeId, scrollToId } = useScrollSpy({
     sectionIds: SECTION_IDS,
-    updateHash: isHome,
+    updateHash: false, // NUNCA actualizar URL con #
     smoothScroll: false, // Lenis maneja el smooth scroll
   });
 
@@ -90,7 +90,7 @@ export function HeaderDeluxe() {
         { href: "/coleccion", label: "Catálogo" },
         { href: "/nosotros", label: "Nosotros" },
         { href: "/garantia", label: "Garantía" },
-        { href: "/faq", label: "FAQ" },
+        { href: "/preguntas-frecuentes", label: "FAQ" },
         { href: "/contacto", label: "Contacto" },
       ];
 

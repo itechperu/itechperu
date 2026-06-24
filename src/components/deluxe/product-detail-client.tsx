@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Star, ShieldCheck, Truck, RotateCcw, CheckCircle2, ShoppingBag,
-  MessageCircle, Zap, ChevronRight, Minus, Plus,
+  MessageCircle, Zap, ChevronRight, Minus, Plus, ArrowLeft,
 } from "lucide-react";
 import { GalleryPremium } from "./gallery-premium";
 import { GradeSelectorPremium } from "./grade-selector-premium";
@@ -62,6 +62,15 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
 
   return (
     <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-4 lg:py-8">
+      {/* Botón volver */}
+      <Link
+        href="/coleccion"
+        className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#86868B] hover:text-[#1D1D1F] transition-colors mb-3"
+      >
+        <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2} />
+        Volver al catálogo
+      </Link>
+
       {/* Breadcrumbs */}
       <BreadcrumbsDeluxe items={[
         { name: "Inicio", href: "/" },

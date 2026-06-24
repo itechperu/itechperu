@@ -34,7 +34,7 @@ export function useScrollSpy({
   sectionIds,
   offset = 140,
   rootMargin,
-  updateHash = true,
+  updateHash = false,
   smoothScroll = true,
 }: ScrollSpyOptions & { sectionIds: string[] }) {
   const [activeId, setActiveId] = useState<string>(() => {
@@ -69,7 +69,6 @@ export function useScrollSpy({
       // Actualizar estado inmediatamente para feedback instantáneo
       setActiveId(id);
       if (updateHash && window.location.hash !== `#${id}`) {
-        history.replaceState(null, "", `#${id}`);
       }
 
       // Liberar el flag después de que termine la animación (aprox 900ms)
@@ -90,7 +89,6 @@ export function useScrollSpy({
       if (firstId && activeId !== firstId) {
         setActiveId(firstId);
         if (updateHash && window.location.hash !== `#${firstId}`) {
-          history.replaceState(null, "", `#${firstId}`);
         }
       }
       return;
@@ -104,7 +102,6 @@ export function useScrollSpy({
       if (lastId && activeId !== lastId) {
         setActiveId(lastId);
         if (updateHash && window.location.hash !== `#${lastId}`) {
-          history.replaceState(null, "", `#${lastId}`);
         }
       }
       return;
@@ -142,7 +139,6 @@ export function useScrollSpy({
     if (current && current !== activeId) {
       setActiveId(current);
       if (updateHash && window.location.hash !== `#${current}`) {
-        history.replaceState(null, "", `#${current}`);
       }
     }
   }, [sectionIds, offset, activeId, updateHash]);
