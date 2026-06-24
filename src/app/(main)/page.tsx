@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { getProducts, formatPEN, type Product } from "@/data/products";
-import { ShieldCheck, Truck, Star, Sparkles, ChevronRight, Flame, MessageCircle } from "lucide-react";
-import { AnimatedCounter } from "@/components/deluxe/animated-counter";
-import { PageTransition } from "@/components/deluxe/page-transition";
+import { ShieldCheck, Truck, Star, Flame, ChevronRight, MessageCircle } from "lucide-react";
+import { HeroClient } from "@/components/deluxe/hero-client";
 
 /**
  * Home page — itechperu.shop (100% responsiva)
@@ -21,95 +20,11 @@ export default async function HomePage() {
   const offers = products.slice(0, 3);
 
   return (
-    <PageTransition>
-    <div className="space-y-8 lg:space-y-12">
-      {/* ====== Hero Deluxe (#inicio) ====== */}
-      <section id="inicio" data-section="inicio" className="relative overflow-hidden rounded-3xl lg:rounded-[2rem] bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#1D1D1F] p-5 sm:p-8 lg:p-12 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.3)] scroll-mt-[140px] lg:scroll-mt-[180px]">
-        {/* Detalle oro */}
-        <div className="absolute -top-12 -right-12 h-40 w-40 lg:h-64 lg:w-64 rounded-full bg-[#D4AF37]/20 blur-3xl" />
-        <div className="absolute -bottom-12 -left-12 h-32 w-32 lg:h-48 lg:w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
+    <div>
+      {/* Hero full-bleed inmersivo */}
+      <HeroClient featuredProduct={featured[0]} />
 
-        <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-          <div className="flex-1 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-2.5 py-1">
-              <Sparkles className="h-3 w-3 text-[#D4AF37]" strokeWidth={1.5} />
-              <span className="text-[10px] lg:text-[11px] font-medium text-white/90 tracking-wide">
-                Reacondicionado Premium · Lima, Perú 🇵🇪
-              </span>
-            </div>
-
-            <h1 className="mt-3 text-[24px] sm:text-[32px] lg:text-[48px] font-bold tracking-tight leading-[1.1] text-white">
-              Tecnología de alta gama
-              <br />
-              <span className="bg-gradient-to-r from-[#D4AF37] via-[#F5E7A1] to-[#D4AF37] bg-clip-text text-transparent">
-                al precio inteligente
-              </span>
-            </h1>
-
-            <p className="mt-2 lg:mt-4 text-[12.5px] lg:text-[16px] text-white/70 leading-relaxed max-w-[280px] sm:max-w-md lg:max-w-lg">
-              iPads, MacBooks y Laptops corporativas verificadas con protocolo de
-              47 puntos. Garantía real y experiencia Deluxe en cada compra.
-            </p>
-
-            <div className="mt-4 lg:mt-6 flex flex-wrap items-center gap-2 lg:gap-3">
-              <Link
-                href={featured[0] ? `/productos/${featured[0].slug}` : "/#catalogo"}
-                className="flex items-center gap-1.5 rounded-full bg-white px-4 lg:px-6 py-2 lg:py-2.5 text-[12px] lg:text-[14px] font-semibold text-[#1D1D1F] tap-scale hover:bg-[#F5F5F7] transition-colors"
-              >
-                Ver destacado
-                <ChevronRight className="h-3.5 w-3.5 lg:h-4 lg:w-4" strokeWidth={2} />
-              </Link>
-              <Link
-                href="#catalogo"
-                className="rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-4 lg:px-6 py-2 lg:py-2.5 text-[12px] lg:text-[14px] font-medium text-white tap-scale hover:bg-white/15 transition-colors"
-              >
-                Ver catálogo
-              </Link>
-              <a
-                href="https://wa.me/51987654321?text=Hola%20iTECH%20Peru%2C%20quiero%20info%20VIP"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] px-4 lg:px-6 py-2 lg:py-2.5 text-[12px] lg:text-[14px] font-semibold text-white tap-scale shadow-[0_4px_16px_rgba(212,175,55,0.4)]"
-              >
-                <MessageCircle className="h-3.5 w-3.5 lg:h-4 lg:w-4" strokeWidth={2} />
-                WhatsApp VIP
-              </a>
-            </div>
-          </div>
-
-          {/* Stats Deluxe en desktop */}
-          <div className="hidden lg:flex flex-col gap-3 lg:w-[280px]">
-            {[
-              { label: "Equipos verificados", num: 500, prefix: "+", accent: false },
-              { label: "Calificación promedio", num: 4.9, prefix: "", suffix: "/5", accent: true, decimals: 1 },
-              { label: "Garantía real (meses)", num: 6, prefix: "3-", accent: false },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className={`rounded-2xl border p-4 backdrop-blur-md ${
-                  stat.accent
-                    ? "bg-[#D4AF37]/10 border-[#D4AF37]/30"
-                    : "bg-white/5 border-white/10"
-                }`}
-              >
-                <p className="text-[11px] text-white/60 uppercase tracking-wider">
-                  {stat.label}
-                </p>
-                <p className={`text-[24px] font-bold mt-1 ${stat.accent ? "text-[#D4AF37]" : "text-white"}`}>
-                  <AnimatedCounter
-                    value={stat.num}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                    decimals={stat.decimals ?? 0}
-                    format={false}
-                  />
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 space-y-12 lg:space-y-16 pt-12 lg:pt-16">
       {/* ====== Cinta de garantías ====== */}
       <section className="grid grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
         {[
@@ -298,7 +213,7 @@ export default async function HomePage() {
           </span>
         </div>
       </section>
+      </div>
     </div>
-    </PageTransition>
   );
 }

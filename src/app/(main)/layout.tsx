@@ -18,16 +18,11 @@ export default function MainLayout({
 }) {
   return (
     <div className="relative min-h-screen flex flex-col bg-[#FFFFFF] bg-frost">
-      {/* Header translúcido sticky con Scroll Spy */}
+      {/* Header full-bleed inmersivo */}
       <HeaderDeluxe />
 
-      {/* Contenido principal — padding responsivo:
-          - Mobile/tablet (con tab bar flotante): pt-[120px] pb-[120px]
-          - Desktop (sin tab bar, header más alto): pt-[160px] pb-[60px]
-          - Max width: 440px móvil → 768px tablet → 1280px desktop
-          - flex-1 para que el footer quede al fondo en páginas cortas
-      */}
-      <main className="flex-1 mx-auto w-full max-w-[440px] sm:max-w-3xl lg:max-w-7xl px-4 sm:px-6 lg:px-8 pt-[120px] sm:pt-[130px] lg:pt-[160px] pb-[120px] lg:pb-[60px]">
+      {/* Contenido principal — padding-top mínimo porque el hero compensa */}
+      <main className="flex-1 w-full pb-[120px] lg:pb-[80px]">
         {children}
       </main>
 
