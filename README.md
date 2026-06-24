@@ -8,26 +8,62 @@ Aplicación web construida con **Next.js 16 + TypeScript + Tailwind CSS 4**, opt
 
 ## 🚀 Deploy en Vercel (automático)
 
-Este repositorio está configurado para deploy automático en Vercel.
+### Checklist de producción (5 minutos)
 
-### Pasos para conectar:
+#### 1. Variables de entorno OBLIGATORIAS (sin estas, la app no funciona)
 
-1. Entra a [vercel.com/new](https://vercel.com/new) e **importa el repo** `itechperu/itechperu`.
-2. Framework Preset: **Next.js** (autodetectado).
-3. Build Command: `next build` (autodetectado).
-4. Install Command: `bun install` (configurado en `vercel.json`).
-5. **Environment Variables** (Settings → Environment Variables):
-   - Copia todas las variables de [`.env.example`](./.env.example)
-   - Cambia `DATABASE_URL` por PostgreSQL (recomendado [Neon](https://neon.tech) o [Supabase](https://supabase.com))
-   - Genera `NEXTAUTH_SECRET` con: `openssl rand -base64 32`
-   - Configura `NEXTAUTH_URL=https://itechperu.shop` (o tu dominio Vercel)
-6. Click en **Deploy**. Cada push a `main` desplegará automáticamente.
+```env
+# Database (Supabase PostgreSQL)
+DATABASE_URL=postgresql://postgres.[REF]:[PASSWORD]@aws-0-sa-east-1.pooler.supabase.com:6543/postgres
 
-### Configuración incluida:
-- ✅ `vercel.json` con headers de seguridad, caching de assets y regiones
-- ✅ `next.config.ts` con `images.remotePatterns` para Unsplash
-- ✅ `.env.example` con todas las variables documentadas
-- ✅ `.gitignore` completo para Next.js + Vercel + sandbox
+# NextAuth (CRÍTICO — sin esto da error ?error=Configuration)
+NEXTAUTH_SECRET=<genera con: openssl rand -base64 32>
+NEXTAUTH_URL=https://itechperu.vercel.app  # o tu dominio custom
+```
+
+#### 2. Variables RECOMENDADAS (para funcionalidad completa)
+
+```env
+# Google OAuth (login con Google)
+GOOGLE_CLIENT_ID=<de Google Cloud Console>
+GOOGLE_CLIENT_SECRET=<de Google Cloud Console>
+
+# Mercado Pago (cobros online)
+MERCADO_PAGO_ACCESS_TOKEN=<de Mercado Pago Developers>
+MERCADO_PAGO_PUBLIC_KEY=<de Mercado Pago Developers>
+
+# Sanity (imágenes — 100 GB gratis)
+NEXT_PUBLIC_SANITY_PROJECT_ID=kqneikcb
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_WRITE_TOKEN=<token Read+Write de Sanity>
+
+# Google Sheets Sync (catálogo automático)
+GOOGLE_SERVICE_ACCOUNT_EMAIL=<email de Service Account>
+GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=<private key del JSON>
+GOOGLE_SHEETS_ID=<ID del sheet>
+CRON_SECRET=<genera con: openssl rand -hex 32>
+```
+
+#### 3. Verificar que todo está OK
+
+Después del deploy, visita:
+```
+https://itechperu.vercel.app/api/health
+```
+
+Debe retornar `status: "healthy"` con todos los checks en `ok` o `warning`.
+Si hay `error`, te dice exactamente qué variable falta configurar.
+
+#### 4. Sanity Studio (gestión visual de imágenes)
+
+**NO lo embebas en Next.js** — Sanity ya lo hostea gratis:
+```
+https://kqneikcb.sanity.studio
+```
+
+- Gratis, siempre disponible, auto-actualizado
+- Accesible desde cualquier dispositivo
+- Si quieres dominio custom: agrega CNAME `cms.itechperu.shop` → `kqneikcb.sanity.studio` (requiere Sanity Pro)
 
 ---
 
