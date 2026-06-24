@@ -9,12 +9,6 @@
     "silent": false,
     "autoAlias": true
   },
-  "crons": [
-    {
-      "path": "/api/cron/sync?secret=$(CRON_SECRET)",
-      "schedule": "0 * * * *"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
