@@ -32,6 +32,54 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${siteUrl}/coleccion`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
+      url: `${siteUrl}/nosotros`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/garantia`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/envios`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/faq`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/contacto`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
+    {
+      url: `${siteUrl}/terminos`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
+    {
+      url: `${siteUrl}/privacidad`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
+    {
       url: `${siteUrl}/auth/login`,
       lastModified: now,
       changeFrequency: "yearly",
@@ -45,14 +93,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Categorías (scroll anchors en la home, pero con URLs dedicadas)
-  const categories = ["iPads", "MacBooks", "Laptops", "Ropa USA", "Accesorios"];
-  const categoryPages: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${siteUrl}/#catalogo`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  }));
+  // Categorías (scroll anchors en la home)
+  const categoryPages: MetadataRoute.Sitemap = [
+    {
+      url: `${siteUrl}/coleccion?cat=IPAD`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/coleccion?cat=MACBOOK`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/coleccion?cat=LAPTOP`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+  ];
 
   // Productos — URLs limpias con slug
   const productPages: MetadataRoute.Sitemap = STATIC_PRODUCTS.map((p) => ({

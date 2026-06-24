@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Search, ShoppingBag, User, ChevronDown, Heart, LayoutGrid, SlidersHorizontal, MessageCircle, Menu, X } from "lucide-react";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { useCart } from "@/store/use-cart";
@@ -18,6 +19,8 @@ import { STATIC_PRODUCTS } from "@/data/products";
 const SECTION_IDS = ["inicio", "ofertas", "catalogo", "categorias", "confianza"];
 
 export function HeaderDeluxe() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -86,35 +89,60 @@ export function HeaderDeluxe() {
             </span>
           </Link>
 
-          {/* Navegación principal en desktop con Scroll Spy activo */}
+          {/* Navegación principal en desktop — Scroll Spy en home + subpáginas */}
           <nav className="hidden lg:flex items-center gap-1 ml-2">
-            {SECTION_IDS.map((id) => {
-              const labels: Record<string, string> = {
-                inicio: "Inicio",
-                ofertas: "Ofertas",
-                catalogo: "Catálogo",
-                categorias: "Categorías",
-                confianza: "Garantía",
-              };
-              const isActive = activeId === id;
-              return (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  onClick={(e) => handleNavClick(e, id)}
-                  className={`relative px-3 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 ${
-                    isActive
-                      ? "text-[#1D1D1F] bg-[#F5F5F7]"
-                      : "text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F]"
-                  }`}
-                >
-                  {labels[id]}
-                  {isActive && (
-                    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-[#D4AF37]" />
-                  )}
-                </a>
-              );
-            })}
+            {/* Si estamos en home, mostrar scroll spy sections */}
+            {isHome ? (
+              SECTION_IDS.map((id) => {
+                const labels: Record<string, string> = {
+                  inicio: "Inicio",
+                  ofertas: "Ofertas",
+                  catalogo: "Catálogo",
+                  categorias: "Categorías",
+                  confianza: "Garantía",
+                };
+                const isActive = activeId === id;
+                return (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={(e) => handleNavClick(e, id)}
+                    className={`relative px-3 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 ${
+                      isActive
+                        ? "text-[#1D1D1F] bg-[#F5F5F7]"
+                        : "text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F]"
+                    }`}
+                  >
+                    {labels[id]}
+                    {isActive && (
+                      <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-[#D4AF37]" />
+                    )}
+                  </a>
+                );
+              })
+            ) : (
+              // En subpáginas, mostrar links a home + páginas principales
+              <>
+                <Link href="/" className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-all">
+                  Inicio
+                </Link>
+                <Link href="/coleccion" className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-all">
+                  Catálogo
+                </Link>
+                <Link href="/nosotros" className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-all">
+                  Nosotros
+                </Link>
+                <Link href="/garantia" className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-all">
+                  Garantía
+                </Link>
+                <Link href="/faq" className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-all">
+                  FAQ
+                </Link>
+                <Link href="/contacto" className="px-3 py-1.5 rounded-full text-[13px] font-medium text-[#1D1D1F]/70 hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-all">
+                  Contacto
+                </Link>
+              </>
+            )}
           </nav>
 
           {/* Search — botón que abre overlay inmersivo */}
