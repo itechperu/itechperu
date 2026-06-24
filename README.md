@@ -142,6 +142,89 @@ src/
 - [ ] **Sprint 3:** Panel admin de inventario + gestión de pedidos
 - [ ] **Sprint 4:** Favoritos persistentes + wishlist + sistema de reviews
 
+## 📊 Google Sheets Sync — Catálogo automático
+
+Sincroniza tus productos desde un Google Sheet cada hora, sin tocar código ni admin web.
+
+### ¿Cómo funciona?
+
+1. Mantienes tu catálogo en un Google Sheet (tú ya trabajas así)
+2. Un cron job de Vercel lee el Sheet cada hora automáticamente
+3. El sistema hace **UPSERT**: crea productos nuevos, actualiza existentes, desactiva los que ya no están
+4. Cero riesgo de baneo (no toca Meta/Facebook para nada)
+5. Cero costo (Google Sheets API es gratis hasta 100M requests/mes)
+
+### Estructura del Google Sheet
+
+Crea un sheet llamado `Catalogo` con estas columnas (fila 1 = headers):
+
+| slug | title | brand | model | category | basePrice | condition | storage | color | description | images | highlights | includes | stock | isActive | gradeA_PriceModifier | gradeB_PriceModifier | gradeC_PriceModifier |
+|------|-------|-------|-------|----------|-----------|-----------|---------|-------|-------------|--------|------------|---------|-------|----------|---------------------|---------------------|---------------------|
+| ipad-pro-m2 | iPad Pro M2 | Apple | iPad Pro 12.9 | IPAD | 3499 | Reacondicionado | 256GB | Space Gray | Descripción... | url1\|url2\|url3 | highlight1\|highlight2 | cable\|cargador | 10 | TRUE | 0 | -250 | -500 |
+
+**Reglas:**
+- `images`, `highlights`, `includes`: separar múltiples valores con `|`
+- `category`: IPAD, MACBOOK, LAPTOP, ROPA, ACCESORIO
+- `basePrice`: en soles (ej: 3499 = S/ 3,499)
+- `isActive`: TRUE o FALSE
+- `gradeA/B/C_PriceModifier`: ajuste en soles (0 = precio base, -250 = S/250 menos)
+
+### Setup (una sola vez)
+
+#### 1. Crear Service Account en Google Cloud
+
+```bash
+# 1. Ve a https://console.cloud.google.com
+# 2. Crea un proyecto nuevo (ej: "itechperu-sync")
+# 3. APIs & Services → Library → busca "Google Sheets API" → Enable
+# 4. APIs & Services → Credentials → Create Credentials → Service Account
+# 5. Nombra: "itechperu-sync-sa"
+# 6. Role: ninguno (no necesita rol)
+# 7. Crea la service account → entra a ella → Keys → Add Key → JSON
+# 8. Se descarga un archivo JSON con:
+#    - client_email: xxx@yyy.iam.gserviceaccount.com
+#    - private_key: -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n
+```
+
+#### 2. Preparar el Google Sheet
+
+```bash
+# 1. Crea un Google Sheet nuevo
+# 2. Renombra la primera hoja a "Catalogo"
+# 3. Agrega los headers (ver tabla arriba)
+# 4. Agrega tus productos (una fila por producto)
+# 5. Click "Compartir" → pega el client_email de la service account → permiso "Lector"
+# 6. Copia el ID del sheet de la URL:
+#    https://docs.google.com/spreadsheets/d/ESTE_ES_EL_ID/edit
+```
+
+#### 3. Configurar variables de entorno en Vercel
+
+```env
+GOOGLE_SERVICE_ACCOUNT_EMAIL=itechperu-sync@itechperu-sync.iam.gserviceaccount.com
+GOOGLE_SERVICE_ACCOUNT_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvQ...\n-----END PRIVATE KEY-----\n
+GOOGLE_SHEETS_ID=1ABCdefGHIjklMNOpqrsTUVwxyz1234567890
+GOOGLE_SHEETS_RANGE=Catalogo!A:T
+CRON_SECRET=<genera con: openssl rand -hex 32>
+```
+
+**⚠️ Importante sobre `GOOGLE_SERVICE_ACCOUNT_KEY`:** Copia el valor de `private_key` del JSON. Los `\n` deben quedar como texto literal (no saltos de línea reales). El código los convierte automáticamente.
+
+#### 4. Verificar
+
+- Ve a `/admin/sincronizar` en tu web
+- Deberías ver "Configurado y activo" con el link a tu Sheet
+- Click "Sincronizar ahora" para probar manualmente
+- El cron job se ejecutará cada hora automáticamente (configurado en `vercel.json`)
+
+### ¿Qué pasa si...?
+
+- **Cambio un precio en el Sheet**: se actualiza en la web en la próxima hora (o al instante si haces sync manual)
+- **Agrego un producto nuevo**: se crea automáticamente con specs y grades por defecto
+- **Elimino un producto del Sheet**: se desactiva en la web (no se borra, preserva historial de pedidos)
+- **El Sheet está vacío**: el sync retorna error, no toca la DB
+- **Una fila tiene error**: se salta esa fila y continúa con las demás, el error se registra en el log
+
 ## 💳 Mercado Pago — Configuración
 
 1. Crea una app en [Mercado Pago Developers](https://www.mercadopago.com.pe/developers/panel/app)

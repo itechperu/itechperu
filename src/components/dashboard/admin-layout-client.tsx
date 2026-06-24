@@ -14,6 +14,7 @@ import {
   X,
   ChevronRight,
   Plus,
+  RefreshCw,
 } from "lucide-react";
 import { useSessionDeluxe } from "@/hooks/use-session-deluxe";
 import { signOut } from "next-auth/react";
@@ -23,6 +24,7 @@ const NAV_ITEMS = [
   { href: "/admin/productos", label: "Productos", icon: Box },
   { href: "/admin/pedidos", label: "Pedidos", icon: ShoppingCart },
   { href: "/admin/usuarios", label: "Usuarios", icon: Users },
+  { href: "/admin/sincronizar", label: "Sync Sheets", icon: RefreshCw },
 ];
 
 interface SessionUser {
