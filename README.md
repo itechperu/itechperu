@@ -142,6 +142,47 @@ src/
 - [ ] **Sprint 3:** Panel admin de inventario + gestión de pedidos
 - [ ] **Sprint 4:** Favoritos persistentes + wishlist + sistema de reviews
 
+## 🖼️ Sanity — Almacenamiento de imágenes (100 GB gratis)
+
+Sanity se usa **solo para imágenes**. Los datos (título, precio, stock) siguen en Google Sheets + Postgres.
+
+### ¿Por qué Sanity y no Supabase Storage?
+
+| Criterio | Sanity ✅ | Supabase Storage |
+|----------|----------|------------------|
+| Plan gratuito | **100 GB** + 100K API calls | 1 GB |
+| CDN global | ✅ Edge (~30ms Perú) | ❌ Solo región |
+| Optimización automática | ✅ WebP/AVIF + resize on-the-fly | ❌ Manual |
+| Editor visual | ✅ Studio (recortar, rotar) | ❌ |
+
+### Setup (una sola vez, ~5 minutos)
+
+1. **Crea cuenta en [sanity.io](https://www.sanity.io/manage)** (gratis, sin tarjeta)
+2. **Crea un proyecto nuevo** → obtén `PROJECT_ID`
+3. **Settings → API → Tokens → Create token** (Permissions: Read+Write) → copia el token
+4. **Configura en Vercel:**
+   ```env
+   NEXT_PUBLIC_SANITY_PROJECT_ID=tu_project_id
+   NEXT_PUBLIC_SANITY_DATASET=production
+   SANITY_API_WRITE_TOKEN=tu_token_aqui
+   ```
+5. Ve a `/admin/productos` → click "Nuevo" → sube imágenes desde el formulario
+
+### Cómo funciona
+
+1. Admin sube imagen en `/admin/productos/nuevo` → se envía a `/api/admin/upload`
+2. La API sube el buffer a Sanity via `sanityWriteClient.assets.upload()`
+3. Sanity retorna `imageId` + URL del CDN optimizada
+4. El `imageId` se guarda en el campo `images` del producto (Postgres)
+5. Cuando un cliente ve el producto, la imagen se sirve desde el CDN de Sanity (~30ms)
+
+### Optimización automática
+
+Sanity transforma la imagen on-the-fly vía URL params:
+- `?w=800&h=600&fit=max&q=80&fm=webp` → 800x600 WebP calidad 80
+- `?w=1200&q=90&fm=avif` → 1200px AVIF calidad 90 (50% más liviano que JPG)
+- El CDN cachea cada variante → siguientes requests son instantáneos
+
 ## 📊 Google Sheets Sync — Catálogo automático
 
 Sincroniza tus productos desde un Google Sheet cada hora, sin tocar código ni admin web.
