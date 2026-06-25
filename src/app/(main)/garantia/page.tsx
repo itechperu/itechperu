@@ -1,140 +1,95 @@
 import type { Metadata } from "next";
-import { BackButton } from "@/components/deluxe/back-button";
 import Link from "next/link";
-import { ShieldCheck, Award, Clock, RefreshCw, CheckCircle2, ChevronRight, Wrench, Truck, CreditCard, Headphones } from "lucide-react";
+import { ShieldCheck, Award, Clock, RefreshCw, CheckCircle2, ChevronRight, Wrench, Headphones } from "lucide-react";
+import { BackButton } from "@/components/deluxe/back-button";
 
 export const metadata: Metadata = {
   title: "Garantía Deluxe — Reparación y Garantía en Perú | itechperu.shop",
   description:
-    "Garantía real de 3 a 6 meses en todos nuestros equipos. Protocolo de 47 puntos de inspección técnica en Lima. 7 días de devolución. Servicio técnico especializado para MacBook, iPad y laptops.",
+    "Garantía real de 3 a 6 meses en todos nuestros equipos. Protocolo de 47 puntos de inspección técnica en Lima. 7 días de devolución. Servicio técnico especializado.",
   alternates: { canonical: "/garantia" },
-  openGraph: {
-    title: "Garantía Deluxe — itechperu.shop",
-    description: "Garantía real de 3-6 meses. 47 puntos de inspección. 7 días devolución. Servicio técnico especializado en Lima.",
-    type: "website",
-    locale: "es_PE",
-  },
 };
 
 const faqs = [
-  {
-    q: "¿Qué cubre la garantía?",
-    a: "La garantía cubre defectos de fábrica y funcionamiento: pantalla, batería, carga, conectividad, botones, cámaras y puertos. No cubre daños por mal uso como caídas, líquidos o modificaciones no autorizadas.",
-  },
-  {
-    q: "¿Cuánto dura la garantía según el grado?",
-    a: "El Grado A+ (Como Nuevo) incluye 6 meses de garantía. El Grado A (Excelente) incluye 4 meses. El Grado B (Muy Bueno) incluye 3 meses. Todos con la misma cobertura de defectos de fábrica.",
-  },
-  {
-    q: "¿Qué pasa si el equipo falla durante la garantía?",
-    a: "Si el equipo falla dentro del período de garantía por un defecto cubierto, lo reparamos sin costo. Si no se puede reparar, te damos un equipo equivalente. Si no hay stock disponible, reembolsamos el 100% del pago.",
-  },
-  {
-    q: "¿Puedo devolver el equipo si no me gusta?",
-    a: "Sí. Tienes 7 días calendario desde la recepción para devolver el equipo sin preguntas. Debe estar en las mismas condiciones recibidas. Reembolso completo del producto (los gastos de envío no son reembolsables).",
-  },
-  {
-    q: "¿El servicio técnico está incluido en la garantía?",
-    a: "Sí, el servicio técnico por defectos cubiertos por garantía es completamente gratuito. Si el problema no está cubierto, te damos una cotización transparente antes de proceder.",
-  },
-  {
-    q: "¿Hacen servicio técnico después de que expira la garantía?",
-    a: "Sí, ofrecemos servicio técnico de pago para equipos fuera de garantía. Diagnóstico gratuito, repuestos originales y garantía de 90 días sobre la mano de obra.",
-  },
+  { q: "¿Qué cubre la garantía?", a: "La garantía cubre defectos de fábrica y funcionamiento: pantalla, batería, carga, conectividad, botones, cámaras y puertos. No cubre daños por mal uso como caídas, líquidos o modificaciones no autorizadas." },
+  { q: "¿Cuánto dura la garantía según el grado?", a: "El Grado A+ (Como Nuevo) incluye 6 meses de garantía. El Grado A (Excelente) incluye 4 meses. El Grado B (Muy Bueno) incluye 3 meses. Todos con la misma cobertura de defectos de fábrica." },
+  { q: "¿Qué pasa si el equipo falla durante la garantía?", a: "Si el equipo falla dentro del período de garantía por un defecto cubierto, lo reparamos sin costo. Si no se puede reparar, te damos un equipo equivalente. Si no hay stock disponible, reembolsamos el 100% del pago." },
+  { q: "¿Puedo devolver el equipo si no me gusta?", a: "Sí. Tienes 7 días calendario desde la recepción para devolver el equipo sin preguntas. Debe estar en las mismas condiciones recibidas. Reembolso completo del producto." },
+  { q: "¿El servicio técnico está incluido en la garantía?", a: "Sí, el servicio técnico por defectos cubiertos por garantía es completamente gratuito. Si el problema no está cubierto, te damos una cotización transparente antes de proceder." },
+  { q: "¿Hacen servicio técnico después de que expira la garantía?", a: "Sí, ofrecemos servicio técnico de pago para equipos fuera de garantía. Diagnóstico gratuito, repuestos originales y garantía de 90 días sobre la mano de obra." },
+];
+
+const INSPECTION_POINTS = [
+  { cat: "Batería", items: ["Salud ≥ 85%", "Ciclos verificados", "Carga rápida testeada", "Duración real medida"] },
+  { cat: "Pantalla", items: ["Píxeles muertos (0)", "Touch funcional", "True Tone operativo", "Retroiluminación uniforme"] },
+  { cat: "Procesador", items: ["Rendimiento CPU", "Thermal throttling", "Stress test 30 min", "Geekbench score"] },
+  { cat: "Cámara", items: ["Cámara frontal", "Cámara trasera", "Autoenfoque", "Flash/Flash True Tone"] },
+  { cat: "Conectividad", items: ["Wi-Fi 2.4/5GHz", "Bluetooth 5.0+", "GPS verificado", "USB-C/Lightning"] },
+  { cat: "Físico", items: ["Chasis sin deformaciones", "Botones responsivos", "Altavoces claros", "Micrófonos funcionales"] },
+  { cat: "Software", items: ["Restaurado de fábrica", "Sin iCloud Lock", "Sin MDM", "Última versión OS"] },
+  { cat: "Seguridad", items: ["IMEI/Serie limpio (SISATEC)", "Sin reporte de robo", "Face ID/Touch ID", "Find My desactivado"] },
+  { cat: "Accesorios", items: ["Cargador original", "Cable verificado", "Caja Deluxe", "Sello de garantía"] },
+];
+
+const GRADES = [
+  { grade: "A+", label: "Como Nuevo", desc: "Sin marcas de uso. Batería ≥ 95%. Caja original.", warranty: "6 meses" },
+  { grade: "A", label: "Excelente", desc: "Microdesgaste imperceptible. Batería ≥ 90%.", warranty: "4 meses" },
+  { grade: "B", label: "Muy Bueno", desc: "Uso visible en bordes. Batería ≥ 85%. 100% funcional.", warranty: "3 meses" },
 ];
 
 export default function GarantiaPage() {
   const faqLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: { "@type": "Answer", text: faq.a },
-    })),
-  };
-
-  const orgLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "itechperu.shop",
-    url: "https://itechperu.shop",
-    areaServed: { "@type": "Country", name: "Perú" },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+51-987-654-321",
-      contactType: "customer service",
-      areaServed: "PE",
-    },
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   };
 
   return (
-    <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-10 py-8 lg:py-12">
+    <div className="mx-auto max-w-[900px] px-4 sm:px-6 lg:px-10 py-8 lg:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
+      <BackButton />
 
       {/* Hero */}
-      <BackButton />
-    <section className="text-center max-w-2xl mx-auto mb-12">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#10B981]/10 px-3 py-1.5 mb-4">
-          <ShieldCheck className="h-4 w-4 text-[#10B981]" strokeWidth={1.5} />
-          <span className="text-[11px] font-medium text-[#10B981] tracking-wide">Confianza absoluta</span>
-        </div>
-        <BackButton />
-      <h1 className="text-[28px] lg:text-[44px] font-bold tracking-tight text-[var(--text-primary)]">
-          Garantía Deluxe
+      <section className="mb-20 lg:mb-28">
+        <p className="text-[12px] uppercase tracking-[0.2em] text-[var(--text-secondary)] mb-3">Garantía Deluxe</p>
+        <h1 className="text-[32px] lg:text-[52px] font-bold tracking-tight text-[var(--text-primary)] leading-[1.1]">
+          Confianza absoluta,
+          <br />
+          <span className="text-[#D4AF37]">sin letra pequeña.</span>
         </h1>
-        <p className="mt-4 text-[15px] lg:text-[17px] text-[var(--text-secondary)] leading-relaxed max-w-xl mx-auto">
-          No vendemos equipos usados. Vendemos equipos verificados con garantía real,
-          sin letra pequeña. Cada equipo pasa por 47 puntos de inspección técnica en Lima.
-          Así de simple.
+        <p className="mt-6 text-[16px] lg:text-[18px] text-[var(--text-secondary)] leading-[1.7]">
+          No vendemos equipos usados. Vendemos equipos verificados con garantía real.
+          Cada equipo pasa por 47 puntos de inspección técnica en Lima.
         </p>
       </section>
 
       {/* Stats */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-        {[
-          { icon: ShieldCheck, value: "3-6", label: "Meses de garantía", accent: true },
-          { icon: Award, value: "47", label: "Puntos de inspección" },
-          { icon: RefreshCw, value: "7", label: "Días de devolución" },
-          { icon: Star, value: "4.9/5", label: "+500 calificaciones" },
-        ].map((stat, i) => (
-          <div key={i} className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5 text-center">
-            <stat.icon className={`h-6 w-6 mx-auto ${stat.accent ? "text-[#D4AF37]" : "text-[var(--text-primary)]"}`} strokeWidth={1.5} />
-            <p className={`text-[24px] font-bold mt-2 ${stat.accent ? "text-[#D4AF37]" : "text-[var(--text-primary)]"}`}>{stat.value}</p>
-            <p className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-medium mt-1">{stat.label}</p>
-          </div>
-        ))}
+      <section className="mb-20 lg:mb-28">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-10">
+          {[{ v: "3-6", l: "Meses de garantía" }, { v: "47", l: "Puntos de inspección" }, { v: "7", l: "Días de devolución" }, { v: "4.9/5", l: "+500 calificaciones" }].map((s, i) => (
+            <div key={i} className="text-center">
+              <p className="text-[36px] lg:text-[48px] font-bold tracking-tight text-[var(--text-primary)]">{s.v}</p>
+              <p className="text-[12px] uppercase tracking-wider text-[var(--text-secondary)] mt-1">{s.l}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Proceso de inspección */}
-      <section className="rounded-3xl bg-gradient-to-br from-[#1D1D1F] to-[#2A2A2D] p-6 lg:p-10 mb-12">
-        <div className="flex items-center gap-2 mb-6">
-          <Wrench className="h-5 w-5 text-[#D4AF37]" strokeWidth={1.5} />
-          <h2 className="text-[18px] lg:text-[22px] font-bold text-white">Protocolo de 47 puntos de inspección</h2>
-        </div>
-        <p className="text-[14px] text-white/70 mb-6 max-w-2xl">
-          Cada equipo pasa por un riguroso check técnico en Lima antes de ser aprobado para la venta.
-          Si un punto falla, el equipo se repara o se rechaza. Así de estricto.
-        </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {[
-            { cat: "Batería", items: ["Salud ≥ 85%", "Ciclos verificados", "Carga rápida testeada", "Duración real medida"] },
-            { cat: "Pantalla", items: ["Píxeles muertos (0)", "Touch funcional", "True Tone operativo", "Retroiluminación uniforme"] },
-            { cat: "Procesador", items: ["Rendimiento CPU", "Thermal throttling", "Stress test 30 min", "Geekbench score"] },
-            { cat: "Cámara", items: ["Cámara frontal", "Cámara trasera", "Autoenfoque", "Flash/Flash True Tone"] },
-            { cat: "Conectividad", items: ["Wi-Fi 2.4/5GHz", "Bluetooth 5.0+", "GPS verificado", "USB-C/Lightning"] },
-            { cat: "Físico", items: ["Chasis sin deformaciones", "Botones responsivos", "Altavoces claros", "Micrófonos funcionales"] },
-            { cat: "Software", items: ["Restaurado de fábrica", "Sin iCloud Lock", "Sin MDM", "Última versión OS"] },
-            { cat: "Seguridad", items: ["IMEI/Serie limpio (SISATEC)", "Sin reporte de robo", "Face ID/Touch ID", "Find My desactivado"] },
-            { cat: "Accesorios", items: ["Cargador original", "Cable verificado", "Caja Deluxe", "Sello de garantía"] },
-          ].map((group, i) => (
-            <div key={i} className="rounded-2xl bg-[var(--bg-primary)]/5 border border-white/10 p-4">
-              <h3 className="text-[13px] font-bold text-[#D4AF37] mb-2">{group.cat}</h3>
-              <ul className="space-y-1">
+      <div className="h-px bg-[var(--border-color)] mb-20 lg:mb-28" />
+
+      {/* 47 puntos — grilla editorial sin cards */}
+      <section className="mb-20 lg:mb-28">
+        <p className="text-[12px] uppercase tracking-[0.2em] text-[#D4AF37] mb-3">Protocolo de inspección</p>
+        <h2 className="text-[24px] lg:text-[36px] font-bold tracking-tight text-[var(--text-primary)] mb-10">
+          47 puntos de control
+        </h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
+          {INSPECTION_POINTS.map((group, i) => (
+            <div key={i}>
+              <h3 className="text-[14px] font-bold text-[var(--text-primary)] mb-3">{group.cat}</h3>
+              <ul className="space-y-1.5">
                 {group.items.map((item, j) => (
-                  <li key={j} className="flex items-center gap-1.5 text-[11px] text-white/70">
-                    <CheckCircle2 className="h-3 w-3 text-[#10B981] flex-shrink-0" strokeWidth={2} />
+                  <li key={j} className="flex items-center gap-2 text-[13px] text-[var(--text-secondary)]">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#D4AF37] flex-shrink-0" strokeWidth={2} />
                     {item}
                   </li>
                 ))}
@@ -144,75 +99,72 @@ export default function GarantiaPage() {
         </div>
       </section>
 
-      {/* Sistema de Grados */}
-      <section className="mb-12">
-        <h2 className="text-[18px] lg:text-[22px] font-bold text-[var(--text-primary)] mb-4 text-center">Sistema de Grados</h2>
-        <div className="grid sm:grid-cols-3 gap-4">
-          {[
-            { grade: "A+", label: "Como Nuevo", desc: "Sin marcas de uso. Batería ≥ 95%. Caja original.", warranty: "6 meses", color: "bg-[#D4AF37]" },
-            { grade: "A", label: "Excelente", desc: "Microdesgaste imperceptible. Batería ≥ 90%.", warranty: "4 meses", color: "bg-[#1D1D1F]" },
-            { grade: "B", label: "Muy Bueno", desc: "Uso visible en bordes. Batería ≥ 85%. 100% funcional.", warranty: "3 meses", color: "bg-[#86868B]" },
-          ].map((g) => (
-            <div key={g.grade} className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5">
-              <span className={`flex h-12 w-12 items-center justify-center rounded-full text-[14px] font-bold text-white ${g.color}`}>{g.grade}</span>
-              <h3 className="text-[15px] font-bold text-[var(--text-primary)] mt-3">Grado {g.grade} — {g.label}</h3>
-              <p className="text-[12px] text-[var(--text-secondary)] mt-1">{g.desc}</p>
-              <p className="text-[14px] font-bold text-[#D4AF37] mt-2">Garantía: {g.warranty}</p>
+      <div className="h-px bg-[var(--border-color)] mb-20 lg:mb-28" />
+
+      {/* Grados — editorial sin cards */}
+      <section className="mb-20 lg:mb-28">
+        <p className="text-[12px] uppercase tracking-[0.2em] text-[#D4AF37] mb-3">Sistema de Grados</p>
+        <h2 className="text-[24px] lg:text-[36px] font-bold tracking-tight text-[var(--text-primary)] mb-10">
+          Tres niveles de condición
+        </h2>
+        <div className="grid sm:grid-cols-3 gap-x-8">
+          {GRADES.map((g, i) => (
+            <div key={g.grade} className={i > 0 ? "sm:border-l sm:border-[var(--border-color)] sm:pl-8" : ""}>
+              <p className="text-[40px] font-bold text-[#D4AF37]">{g.grade}</p>
+              <p className="text-[16px] font-semibold text-[var(--text-primary)] mt-1">{g.label}</p>
+              <p className="text-[13px] text-[var(--text-secondary)] mt-2 leading-relaxed">{g.desc}</p>
+              <p className="text-[14px] font-bold text-[var(--text-primary)] mt-4">Garantía: {g.warranty}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Beneficios */}
-      <section className="grid sm:grid-cols-2 gap-4 mb-12">
-        <div className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5">
-          <RefreshCw className="h-6 w-6 text-[#D4AF37]" strokeWidth={1.5} />
-          <h3 className="text-[15px] font-bold text-[var(--text-primary)] mt-3">7 días de devolución</h3>
-          <p className="text-[12px] text-[var(--text-secondary)] mt-1 leading-relaxed">
-            Si no quedas satisfecho, tienes 7 días para devolverlo. Sin preguntas, sin letra
-            pequeña. Reembolso completo del producto.
-          </p>
-        </div>
-        <div className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5">
-          <Headphones className="h-6 w-6 text-[#D4AF37]" strokeWidth={1.5} />
-          <h3 className="text-[15px] font-bold text-[var(--text-primary)] mt-3">Soporte VIP</h3>
-          <p className="text-[12px] text-[var(--text-secondary)] mt-1 leading-relaxed">
-            ¿Problema con tu equipo? Escríbenos por WhatsApp VIP y te atendemos
-            prioritariamente. Soporte real, no chatbots.
-          </p>
+      <div className="h-px bg-[var(--border-color)] mb-20 lg:mb-28" />
+
+      {/* Devolución + Soporte */}
+      <section className="mb-20 lg:mb-28">
+        <div className="grid sm:grid-cols-2 gap-10">
+          <div>
+            <RefreshCw className="h-6 w-6 text-[#D4AF37]" strokeWidth={1.5} />
+            <h3 className="text-[18px] font-bold text-[var(--text-primary)] mt-4">7 días de devolución</h3>
+            <p className="text-[14px] text-[var(--text-secondary)] mt-2 leading-relaxed">
+              Si no quedas satisfecho, tienes 7 días para devolverlo. Sin preguntas, sin letra pequeña. Reembolso completo del producto.
+            </p>
+          </div>
+          <div>
+            <Headphones className="h-6 w-6 text-[#D4AF37]" strokeWidth={1.5} />
+            <h3 className="text-[18px] font-bold text-[var(--text-primary)] mt-4">Soporte VIP</h3>
+            <p className="text-[14px] text-[var(--text-secondary)] mt-2 leading-relaxed">
+              ¿Problema con tu equipo? Escríbenos por WhatsApp VIP y te atendemos prioritariamente. Soporte real, no chatbots.
+            </p>
+          </div>
         </div>
       </section>
 
+      <div className="h-px bg-[var(--border-color)] mb-20 lg:mb-28" />
+
       {/* FAQ */}
-      <section className="mb-12">
-        <h2 className="text-[18px] lg:text-[22px] font-bold text-[var(--text-primary)] mb-4 text-center">Preguntas frecuentes sobre garantía</h2>
-        <div className="max-w-3xl mx-auto space-y-3">
+      <section className="mb-20 lg:mb-28">
+        <p className="text-[12px] uppercase tracking-[0.2em] text-[#D4AF37] mb-3">Preguntas frecuentes</p>
+        <h2 className="text-[24px] lg:text-[36px] font-bold tracking-tight text-[var(--text-primary)] mb-10">
+          Todo lo que necesitas saber
+        </h2>
+        <div className="space-y-8">
           {faqs.map((faq, i) => (
-            <div key={i} className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-4">
-              <h3 className="text-[14px] font-semibold text-[var(--text-primary)] flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-[#D4AF37] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                {faq.q}
-              </h3>
-              <p className="mt-2 ml-6 text-[13px] text-[var(--text-primary)]/70 leading-relaxed">{faq.a}</p>
+            <div key={i}>
+              <h3 className="text-[15px] font-semibold text-[var(--text-primary)]">{faq.q}</h3>
+              <p className="mt-2 text-[14px] text-[var(--text-secondary)] leading-relaxed">{faq.a}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="text-center">
-        <Link href="/coleccion" className="inline-flex items-center gap-1.5 rounded-full bg-[#1D1D1F] px-6 py-3 text-[14px] font-semibold text-white tap-scale">
+      <section className="text-center pt-8">
+        <Link href="/catalogo" className="inline-flex items-center gap-1.5 rounded-full bg-[#1D1D1F] dark:bg-[#D4AF37] px-6 py-3 text-[14px] font-semibold text-white dark:text-[#1D1D1F] hover:scale-[1.02] transition-transform">
           Explorar catálogo verificado <ChevronRight className="h-4 w-4" strokeWidth={2} />
         </Link>
       </section>
     </div>
-  );
-}
-
-function Star({ className, strokeWidth }: { className?: string; strokeWidth?: number }) {
-  return (
-    <svg className={className} strokeWidth={strokeWidth ?? 1.5} viewBox="0 0 24 24" fill="currentColor" stroke="currentColor">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
   );
 }
