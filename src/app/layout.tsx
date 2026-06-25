@@ -195,7 +195,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FFFFFF] text-[#1D1D1F] min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen`}
       >
         <Providers>
           {children}

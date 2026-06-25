@@ -21,10 +21,10 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="min-h-screen flex items-center justify-center bg-[var(--bg-primary)]">
           <div className="flex flex-col items-center gap-3">
-            <div className="h-8 w-8 border-2 border-[#E5E5E7] border-t-[#D4AF37] rounded-full animate-spin" />
-            <p className="text-[12px] text-[#86868B]">Cargando…</p>
+            <div className="h-8 w-8 border-2 border-[var(--border-color)] border-t-[#D4AF37] rounded-full animate-spin" />
+            <p className="text-[12px] text-[var(--text-secondary)]">Cargando…</p>
           </div>
         </div>
       }
@@ -114,14 +114,14 @@ function LoginContent() {
                 Acceso Deluxe
               </span>
             </motion.div>
-            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[#1D1D1F]">
+            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
               Iniciar Sesión
             </h2>
-            <p className="mt-1 text-[13px] text-[#86868B]">
+            <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
               ¿No tienes cuenta?{" "}
               <Link
                 href="/auth/register"
-                className="text-[#1D1D1F] font-medium hover:text-[#D4AF37] transition-colors underline-offset-4 hover:underline"
+                className="text-[var(--text-primary)] font-medium hover:text-[#D4AF37] transition-colors underline-offset-4 hover:underline"
               >
                 Regístrate gratis
               </Link>
@@ -148,7 +148,7 @@ function LoginContent() {
           {/* Divider */}
           <div className="flex items-center gap-3 mb-5">
             <div className="h-px flex-1 bg-[#E5E5E7]" />
-            <span className="text-[11px] text-[#86868B] font-medium">o con tu correo</span>
+            <span className="text-[11px] text-[var(--text-secondary)] font-medium">o con tu correo</span>
             <div className="h-px flex-1 bg-[#E5E5E7]" />
           </div>
 
@@ -186,7 +186,7 @@ function LoginContent() {
                   className={`flex h-4 w-4 items-center justify-center rounded-md border-2 transition-all ${
                     rememberMe
                       ? "bg-[#1D1D1F] border-[#1D1D1F]"
-                      : "border-[#E5E5E7] bg-white"
+                      : "border-[var(--border-color)] bg-[var(--bg-primary)]"
                   }`}
                   aria-pressed={rememberMe}
                   aria-label="Recordarme"
@@ -205,11 +205,11 @@ function LoginContent() {
                     </motion.svg>
                   )}
                 </button>
-                <span className="text-[#1D1D1F]/80">Recordarme</span>
+                <span className="text-[var(--text-primary)]/80">Recordarme</span>
               </label>
               <Link
                 href="/auth/forgot-password"
-                className="text-[#1D1D1F] font-medium hover:text-[#D4AF37] transition-colors"
+                className="text-[var(--text-primary)] font-medium hover:text-[#D4AF37] transition-colors"
               >
                 ¿Olvidaste tu contraseña?
               </Link>
@@ -246,11 +246,11 @@ function LoginContent() {
           </form>
 
           {/* Demo credentials hint */}
-          <div className="mt-6 rounded-2xl bg-[#F5F5F7] p-3 text-center">
-            <p className="text-[10px] text-[#86868B] uppercase tracking-wider font-medium mb-1">
+          <div className="mt-6 rounded-2xl bg-[var(--bg-secondary)] p-3 text-center">
+            <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider font-medium mb-1">
               Cuenta demo
             </p>
-            <p className="text-[11px] text-[#1D1D1F] font-mono">
+            <p className="text-[11px] text-[var(--text-primary)] font-mono">
               demo@itechperu.shop · admin123
             </p>
           </div>

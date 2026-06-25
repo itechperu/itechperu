@@ -65,7 +65,7 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
       {/* Botón volver */}
       <Link
         href="/coleccion"
-        className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#86868B] hover:text-[#1D1D1F] transition-colors mb-3"
+        className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-3"
       >
         <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2} />
         Volver al catálogo
@@ -98,16 +98,16 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
               <span className="inline-flex items-center rounded-full bg-[#1D1D1F] px-2 py-0.5 text-[10px] font-bold text-white uppercase tracking-wide">
                 {product.brand}
               </span>
-              <span className="inline-flex items-center rounded-full bg-[#F5F5F7] border border-[#E5E5E7] px-2 py-0.5 text-[10px] font-medium text-[#1D1D1F]">
+              <span className="inline-flex items-center rounded-full bg-[var(--bg-secondary)] border border-[var(--border-color)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-primary)]">
                 {product.condition}
               </span>
-              {product.color && <span className="text-[11px] text-[#86868B]">· {product.color}</span>}
+              {product.color && <span className="text-[11px] text-[var(--text-secondary)]">· {product.color}</span>}
             </div>
 
-            <h1 className="text-[22px] lg:text-[32px] font-bold tracking-tight leading-tight text-[#1D1D1F]">
+            <h1 className="text-[22px] lg:text-[32px] font-bold tracking-tight leading-tight text-[var(--text-primary)]">
               {product.title}
             </h1>
-            <p className="mt-1 text-[13px] lg:text-[15px] text-[#86868B]">{product.subtitle}</p>
+            <p className="mt-1 text-[13px] lg:text-[15px] text-[var(--text-secondary)]">{product.subtitle}</p>
 
             {/* Rating */}
             <div className="flex items-center gap-2 mt-2">
@@ -116,10 +116,10 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
                   <Star key={s} className={`h-3.5 w-3.5 ${s <= Math.round(product.rating) ? "fill-[#D4AF37] text-[#D4AF37]" : "text-[#E5E5E7]"}`} strokeWidth={1.5} />
                 ))}
               </div>
-              <span className="text-[12px] font-medium text-[#1D1D1F]">{product.rating.toFixed(1)}</span>
-              <span className="text-[12px] text-[#86868B]">({product.reviewCount} opiniones)</span>
+              <span className="text-[12px] font-medium text-[var(--text-primary)]">{product.rating.toFixed(1)}</span>
+              <span className="text-[12px] text-[var(--text-secondary)]">({product.reviewCount} opiniones)</span>
               <span className="text-[#E5E5E7]">·</span>
-              <span className="text-[12px] text-[#86868B]">{product.soldCount} vendidos</span>
+              <span className="text-[12px] text-[var(--text-secondary)]">{product.soldCount} vendidos</span>
             </div>
           </div>
 
@@ -127,18 +127,18 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
           <div className="rounded-3xl bg-gradient-to-br from-[#FFFBEB] via-[#FFFDF7] to-white border border-[#D4AF37]/20 p-5 shadow-[0_4px_30px_rgb(0,0,0,0.04)]">
             <div className="flex items-end justify-between">
               <div>
-                <p className="text-[10px] uppercase tracking-wider text-[#86868B] font-medium">
+                <p className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-medium">
                   Precio Deluxe · Grado {selectedGrade}
                 </p>
                 <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-[32px] lg:text-[40px] font-bold tracking-tight text-[#1D1D1F] leading-none">
+                  <span className="text-[32px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)] leading-none">
                     {formatPEN(finalUnitPrice)}
                   </span>
                   {savings > 0 && (
-                    <span className="text-[13px] text-[#86868B] line-through">{formatPEN(product.basePrice)}</span>
+                    <span className="text-[13px] text-[var(--text-secondary)] line-through">{formatPEN(product.basePrice)}</span>
                   )}
                 </div>
-                <p className="text-[11px] text-[#86868B] mt-1">
+                <p className="text-[11px] text-[var(--text-secondary)] mt-1">
                   O 12 cuotas de {formatPEN(Math.round(finalUnitPrice / 12))} · Mercado Pago
                 </p>
               </div>
@@ -156,10 +156,10 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
               <span className="flex items-center gap-1 text-[11px] text-[#10B981] font-medium">
                 <CheckCircle2 className="h-3.5 w-3.5" strokeWidth={2} /> En stock
               </span>
-              <span className="flex items-center gap-1 text-[11px] text-[#86868B]">
+              <span className="flex items-center gap-1 text-[11px] text-[var(--text-secondary)]">
                 <Truck className="h-3.5 w-3.5" strokeWidth={1.5} /> Envío 24-48h Lima
               </span>
-              <span className="flex items-center gap-1 text-[11px] text-[#86868B]">
+              <span className="flex items-center gap-1 text-[11px] text-[var(--text-secondary)]">
                 <ShieldCheck className="h-3.5 w-3.5" strokeWidth={1.5} /> {currentGrade.warranty}
               </span>
             </div>
@@ -174,18 +174,18 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
 
           {/* Cantidad + CTAs */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 rounded-2xl bg-[#F5F5F7] p-1.5">
-              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="flex h-9 w-9 items-center justify-center rounded-xl hover:bg-white transition-colors" aria-label="Disminuir">
-                <Minus className="h-4 w-4 text-[#1D1D1F]" strokeWidth={2} />
+            <div className="flex items-center gap-1 rounded-2xl bg-[var(--bg-secondary)] p-1.5">
+              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="flex h-9 w-9 items-center justify-center rounded-xl hover:bg-[var(--bg-primary)] transition-colors" aria-label="Disminuir">
+                <Minus className="h-4 w-4 text-[var(--text-primary)]" strokeWidth={2} />
               </button>
-              <span className="w-8 text-center text-[15px] font-bold text-[#1D1D1F]">{quantity}</span>
-              <button onClick={() => setQuantity((q) => Math.min(9, q + 1))} className="flex h-9 w-9 items-center justify-center rounded-xl hover:bg-white transition-colors" aria-label="Aumentar">
-                <Plus className="h-4 w-4 text-[#1D1D1F]" strokeWidth={2} />
+              <span className="w-8 text-center text-[15px] font-bold text-[var(--text-primary)]">{quantity}</span>
+              <button onClick={() => setQuantity((q) => Math.min(9, q + 1))} className="flex h-9 w-9 items-center justify-center rounded-xl hover:bg-[var(--bg-primary)] transition-colors" aria-label="Aumentar">
+                <Plus className="h-4 w-4 text-[var(--text-primary)]" strokeWidth={2} />
               </button>
             </div>
             <div className="flex-1">
-              <p className="text-[10px] uppercase tracking-wider text-[#86868B] font-medium leading-none">Total</p>
-              <p className="text-[18px] font-bold text-[#1D1D1F] leading-tight">{formatPEN(finalTotal)}</p>
+              <p className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-medium leading-none">Total</p>
+              <p className="text-[18px] font-bold text-[var(--text-primary)] leading-tight">{formatPEN(finalTotal)}</p>
             </div>
           </div>
 
@@ -224,15 +224,15 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
           <TrustSection />
 
           {/* Highlights */}
-          <div className="rounded-2xl bg-[#F5F5F7] p-5">
-            <h3 className="text-[14px] font-semibold text-[#1D1D1F] mb-3">¿Por qué amarán este {product.category}?</h3>
+          <div className="rounded-2xl bg-[var(--bg-secondary)] p-5">
+            <h3 className="text-[14px] font-semibold text-[var(--text-primary)] mb-3">¿Por qué amarán este {product.category}?</h3>
             <ul className="space-y-2">
               {product.highlights.map((h, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#D4AF37]/10 mt-0.5">
                     <CheckCircle2 className="h-3 w-3 text-[#D4AF37]" strokeWidth={2} />
                   </span>
-                  <span className="text-[13px] text-[#1D1D1F] leading-relaxed">{h}</span>
+                  <span className="text-[13px] text-[var(--text-primary)] leading-relaxed">{h}</span>
                 </li>
               ))}
             </ul>
@@ -240,26 +240,26 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
 
           {/* Descripción */}
           <div className="space-y-2">
-            <h3 className="text-[14px] font-semibold text-[#1D1D1F]">Descripción</h3>
-            <p className="text-[13px] text-[#1D1D1F]/80 leading-relaxed">{product.description}</p>
+            <h3 className="text-[14px] font-semibold text-[var(--text-primary)]">Descripción</h3>
+            <p className="text-[13px] text-[var(--text-primary)]/80 leading-relaxed">{product.description}</p>
           </div>
 
           {/* En la caja */}
-          <div className="rounded-2xl border border-[#E5E5E7] p-4">
-            <h3 className="text-[13px] font-semibold text-[#1D1D1F] mb-2">En la caja Deluxe</h3>
+          <div className="rounded-2xl border border-[var(--border-color)] p-4">
+            <h3 className="text-[13px] font-semibold text-[var(--text-primary)] mb-2">En la caja Deluxe</h3>
             <ul className="grid sm:grid-cols-2 gap-1.5">
               {product.includes.map((item, i) => (
                 <li key={i} className="flex items-center gap-2">
                   <ShieldCheck className="h-3.5 w-3.5 text-[#D4AF37] flex-shrink-0" strokeWidth={1.5} />
-                  <span className="text-[12px] text-[#1D1D1F]">{item}</span>
+                  <span className="text-[12px] text-[var(--text-primary)]">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Ficha técnica accordion */}
-          <div className="rounded-2xl bg-white border border-[#E5E5E7] p-5">
-            <h3 className="text-[14px] font-semibold text-[#1D1D1F] mb-2">Ficha técnica</h3>
+          <div className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5">
+            <h3 className="text-[14px] font-semibold text-[var(--text-primary)] mb-2">Ficha técnica</h3>
             <SpecsAccordion specs={product.specs} />
           </div>
         </div>
@@ -272,7 +272,7 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
       <section className="mt-10 rounded-3xl bg-gradient-to-br from-[#1D1D1F] to-[#2A2A2D] p-6 lg:p-8 text-center">
         <h2 className="text-[18px] lg:text-[20px] font-bold text-white">¿Tienes dudas sobre este equipo?</h2>
         <p className="text-[13px] text-white/60 mt-1">Te asesoramos por WhatsApp sin compromiso</p>
-        <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-4 rounded-full bg-[#D4AF37] px-6 py-3 text-[14px] font-semibold text-[#1D1D1F]">
+        <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-4 rounded-full bg-[#D4AF37] px-6 py-3 text-[14px] font-semibold text-[var(--text-primary)]">
           <MessageCircle className="h-4 w-4" strokeWidth={1.5} /> WhatsApp VIP
         </a>
       </section>

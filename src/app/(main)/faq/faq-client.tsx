@@ -53,10 +53,10 @@ export function FAQClient() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <section className="text-center">
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[#1D1D1F]">
+        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
           Preguntas frecuentes
         </h1>
-        <p className="mt-3 text-[14px] text-[#86868B]">
+        <p className="mt-3 text-[14px] text-[var(--text-secondary)]">
           Todo lo que necesitas saber antes de comprar
         </p>
       </section>
@@ -65,17 +65,17 @@ export function FAQClient() {
         {FAQS.map((faq, i) => (
           <div
             key={i}
-            className="rounded-2xl bg-white border border-[#E5E5E7] overflow-hidden"
+            className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] overflow-hidden"
           >
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="w-full flex items-center justify-between p-4 text-left hover:bg-[#F5F5F7] transition-colors"
+              className="w-full flex items-center justify-between p-4 text-left hover:bg-[var(--bg-secondary)] transition-colors"
             >
-              <span className="text-[13px] lg:text-[14px] font-semibold text-[#1D1D1F] pr-3">
+              <span className="text-[13px] lg:text-[14px] font-semibold text-[var(--text-primary)] pr-3">
                 {faq.q}
               </span>
               <ChevronDown
-                className={`h-4 w-4 flex-shrink-0 text-[#86868B] transition-transform ${
+                className={`h-4 w-4 flex-shrink-0 text-[var(--text-secondary)] transition-transform ${
                   openIndex === i ? "rotate-180" : ""
                 }`}
                 strokeWidth={2}
@@ -89,7 +89,7 @@ export function FAQClient() {
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <p className="px-4 pb-4 text-[13px] text-[#1D1D1F]/80 leading-relaxed">
+                  <p className="px-4 pb-4 text-[13px] text-[var(--text-primary)]/80 leading-relaxed">
                     {faq.a}
                   </p>
                 </motion.div>
@@ -110,14 +110,14 @@ export function FAQClient() {
             href="https://wa.me/51987654321"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#D4AF37] px-5 py-2.5 text-[13px] font-semibold text-[#1D1D1F]"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#D4AF37] px-5 py-2.5 text-[13px] font-semibold text-[var(--text-primary)]"
           >
             <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
             WhatsApp VIP
           </a>
           <a
             href="mailto:hola@itechperu.shop"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white/10 border border-white/20 px-5 py-2.5 text-[13px] font-semibold text-white"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--bg-primary)]/10 border border-white/20 px-5 py-2.5 text-[13px] font-semibold text-white"
           >
             <Mail className="h-4 w-4" strokeWidth={1.5} />
             hola@itechperu.shop

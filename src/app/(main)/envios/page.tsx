@@ -19,29 +19,29 @@ export default function EnviosPage() {
             Cobertura nacional
           </span>
         </div>
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[#1D1D1F]">
+        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
           Envíos y cobertura
         </h1>
-        <p className="mt-3 text-[14px] text-[#86868B] max-w-2xl mx-auto">
+        <p className="mt-3 text-[14px] text-[var(--text-secondary)] max-w-2xl mx-auto">
           Llevamos tu tecnología premium a todo Perú. Envío express en Lima,
           cobertura nacional en 3-5 días hábiles.
         </p>
       </section>
 
       {/* Tabla de envíos */}
-      <section className="rounded-3xl bg-white border border-[#E5E5E7] overflow-hidden">
-        <div className="grid grid-cols-3 gap-4 p-4 bg-[#F5F5F7] border-b border-[#E5E5E7]">
+      <section className="rounded-3xl bg-[var(--bg-primary)] border border-[var(--border-color)] overflow-hidden">
+        <div className="grid grid-cols-3 gap-4 p-4 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
           <div className="text-center">
             <MapPin className="h-5 w-5 mx-auto text-[#D4AF37]" strokeWidth={1.5} />
-            <p className="text-[11px] font-semibold text-[#1D1D1F] mt-1">Zona</p>
+            <p className="text-[11px] font-semibold text-[var(--text-primary)] mt-1">Zona</p>
           </div>
           <div className="text-center">
             <Clock className="h-5 w-5 mx-auto text-[#D4AF37]" strokeWidth={1.5} />
-            <p className="text-[11px] font-semibold text-[#1D1D1F] mt-1">Tiempo</p>
+            <p className="text-[11px] font-semibold text-[var(--text-primary)] mt-1">Tiempo</p>
           </div>
           <div className="text-center">
             <Package className="h-5 w-5 mx-auto text-[#D4AF37]" strokeWidth={1.5} />
-            <p className="text-[11px] font-semibold text-[#1D1D1F] mt-1">Costo</p>
+            <p className="text-[11px] font-semibold text-[var(--text-primary)] mt-1">Costo</p>
           </div>
         </div>
 
@@ -54,10 +54,10 @@ export default function EnviosPage() {
         ].map((row, i) => (
           <div
             key={i}
-            className={`grid grid-cols-3 gap-4 p-4 ${i % 2 === 0 ? "bg-white" : "bg-[#F5F5F7]/50"}`}
+            className={`grid grid-cols-3 gap-4 p-4 ${i % 2 === 0 ? "bg-[var(--bg-primary)]" : "bg-[var(--bg-secondary)]/50"}`}
           >
-            <p className="text-[12px] font-medium text-[#1D1D1F] text-center">{row.zona}</p>
-            <p className="text-[12px] text-[#86868B] text-center">{row.tiempo}</p>
+            <p className="text-[12px] font-medium text-[var(--text-primary)] text-center">{row.zona}</p>
+            <p className="text-[12px] text-[var(--text-secondary)] text-center">{row.tiempo}</p>
             <p className="text-[12px] font-semibold text-[#D4AF37] text-center">{row.costo}</p>
           </div>
         ))}
@@ -85,7 +85,7 @@ export default function EnviosPage() {
 
       {/* Proceso */}
       <section>
-        <h2 className="text-[18px] font-bold text-[#1D1D1F] mb-4 text-center">
+        <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-4 text-center">
           ¿Cómo funciona?
         </h2>
         <div className="grid sm:grid-cols-4 gap-3">
@@ -95,12 +95,12 @@ export default function EnviosPage() {
             { num: "3", title: "Enviamos", desc: "Te notificamos el tracking" },
             { num: "4", title: "Recibes", desc: "Coordina con el mensajero" },
           ].map((step) => (
-            <div key={step.num} className="rounded-2xl bg-[#F5F5F7] p-4 text-center">
+            <div key={step.num} className="rounded-2xl bg-[var(--bg-secondary)] p-4 text-center">
               <span className="flex h-8 w-8 mx-auto items-center justify-center rounded-full bg-[#1D1D1F] text-[12px] font-bold text-white">
                 {step.num}
               </span>
-              <p className="text-[13px] font-semibold text-[#1D1D1F] mt-2">{step.title}</p>
-              <p className="text-[11px] text-[#86868B] mt-0.5">{step.desc}</p>
+              <p className="text-[13px] font-semibold text-[var(--text-primary)] mt-2">{step.title}</p>
+              <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">{step.desc}</p>
             </div>
           ))}
         </div>

@@ -95,7 +95,7 @@ export function GalleryPremium({
             initial={{ opacity: 0.3, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative aspect-square w-full rounded-3xl overflow-hidden bg-[#F5F5F7] cursor-zoom-in group"
+            className="relative aspect-square w-full rounded-3xl overflow-hidden bg-[var(--bg-secondary)] cursor-zoom-in group"
             onClick={() => setLightboxOpen(true)}
           >
             <Image
@@ -109,8 +109,8 @@ export function GalleryPremium({
             />
 
             {/* Expand hint */}
-            <div className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
-              <Expand className="h-4 w-4 text-[#1D1D1F]" strokeWidth={1.5} />
+            <div className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--bg-primary)]/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+              <Expand className="h-4 w-4 text-[var(--text-primary)]" strokeWidth={1.5} />
             </div>
 
             {/* Badge Grado A+ */}
@@ -131,18 +131,18 @@ export function GalleryPremium({
               whileTap={{ scale: 0.9 }}
               onClick={handleFav}
               className={`flex h-11 w-11 items-center justify-center rounded-full backdrop-blur-md border border-white/40 shadow-lg transition-all ${
-                favorite ? "bg-[#D4AF37]" : "bg-white/80 hover:bg-white"
+                favorite ? "bg-[#D4AF37]" : "bg-[var(--bg-primary)]/80 hover:bg-[var(--bg-primary)]"
               }`}
               aria-label={favorite ? "Quitar de favoritos" : "Agregar a favoritos"}
             >
-              <Heart className={`h-5 w-5 transition-all ${favorite ? "text-white fill-white" : "text-[#1D1D1F]"}`} strokeWidth={1.5} />
+              <Heart className={`h-5 w-5 transition-all ${favorite ? "text-white fill-white" : "text-[var(--text-primary)]"}`} strokeWidth={1.5} />
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.9 }}
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-white/80 backdrop-blur-md border border-white/40 shadow-lg hover:bg-white transition-all"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--bg-primary)]/80 backdrop-blur-md border border-white/40 shadow-lg hover:bg-[var(--bg-primary)] transition-all"
               aria-label="Compartir"
             >
-              <Share2 className="h-5 w-5 text-[#1D1D1F]" strokeWidth={1.5} />
+              <Share2 className="h-5 w-5 text-[var(--text-primary)]" strokeWidth={1.5} />
             </motion.button>
           </div>
         </div>

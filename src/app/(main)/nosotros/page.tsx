@@ -20,13 +20,13 @@ export default function NosotrosPage() {
             Nuestra historia
           </span>
         </div>
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[#1D1D1F]">
+        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
           Tecnología premium,<br />
           <span className="bg-gradient-to-r from-[#D4AF37] to-[#B8941F] bg-clip-text text-transparent">
             precio inteligente
           </span>
         </h1>
-        <p className="mt-4 text-[14px] lg:text-[16px] text-[#86868B] leading-relaxed max-w-2xl mx-auto">
+        <p className="mt-4 text-[14px] lg:text-[16px] text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
           itechperu.shop nació en Lima con una misión clara: democratizar el acceso a
           tecnología de alta gama en Perú, ofreciendo equipos reacondicionados premium
           con la confianza y transparencia que mereces.
@@ -43,13 +43,13 @@ export default function NosotrosPage() {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="rounded-2xl bg-white border border-[#E5E5E7] p-4 text-center"
+            className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-4 text-center"
           >
             <stat.icon className="h-6 w-6 mx-auto text-[#D4AF37]" strokeWidth={1.5} />
-            <p className="text-[20px] lg:text-[24px] font-bold text-[#1D1D1F] mt-2">
+            <p className="text-[20px] lg:text-[24px] font-bold text-[var(--text-primary)] mt-2">
               {stat.value}
             </p>
-            <p className="text-[10px] uppercase tracking-wider text-[#86868B] font-medium">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-medium">
               {stat.label}
             </p>
           </div>
@@ -71,12 +71,12 @@ export default function NosotrosPage() {
       </section>
 
       {/* Visión */}
-      <section className="rounded-3xl bg-white border border-[#E5E5E7] p-6 lg:p-10">
+      <section className="rounded-3xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-6 lg:p-10">
         <div className="flex items-center gap-2 mb-3">
           <Eye className="h-5 w-5 text-[#D4AF37]" strokeWidth={1.5} />
-          <h2 className="text-[18px] lg:text-[22px] font-bold text-[#1D1D1F]">Visión</h2>
+          <h2 className="text-[18px] lg:text-[22px] font-bold text-[var(--text-primary)]">Visión</h2>
         </div>
-        <p className="text-[14px] text-[#1D1D1F]/80 leading-relaxed">
+        <p className="text-[14px] text-[var(--text-primary)]/80 leading-relaxed">
           Ser la plataforma líder en tecnología reacondicionada premium del Perú, reconocida
           por su transparencia, calidad y experiencia de usuario Deluxe. Aspiramos a que cada
           peruano pueda acceder a tecnología de punta sin pagar precios inflados de marca nueva.
@@ -85,7 +85,7 @@ export default function NosotrosPage() {
 
       {/* Valores */}
       <section>
-        <h2 className="text-[18px] lg:text-[22px] font-bold tracking-tight text-[#1D1D1F] mb-4 text-center">
+        <h2 className="text-[18px] lg:text-[22px] font-bold tracking-tight text-[var(--text-primary)] mb-4 text-center">
           Nuestros valores
         </h2>
         <div className="grid sm:grid-cols-3 gap-4">
@@ -108,13 +108,13 @@ export default function NosotrosPage() {
           ].map((val) => (
             <div
               key={val.title}
-              className="rounded-2xl bg-[#F5F5F7] p-5"
+              className="rounded-2xl bg-[var(--bg-secondary)] p-5"
             >
               <val.icon className="h-6 w-6 text-[#D4AF37]" strokeWidth={1.5} />
-              <h3 className="text-[14px] font-semibold text-[#1D1D1F] mt-3">
+              <h3 className="text-[14px] font-semibold text-[var(--text-primary)] mt-3">
                 {val.title}
               </h3>
-              <p className="text-[12px] text-[#86868B] mt-1 leading-relaxed">
+              <p className="text-[12px] text-[var(--text-secondary)] mt-1 leading-relaxed">
                 {val.desc}
               </p>
             </div>
@@ -124,10 +124,10 @@ export default function NosotrosPage() {
 
       {/* CTA */}
       <section className="text-center">
-        <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1D1D1F]">
+        <h2 className="text-[20px] lg:text-[24px] font-bold text-[var(--text-primary)]">
           ¿Listo para la experiencia Deluxe?
         </h2>
-        <p className="mt-1 text-[13px] text-[#86868B]">
+        <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
           Explora nuestro catálogo y encuentra tu próximo equipo premium
         </p>
         <Link

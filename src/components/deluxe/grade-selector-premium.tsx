@@ -41,10 +41,10 @@ export function GradeSelectorPremium({ grades, selected, onSelect }: GradeSelect
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-[15px] font-semibold tracking-tight text-[#1D1D1F]">
+        <h3 className="text-[15px] font-semibold tracking-tight text-[var(--text-primary)]">
           Selecciona el grado
         </h3>
-        <div className="flex items-center gap-1 text-[11px] font-medium text-[#86868B]">
+        <div className="flex items-center gap-1 text-[11px] font-medium text-[var(--text-secondary)]">
           <Shield className="h-3 w-3" strokeWidth={1.5} />
           <span>Garantía incluida</span>
         </div>
@@ -66,7 +66,7 @@ export function GradeSelectorPremium({ grades, selected, onSelect }: GradeSelect
               className={`relative w-full flex items-center gap-3 rounded-2xl border-2 p-4 text-left transition-all duration-300 overflow-hidden ${
                 isSelected
                   ? `${style.ring} bg-gradient-to-br ${style.bg} ${style.glow}`
-                  : "border-[#E5E5E7] bg-white hover:border-[#D4AF37]/30"
+                  : "border-[var(--border-color)] bg-[var(--bg-primary)] hover:border-[#D4AF37]/30"
               }`}
             >
               {/* Badge del grado */}
@@ -79,18 +79,18 @@ export function GradeSelectorPremium({ grades, selected, onSelect }: GradeSelect
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-1.5">
-                  <span className={`text-[15px] font-bold ${isDark && isSelected ? "text-white" : "text-[#1D1D1F]"}`}>
+                  <span className={`text-[15px] font-bold ${isDark && isSelected ? "text-white" : "text-[var(--text-primary)]"}`}>
                     Grado {g.grade}
                   </span>
-                  <span className={`text-[13px] font-medium ${isDark && isSelected ? "text-white/70" : "text-[#86868B]"}`}>
+                  <span className={`text-[13px] font-medium ${isDark && isSelected ? "text-white/70" : "text-[var(--text-secondary)]"}`}>
                     {g.label}
                   </span>
                 </div>
-                <p className={`text-[12px] mt-0.5 leading-snug ${isDark && isSelected ? "text-white/60" : "text-[#86868B]"}`}>
+                <p className={`text-[12px] mt-0.5 leading-snug ${isDark && isSelected ? "text-white/60" : "text-[var(--text-secondary)]"}`}>
                   {g.description}
                 </p>
                 <div className={`flex items-center gap-3 mt-1.5`}>
-                  <span className={`text-[11px] font-medium ${isDark && isSelected ? "text-white/70" : "text-[#86868B]"}`}>
+                  <span className={`text-[11px] font-medium ${isDark && isSelected ? "text-white/70" : "text-[var(--text-secondary)]"}`}>
                     Garantía: {g.warranty}
                   </span>
                 </div>
@@ -98,7 +98,7 @@ export function GradeSelectorPremium({ grades, selected, onSelect }: GradeSelect
 
               {/* Precio + check */}
               <div className="flex flex-col items-end gap-2 flex-shrink-0">
-                <span className={`text-[14px] font-bold ${g.grade === "A+" ? "text-[#D4AF37]" : isDark && isSelected ? "text-[#D4AF37]" : "text-[#1D1D1F]"}`}>
+                <span className={`text-[14px] font-bold ${g.grade === "A+" ? "text-[#D4AF37]" : isDark && isSelected ? "text-[#D4AF37]" : "text-[var(--text-primary)]"}`}>
                   {g.priceModifier === 0 ? "Precio base" : `−S/ ${Math.abs(g.priceModifier / 100)}`}
                 </span>
                 <AnimatePresence>

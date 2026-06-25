@@ -130,14 +130,14 @@ export default function RegisterPage() {
                 Cuenta Nueva
               </span>
             </motion.div>
-            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[#1D1D1F]">
+            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
               Crear Cuenta
             </h2>
-            <p className="mt-1 text-[13px] text-[#86868B]">
+            <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
               ¿Ya tienes cuenta?{" "}
               <Link
                 href="/auth/login"
-                className="text-[#1D1D1F] font-medium hover:text-[#D4AF37] transition-colors underline-offset-4 hover:underline"
+                className="text-[var(--text-primary)] font-medium hover:text-[#D4AF37] transition-colors underline-offset-4 hover:underline"
               >
                 Inicia sesión
               </Link>
@@ -164,7 +164,7 @@ export default function RegisterPage() {
           {/* Divider */}
           <div className="flex items-center gap-3 mb-5">
             <div className="h-px flex-1 bg-[#E5E5E7]" />
-            <span className="text-[11px] text-[#86868B] font-medium">o con tu correo</span>
+            <span className="text-[11px] text-[var(--text-secondary)] font-medium">o con tu correo</span>
             <div className="h-px flex-1 bg-[#E5E5E7]" />
           </div>
 
@@ -215,7 +215,7 @@ export default function RegisterPage() {
                   className="mt-2"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="flex-1 h-1.5 rounded-full bg-[#F5F5F7] overflow-hidden">
+                    <div className="flex-1 h-1.5 rounded-full bg-[var(--bg-secondary)] overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${(strength.score / 4) * 100}%` }}
@@ -257,7 +257,7 @@ export default function RegisterPage() {
                   className={`flex h-4 w-4 mt-0.5 flex-shrink-0 items-center justify-center rounded-md border-2 transition-all ${
                     acceptTerms
                       ? "bg-[#1D1D1F] border-[#1D1D1F]"
-                      : "border-[#E5E5E7] bg-white"
+                      : "border-[var(--border-color)] bg-[var(--bg-primary)]"
                   }`}
                   aria-pressed={acceptTerms}
                   aria-label="Aceptar términos"
@@ -271,13 +271,13 @@ export default function RegisterPage() {
                     </motion.span>
                   )}
                 </button>
-                <span className="text-[12px] text-[#1D1D1F]/80 leading-relaxed">
+                <span className="text-[12px] text-[var(--text-primary)]/80 leading-relaxed">
                   Acepto los{" "}
-                  <Link href="/" className="text-[#1D1D1F] font-medium underline hover:text-[#D4AF37]">
+                  <Link href="/" className="text-[var(--text-primary)] font-medium underline hover:text-[#D4AF37]">
                     Términos
                   </Link>{" "}
                   y la{" "}
-                  <Link href="/" className="text-[#1D1D1F] font-medium underline hover:text-[#D4AF37]">
+                  <Link href="/" className="text-[var(--text-primary)] font-medium underline hover:text-[#D4AF37]">
                     Política de Privacidad
                   </Link>
                 </span>
@@ -323,7 +323,7 @@ export default function RegisterPage() {
             </motion.button>
           </form>
 
-          <p className="mt-6 text-center text-[10px] text-[#86868B] leading-relaxed">
+          <p className="mt-6 text-center text-[10px] text-[var(--text-secondary)] leading-relaxed">
             Al registrarte recibes 10% off en tu primera compra. Código:{" "}
             <span className="font-mono font-semibold text-[#D4AF37]">BIENVENIDO10</span>
           </p>

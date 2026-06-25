@@ -59,17 +59,17 @@ export default function ForgotPasswordPage() {
               <CheckCircle2 className="h-8 w-8 text-[#10B981]" strokeWidth={1.5} />
             </motion.div>
 
-            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[#1D1D1F]">
+            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
               Revisa tu correo
             </h2>
-            <p className="mt-2 text-[13px] text-[#86868B] leading-relaxed">
+            <p className="mt-2 text-[13px] text-[var(--text-secondary)] leading-relaxed">
               Hemos enviado un enlace de recuperación a
               <br />
-              <span className="font-semibold text-[#1D1D1F]">{email}</span>
+              <span className="font-semibold text-[var(--text-primary)]">{email}</span>
             </p>
 
-            <div className="mt-6 rounded-2xl bg-[#F5F5F7] p-4 text-left">
-              <p className="text-[11px] text-[#86868B] leading-relaxed">
+            <div className="mt-6 rounded-2xl bg-[var(--bg-secondary)] p-4 text-left">
+              <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
                 💡 <span className="font-medium">Tip:</span> Si no lo recibes en 5 minutos,
                 revisa tu carpeta de spam o correo no deseado. El enlace expira en 1 hora.
               </p>
@@ -86,7 +86,7 @@ export default function ForgotPasswordPage() {
               </motion.button>
               <Link
                 href="/auth/login"
-                className="block w-full rounded-2xl border-2 border-[#E5E5E7] px-4 py-3 text-[14px] font-medium text-[#1D1D1F] hover:border-[#1D1D1F]/30 transition-colors"
+                className="block w-full rounded-2xl border-2 border-[var(--border-color)] px-4 py-3 text-[14px] font-medium text-[var(--text-primary)] hover:border-[#1D1D1F]/30 transition-colors"
               >
                 Volver a iniciar sesión
               </Link>
@@ -103,7 +103,7 @@ export default function ForgotPasswordPage() {
             {/* Back */}
             <Link
               href="/auth/login"
-              className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#86868B] hover:text-[#1D1D1F] transition-colors mb-4"
+              className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-4"
             >
               <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2} />
               Volver
@@ -121,10 +121,10 @@ export default function ForgotPasswordPage() {
                   Recuperación Segura
                 </span>
               </motion.div>
-              <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[#1D1D1F]">
+              <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
                 Olvidé mi contraseña
               </h2>
-              <p className="mt-1 text-[13px] text-[#86868B] leading-relaxed">
+              <p className="mt-1 text-[13px] text-[var(--text-secondary)] leading-relaxed">
                 No te preocupes. Ingresa tu correo y te enviaremos un enlace para
                 crear una nueva contraseña.
               </p>
@@ -174,11 +174,11 @@ export default function ForgotPasswordPage() {
               </motion.button>
             </form>
 
-            <p className="mt-6 text-center text-[12px] text-[#86868B]">
+            <p className="mt-6 text-center text-[12px] text-[var(--text-secondary)]">
               ¿Recordaste tu contraseña?{" "}
               <Link
                 href="/auth/login"
-                className="text-[#1D1D1F] font-medium hover:text-[#D4AF37] transition-colors underline-offset-4 hover:underline"
+                className="text-[var(--text-primary)] font-medium hover:text-[#D4AF37] transition-colors underline-offset-4 hover:underline"
               >
                 Inicia sesión
               </Link>

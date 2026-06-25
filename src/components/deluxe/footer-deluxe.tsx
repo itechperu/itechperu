@@ -11,7 +11,7 @@ import { ShieldCheck, Truck, CreditCard, RefreshCw, MessageCircle, Mail, MapPin,
  */
 export function FooterDeluxe() {
   return (
-    <footer className="mt-16 lg:mt-24 border-t border-[#E5E5E7] bg-white">
+    <footer className="mt-16 lg:mt-24 border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
       {/* Trust badges */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -43,7 +43,7 @@ export function FooterDeluxe() {
       </div>
 
       {/* Main footer */}
-      <div className="border-t border-[#E5E5E7]">
+      <div className="border-t border-[var(--border-color)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Columna 1: Marca */}
@@ -52,12 +52,12 @@ export function FooterDeluxe() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1D1D1F]">
                   <span className="text-[12px] font-bold tracking-tight text-[#D4AF37]">iT</span>
                 </span>
-                <span className="text-[16px] font-semibold tracking-tight text-[#1D1D1F]">
+                <span className="text-[16px] font-semibold tracking-tight text-[var(--text-primary)]">
                   itech<span className="text-[#D4AF37]">peru</span>
-                  <span className="text-[10px] font-normal text-[#86868B] ml-1">.shop</span>
+                  <span className="text-[10px] font-normal text-[var(--text-secondary)] ml-1">.shop</span>
                 </span>
               </Link>
-              <p className="text-[12px] text-[#86868B] leading-relaxed max-w-xs">
+              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed max-w-xs">
                 Tecnología premium reacondicionada en Lima, Perú. iPads, MacBooks y Laptops
                 corporativas verificadas con garantía real.
               </p>
@@ -66,7 +66,7 @@ export function FooterDeluxe() {
                   href="https://wa.me/51987654321"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5F5F7] hover:bg-[#25D366]/10 hover:text-[#25D366] text-[#1D1D1F] transition-colors"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--bg-secondary)] hover:bg-[#25D366]/10 hover:text-[#25D366] text-[var(--text-primary)] transition-colors"
                   aria-label="WhatsApp"
                 >
                   <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
@@ -75,7 +75,7 @@ export function FooterDeluxe() {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5F5F7] hover:bg-[#E1306C]/10 hover:text-[#E1306C] text-[#1D1D1F] transition-colors"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--bg-secondary)] hover:bg-[#E1306C]/10 hover:text-[#E1306C] text-[var(--text-primary)] transition-colors"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-4 w-4" strokeWidth={1.5} />
@@ -84,7 +84,7 @@ export function FooterDeluxe() {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5F5F7] hover:bg-[#1877F2]/10 hover:text-[#1877F2] text-[#1D1D1F] transition-colors"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--bg-secondary)] hover:bg-[#1877F2]/10 hover:text-[#1877F2] text-[var(--text-primary)] transition-colors"
                   aria-label="Facebook"
                 >
                   <Facebook className="h-4 w-4" strokeWidth={1.5} />
@@ -94,7 +94,7 @@ export function FooterDeluxe() {
 
             {/* Columna 2: Tienda */}
             <div>
-              <h3 className="text-[12px] font-semibold uppercase tracking-wider text-[#1D1D1F] mb-3">
+              <h3 className="text-[12px] font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
                 Tienda
               </h3>
               <ul className="space-y-2">
@@ -109,7 +109,7 @@ export function FooterDeluxe() {
 
             {/* Columna 3: Empresa */}
             <div>
-              <h3 className="text-[12px] font-semibold uppercase tracking-wider text-[#1D1D1F] mb-3">
+              <h3 className="text-[12px] font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
                 Empresa
               </h3>
               <ul className="space-y-2">
@@ -124,25 +124,25 @@ export function FooterDeluxe() {
 
             {/* Columna 4: Legal + contacto */}
             <div>
-              <h3 className="text-[12px] font-semibold uppercase tracking-wider text-[#1D1D1F] mb-3">
+              <h3 className="text-[12px] font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
                 Soporte
               </h3>
               <ul className="space-y-2">
                 <li><FooterLink href="/terminos">Términos y condiciones</FooterLink></li>
                 <li><FooterLink href="/privacidad">Política de privacidad</FooterLink></li>
                 <li>
-                  <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="text-[12px] text-[#86868B] hover:text-[#1D1D1F] transition-colors flex items-center gap-1.5">
+                  <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="text-[12px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-1.5">
                     <MessageCircle className="h-3 w-3" strokeWidth={1.5} />
                     WhatsApp VIP
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:hola@itechperu.shop" className="text-[12px] text-[#86868B] hover:text-[#1D1D1F] transition-colors flex items-center gap-1.5">
+                  <a href="mailto:hola@itechperu.shop" className="text-[12px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-1.5">
                     <Mail className="h-3 w-3" strokeWidth={1.5} />
                     hola@itechperu.shop
                   </a>
                 </li>
-                <li className="text-[12px] text-[#86868B] flex items-start gap-1.5 pt-1">
+                <li className="text-[12px] text-[var(--text-secondary)] flex items-start gap-1.5 pt-1">
                   <MapPin className="h-3 w-3 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
                   Lima, Perú 🇵🇪
                 </li>
@@ -153,12 +153,12 @@ export function FooterDeluxe() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-[#E5E5E7] bg-[#F5F5F7]">
+      <div className="border-t border-[var(--border-color)] bg-[var(--bg-secondary)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] text-[#86868B]">
+          <p className="text-[11px] text-[var(--text-secondary)]">
             © 2026 itechperu.shop · Todos los derechos reservados
           </p>
-          <div className="flex items-center gap-4 text-[11px] text-[#86868B]">
+          <div className="flex items-center gap-4 text-[11px] text-[var(--text-secondary)]">
             <span className="flex items-center gap-1">
               <ShieldCheck className="h-3 w-3 text-[#10B981]" strokeWidth={1.5} />
               SSL 256-bit
@@ -192,14 +192,14 @@ function TrustBadge({
   return (
     <Link
       href={href}
-      className="group flex items-center gap-3 rounded-2xl bg-[#F5F5F7] p-3 hover:bg-white hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] transition-all"
+      className="group flex items-center gap-3 rounded-2xl bg-[var(--bg-secondary)] p-3 hover:bg-[var(--bg-primary)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] transition-all"
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white group-hover:bg-[#D4AF37]/10 transition-colors">
-        <Icon className="h-5 w-5 text-[#1D1D1F] group-hover:text-[#D4AF37]" strokeWidth={1.5} />
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg-primary)] group-hover:bg-[#D4AF37]/10 transition-colors">
+        <Icon className="h-5 w-5 text-[var(--text-primary)] group-hover:text-[#D4AF37]" strokeWidth={1.5} />
       </div>
       <div>
-        <p className="text-[12px] font-semibold text-[#1D1D1F]">{title}</p>
-        <p className="text-[10px] text-[#86868B]">{desc}</p>
+        <p className="text-[12px] font-semibold text-[var(--text-primary)]">{title}</p>
+        <p className="text-[10px] text-[var(--text-secondary)]">{desc}</p>
       </div>
     </Link>
   );
@@ -209,7 +209,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   return (
     <Link
       href={href}
-      className="text-[12px] text-[#86868B] hover:text-[#1D1D1F] transition-colors"
+      className="text-[12px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
     >
       {children}
     </Link>

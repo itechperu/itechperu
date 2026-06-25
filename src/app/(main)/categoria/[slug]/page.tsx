@@ -101,22 +101,22 @@ export default async function CategoriaPage({ params }: { params: Promise<{ slug
       ]} />
 
       <div className="max-w-3xl">
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[#1D1D1F]">{category.h1}</h1>
-        <p className="mt-3 text-[14px] lg:text-[16px] text-[#86868B] leading-relaxed">{category.metaDescription}</p>
+        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">{category.h1}</h1>
+        <p className="mt-3 text-[14px] lg:text-[16px] text-[var(--text-secondary)] leading-relaxed">{category.metaDescription}</p>
       </div>
 
       {/* Productos */}
       {products.length > 0 && (
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-5">
           {products.map((p) => (
-            <Link key={p.id} href={`/producto/${p.slug}`} className="group rounded-3xl overflow-hidden bg-white border border-[#E5E5E7] hover:shadow-lg transition-all">
-              <div className="relative aspect-square overflow-hidden bg-[#F5F5F7]">
+            <Link key={p.id} href={`/producto/${p.slug}`} className="group rounded-3xl overflow-hidden bg-[var(--bg-primary)] border border-[var(--border-color)] hover:shadow-lg transition-all">
+              <div className="relative aspect-square overflow-hidden bg-[var(--bg-secondary)]">
                 <img src={p.images[0]} alt={p.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <span className="absolute top-2 left-2 rounded-full bg-[#D4AF37] px-2 py-0.5 text-[9px] font-bold text-white">GRADO A+</span>
               </div>
               <div className="p-3 lg:p-4">
-                <h2 className="text-[12px] lg:text-[14px] font-semibold text-[#1D1D1F] line-clamp-2">{p.title}</h2>
-                <p className="mt-1 text-[14px] lg:text-[18px] font-bold text-[#1D1D1F]">{formatPEN(p.basePrice)}</p>
+                <h2 className="text-[12px] lg:text-[14px] font-semibold text-[var(--text-primary)] line-clamp-2">{p.title}</h2>
+                <p className="mt-1 text-[14px] lg:text-[18px] font-bold text-[var(--text-primary)]">{formatPEN(p.basePrice)}</p>
               </div>
             </Link>
           ))}
@@ -124,7 +124,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ slug
       )}
 
       {/* Contenido SEO (400+ palabras) */}
-      <section className="mt-12 prose prose-sm max-w-3xl text-[13px] lg:text-[14px] text-[#1D1D1F]/80 leading-relaxed">
+      <section className="mt-12 prose prose-sm max-w-3xl text-[13px] lg:text-[14px] text-[var(--text-primary)]/80 leading-relaxed">
         <div dangerouslySetInnerHTML={{ __html: category.content.replace(/\n\n/g, "<br/><br/>") }} />
       </section>
 
@@ -132,7 +132,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ slug
       <section className="mt-8 rounded-3xl bg-gradient-to-br from-[#1D1D1F] to-[#2A2A2D] p-6 lg:p-8 text-center">
         <h2 className="text-[18px] lg:text-[20px] font-bold text-white">¿No encuentras lo que buscas?</h2>
         <p className="text-[13px] text-white/60 mt-1">Escríbenos por WhatsApp y te ayudamos</p>
-        <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-4 rounded-full bg-[#D4AF37] px-6 py-2.5 text-[13px] font-semibold text-[#1D1D1F]">
+        <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-4 rounded-full bg-[#D4AF37] px-6 py-2.5 text-[13px] font-semibold text-[var(--text-primary)]">
           WhatsApp VIP <ChevronRight className="h-4 w-4" strokeWidth={2} />
         </a>
       </section>

@@ -27,13 +27,13 @@ export function TrustSection() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4, delay: i * 0.08 }}
           whileHover={{ y: -3 }}
-          className="flex flex-col items-center text-center gap-1.5 rounded-2xl bg-white border border-[#E5E5E7] p-3 lg:p-4 hover:border-[#D4AF37]/30 transition-colors"
+          className="flex flex-col items-center text-center gap-1.5 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-3 lg:p-4 hover:border-[#D4AF37]/30 transition-colors"
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#D4AF37]/10">
             <item.icon className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5} />
           </div>
-          <p className="text-[11px] font-semibold text-[#1D1D1F]">{item.title}</p>
-          <p className="text-[10px] text-[#86868B]">{item.desc}</p>
+          <p className="text-[11px] font-semibold text-[var(--text-primary)]">{item.title}</p>
+          <p className="text-[10px] text-[var(--text-secondary)]">{item.desc}</p>
         </motion.div>
       ))}
     </div>

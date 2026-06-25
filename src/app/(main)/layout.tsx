@@ -17,7 +17,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen flex flex-col bg-[#FFFFFF] bg-frost">
+    <div className="relative min-h-screen flex flex-col bg-[var(--bg-primary)] bg-frost">
       {/* Header full-bleed inmersivo — z-50, altura fija 64px mobile / 80px desktop */}
       <HeaderDeluxe />
 

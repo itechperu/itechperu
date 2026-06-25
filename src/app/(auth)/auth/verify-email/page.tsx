@@ -98,10 +98,10 @@ export default function VerifyEmailPage() {
             >
               <CheckCircle2 className="h-8 w-8 text-[#10B981]" strokeWidth={1.5} />
             </motion.div>
-            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[#1D1D1F]">
+            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
               ¡Correo verificado!
             </h2>
-            <p className="mt-2 text-[13px] text-[#86868B] leading-relaxed">
+            <p className="mt-2 text-[13px] text-[var(--text-secondary)] leading-relaxed">
               Tu cuenta Deluxe está activa. Ya puedes disfrutar de todos los
               beneficios premium.
             </p>
@@ -139,13 +139,13 @@ export default function VerifyEmailPage() {
                   Verificación
                 </span>
               </motion.div>
-              <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[#1D1D1F]">
+              <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
                 Verifica tu correo
               </h2>
-              <p className="mt-1 text-[13px] text-[#86868B] leading-relaxed">
+              <p className="mt-1 text-[13px] text-[var(--text-secondary)] leading-relaxed">
                 Enviamos un código de 6 dígitos a
                 <br />
-                <span className="font-semibold text-[#1D1D1F]">tu***@correo.com</span>
+                <span className="font-semibold text-[var(--text-primary)]">tu***@correo.com</span>
               </p>
             </div>
 
@@ -166,7 +166,7 @@ export default function VerifyEmailPage() {
                     borderColor: error ? "#EF4444" : d ? "#D4AF37" : "#E5E5E7",
                     backgroundColor: error ? "#FEF2F2" : d ? "#FFFBEB" : "#F5F5F7",
                   }}
-                  className="w-12 h-14 lg:w-14 lg:h-16 text-center text-[22px] lg:text-[24px] font-bold text-[#1D1D1F] border-2 rounded-2xl focus:outline-none focus:shadow-[0_4px_20px_-4px_rgba(212,175,55,0.3)] transition-shadow"
+                  className="w-12 h-14 lg:w-14 lg:h-16 text-center text-[22px] lg:text-[24px] font-bold text-[var(--text-primary)] border-2 rounded-2xl focus:outline-none focus:shadow-[0_4px_20px_-4px_rgba(212,175,55,0.3)] transition-shadow"
                   aria-label={`Dígito ${i + 1}`}
                 />
               ))}
@@ -217,11 +217,11 @@ export default function VerifyEmailPage() {
 
             {/* Resend */}
             <div className="mt-6 text-center">
-              <p className="text-[12px] text-[#86868B]">¿No recibiste el código?</p>
+              <p className="text-[12px] text-[var(--text-secondary)]">¿No recibiste el código?</p>
               <button
                 type="button"
                 onClick={handleResend}
-                className="mt-1 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#1D1D1F] hover:text-[#D4AF37] transition-colors"
+                className="mt-1 inline-flex items-center gap-1.5 text-[13px] font-medium text-[var(--text-primary)] hover:text-[#D4AF37] transition-colors"
               >
                 <RefreshCw className="h-3.5 w-3.5" strokeWidth={1.5} />
                 Reenviar código

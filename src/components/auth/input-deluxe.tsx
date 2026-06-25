@@ -35,14 +35,14 @@ export const InputDeluxe = forwardRef<HTMLInputElement, InputDeluxeProps>(
       <div className="space-y-1.5">
         <label
           htmlFor={inputId}
-          className="block text-[12px] font-medium text-[#1D1D1F]/80"
+          className="block text-[12px] font-medium text-[var(--text-primary)]/80"
         >
           {label}
         </label>
         <div className="relative">
           {/* Icono izquierdo */}
           {icon && (
-            <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#86868B] pointer-events-none">
+            <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] pointer-events-none">
               {icon}
             </div>
           )}
@@ -72,7 +72,7 @@ export const InputDeluxe = forwardRef<HTMLInputElement, InputDeluxeProps>(
             transition={{ duration: 0.2 }}
             className={`w-full ${icon ? "pl-11" : "pl-4"} ${
               isPassword ? "pr-11" : "pr-4"
-            } py-3 text-[14px] text-[#1D1D1F] placeholder:text-[#86868B] border-2 rounded-2xl focus:outline-none transition-shadow ${
+            } py-3 text-[14px] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] border-2 rounded-2xl focus:outline-none transition-shadow ${
               focused ? "shadow-[0_4px_20px_-4px_rgba(212,175,55,0.25)]" : ""
             } ${className}`}
             {...rest}
@@ -83,7 +83,7 @@ export const InputDeluxe = forwardRef<HTMLInputElement, InputDeluxeProps>(
             <button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#86868B] hover:text-[#1D1D1F] transition-colors p-1"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-1"
               aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
             >
               {showPassword ? (
@@ -124,7 +124,7 @@ export const InputDeluxe = forwardRef<HTMLInputElement, InputDeluxeProps>(
               key="hint"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-[11px] text-[#86868B]"
+              className="text-[11px] text-[var(--text-secondary)]"
             >
               {hint}
             </motion.div>

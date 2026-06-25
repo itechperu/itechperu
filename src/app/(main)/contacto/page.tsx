@@ -12,10 +12,10 @@ export default function ContactoPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <section className="text-center">
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[#1D1D1F]">
+        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
           Hablemos
         </h1>
-        <p className="mt-3 text-[14px] text-[#86868B]">
+        <p className="mt-3 text-[14px] text-[var(--text-secondary)]">
           Estamos aquí para ayudarte. Elige el canal que prefieras.
         </p>
       </section>
@@ -36,25 +36,25 @@ export default function ContactoPage() {
 
         <a
           href="mailto:hola@itechperu.shop"
-          className="group rounded-2xl bg-white border border-[#E5E5E7] p-5 hover:border-[#D4AF37]/30 transition-colors"
+          className="group rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5 hover:border-[#D4AF37]/30 transition-colors"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#F5F5F7]">
-            <Mail className="h-5 w-5 text-[#1D1D1F]" strokeWidth={1.5} />
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[var(--bg-secondary)]">
+            <Mail className="h-5 w-5 text-[var(--text-primary)]" strokeWidth={1.5} />
           </div>
-          <h2 className="text-[16px] font-bold mt-3 text-[#1D1D1F]">Email</h2>
-          <p className="text-[12px] text-[#86868B] mt-1">hola@itechperu.shop</p>
-          <p className="text-[11px] text-[#86868B] mt-2">Respuesta en 24h</p>
+          <h2 className="text-[16px] font-bold mt-3 text-[var(--text-primary)]">Email</h2>
+          <p className="text-[12px] text-[var(--text-secondary)] mt-1">hola@itechperu.shop</p>
+          <p className="text-[11px] text-[var(--text-secondary)] mt-2">Respuesta en 24h</p>
         </a>
       </div>
 
       {/* Info */}
-      <section className="rounded-2xl bg-white border border-[#E5E5E7] p-5 space-y-3">
+      <section className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5 space-y-3">
         <div className="flex items-start gap-3">
           <MapPin className="h-5 w-5 text-[#D4AF37] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
           <div>
-            <p className="text-[13px] font-semibold text-[#1D1D1F]">Ubicación</p>
-            <p className="text-[12px] text-[#86868B]">Lima, Perú 🇵🇪</p>
-            <p className="text-[11px] text-[#86868B] mt-1">
+            <p className="text-[13px] font-semibold text-[var(--text-primary)]">Ubicación</p>
+            <p className="text-[12px] text-[var(--text-secondary)]">Lima, Perú 🇵🇪</p>
+            <p className="text-[11px] text-[var(--text-secondary)] mt-1">
               Atención 100% online (no tenemos tienda física)
             </p>
           </div>
@@ -62,16 +62,16 @@ export default function ContactoPage() {
         <div className="flex items-start gap-3">
           <Clock className="h-5 w-5 text-[#D4AF37] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
           <div>
-            <p className="text-[13px] font-semibold text-[#1D1D1F]">Horario de atención</p>
-            <p className="text-[12px] text-[#86868B]">Lunes a Sábado: 9:00 AM — 8:00 PM</p>
-            <p className="text-[12px] text-[#86868B]">Domingo: Cerrado</p>
+            <p className="text-[13px] font-semibold text-[var(--text-primary)]">Horario de atención</p>
+            <p className="text-[12px] text-[var(--text-secondary)]">Lunes a Sábado: 9:00 AM — 8:00 PM</p>
+            <p className="text-[12px] text-[var(--text-secondary)]">Domingo: Cerrado</p>
           </div>
         </div>
       </section>
 
       {/* Redes */}
       <section className="text-center">
-        <p className="text-[12px] uppercase tracking-wider text-[#86868B] font-semibold mb-3">
+        <p className="text-[12px] uppercase tracking-wider text-[var(--text-secondary)] font-semibold mb-3">
           Síguenos
         </p>
         <div className="flex items-center justify-center gap-3">

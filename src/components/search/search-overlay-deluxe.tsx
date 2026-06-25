@@ -133,10 +133,10 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.95, y: -20, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="relative w-full max-w-2xl mx-4 mt-[8vh] sm:mt-[12vh] bg-white rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] overflow-hidden"
+            className="relative w-full max-w-2xl mx-4 mt-[8vh] sm:mt-[12vh] bg-[var(--bg-primary)] rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] overflow-hidden"
           >
             {/* Input header */}
-            <form onSubmit={handleSubmit} className="flex items-center gap-3 px-5 py-4 border-b border-[#E5E5E7]">
+            <form onSubmit={handleSubmit} className="flex items-center gap-3 px-5 py-4 border-b border-[var(--border-color)]">
               <Search className="h-5 w-5 text-[#D4AF37] flex-shrink-0" strokeWidth={1.5} />
               <input
                 ref={inputRef}
@@ -144,16 +144,16 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Buscar iPad, MacBook, laptop…"
-                className="flex-1 bg-transparent text-[16px] lg:text-[18px] text-[#1D1D1F] placeholder:text-[#86868B] focus:outline-none"
+                className="flex-1 bg-transparent text-[16px] lg:text-[18px] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:outline-none"
                 aria-label="Buscar productos"
               />
               <button
                 type="button"
                 onClick={handleClose}
-                className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-[#F5F5F7] transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-[var(--bg-secondary)] transition-colors"
                 aria-label="Cerrar búsqueda"
               >
-                <X className="h-4 w-4 text-[#86868B]" strokeWidth={2} />
+                <X className="h-4 w-4 text-[var(--text-secondary)]" strokeWidth={2} />
               </button>
             </form>
 
@@ -164,7 +164,7 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                 <div className="p-5 space-y-5">
                   {recentSearches.length > 0 && (
                     <div>
-                      <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[#86868B] font-semibold mb-2">
+                      <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-semibold mb-2">
                         <Clock className="h-3 w-3" strokeWidth={1.5} />
                         Búsquedas recientes
                       </p>
@@ -173,7 +173,7 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                           <button
                             key={s}
                             onClick={() => setQuery(s)}
-                            className="rounded-full bg-[#F5F5F7] px-3 py-1.5 text-[12px] font-medium text-[#1D1D1F] hover:bg-[#E5E5E7] transition-colors"
+                            className="rounded-full bg-[var(--bg-secondary)] px-3 py-1.5 text-[12px] font-medium text-[var(--text-primary)] hover:bg-[#E5E5E7] transition-colors"
                           >
                             {s}
                           </button>
@@ -183,7 +183,7 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                   )}
 
                   <div>
-                    <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[#86868B] font-semibold mb-2">
+                    <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-semibold mb-2">
                       <TrendingUp className="h-3 w-3" strokeWidth={1.5} />
                       Categorías populares
                     </p>
@@ -192,7 +192,7 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                         <button
                           key={cat}
                           onClick={() => setQuery(cat)}
-                          className="rounded-full bg-gradient-to-br from-[#FFFBEB] to-white border border-[#D4AF37]/30 px-3 py-1.5 text-[12px] font-medium text-[#1D1D1F] hover:border-[#D4AF37] transition-colors"
+                          className="rounded-full bg-gradient-to-br from-[#FFFBEB] to-white border border-[#D4AF37]/30 px-3 py-1.5 text-[12px] font-medium text-[var(--text-primary)] hover:border-[#D4AF37] transition-colors"
                         >
                           {cat}
                         </button>
@@ -202,7 +202,7 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
 
                   {/* Productos destacados como sugerencia */}
                   <div>
-                    <p className="text-[10px] uppercase tracking-wider text-[#86868B] font-semibold mb-2">
+                    <p className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-semibold mb-2">
                       Destacados
                     </p>
                     <div className="grid grid-cols-2 gap-2">
@@ -210,7 +210,7 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                         <button
                           key={p.id}
                           onClick={() => handleProductClick(p.id, p.slug)}
-                          className="flex items-center gap-2 rounded-2xl bg-[#F5F5F7] p-2 hover:bg-[#E5E5E7] transition-colors text-left"
+                          className="flex items-center gap-2 rounded-2xl bg-[var(--bg-secondary)] p-2 hover:bg-[#E5E5E7] transition-colors text-left"
                         >
                           <img
                             src={p.images[0]}
@@ -218,7 +218,7 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                             className="h-10 w-10 rounded-lg object-cover flex-shrink-0"
                           />
                           <div className="min-w-0">
-                            <p className="text-[11px] font-medium text-[#1D1D1F] truncate">
+                            <p className="text-[11px] font-medium text-[var(--text-primary)] truncate">
                               {p.title}
                             </p>
                             <p className="text-[11px] font-bold text-[#D4AF37]">
@@ -233,13 +233,13 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
               ) : results.length === 0 ? (
                 /* Sin resultados */
                 <div className="p-10 text-center">
-                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#F5F5F7] mb-3">
-                    <Search className="h-6 w-6 text-[#86868B]" strokeWidth={1.5} />
+                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[var(--bg-secondary)] mb-3">
+                    <Search className="h-6 w-6 text-[var(--text-secondary)]" strokeWidth={1.5} />
                   </div>
-                  <p className="text-[14px] font-semibold text-[#1D1D1F]">
+                  <p className="text-[14px] font-semibold text-[var(--text-primary)]">
                     Sin resultados para "{query}"
                   </p>
-                  <p className="text-[12px] text-[#86868B] mt-1">
+                  <p className="text-[12px] text-[var(--text-secondary)] mt-1">
                     Prueba con otra palabra o revisa nuestras categorías
                   </p>
                 </div>
@@ -255,7 +255,7 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                     >
                       <button
                         onClick={() => handleProductClick(p.id, p.slug)}
-                        className="group w-full flex items-center gap-3 rounded-2xl p-2.5 hover:bg-[#F5F5F7] transition-colors text-left"
+                        className="group w-full flex items-center gap-3 rounded-2xl p-2.5 hover:bg-[var(--bg-secondary)] transition-colors text-left"
                       >
                         <div className="relative flex-shrink-0">
                           <img
@@ -268,17 +268,17 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
                           </span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-[13px] font-semibold text-[#1D1D1F] leading-tight line-clamp-1">
+                          <p className="text-[13px] font-semibold text-[var(--text-primary)] leading-tight line-clamp-1">
                             {p.title}
                           </p>
-                          <p className="text-[11px] text-[#86868B] truncate">
+                          <p className="text-[11px] text-[var(--text-secondary)] truncate">
                             {p.subtitle}
                           </p>
                           <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-[13px] font-bold text-[#1D1D1F]">
+                            <span className="text-[13px] font-bold text-[var(--text-primary)]">
                               {formatPEN(p.basePrice)}
                             </span>
-                            <span className="flex items-center gap-0.5 text-[10px] text-[#86868B]">
+                            <span className="flex items-center gap-0.5 text-[10px] text-[var(--text-secondary)]">
                               <Star className="h-2.5 w-2.5 fill-[#D4AF37] text-[#D4AF37]" strokeWidth={1.5} />
                               {p.rating.toFixed(1)}
                             </span>
@@ -295,14 +295,14 @@ export function SearchOverlayDeluxe({ isOpen, onClose, products }: SearchOverlay
             </div>
 
             {/* Footer con hint de teclado */}
-            <div className="border-t border-[#E5E5E7] px-5 py-2.5 flex items-center justify-between text-[10px] text-[#86868B]">
+            <div className="border-t border-[var(--border-color)] px-5 py-2.5 flex items-center justify-between text-[10px] text-[var(--text-secondary)]">
               <div className="flex items-center gap-3">
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded bg-[#F5F5F7] border border-[#E5E5E7] px-1.5 py-0.5 text-[9px] font-mono">↵</kbd>
+                  <kbd className="rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] px-1.5 py-0.5 text-[9px] font-mono">↵</kbd>
                   Ir al primer resultado
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded bg-[#F5F5F7] border border-[#E5E5E7] px-1.5 py-0.5 text-[9px] font-mono">ESC</kbd>
+                  <kbd className="rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] px-1.5 py-0.5 text-[9px] font-mono">ESC</kbd>
                   Cerrar
                 </span>
               </div>

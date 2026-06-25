@@ -64,7 +64,7 @@ export function AuthLayoutDeluxe({
           transition={{ duration: 0.6 }}
           className="relative z-10 flex items-center gap-2"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg-primary)]/10 backdrop-blur-md border border-white/20">
             <span className="text-[14px] font-bold tracking-tight text-[#D4AF37]">iT</span>
           </span>
           <span className="text-[18px] font-semibold tracking-tight text-white">
@@ -96,7 +96,7 @@ export function AuthLayoutDeluxe({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                  className="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md p-3.5"
+                  className="rounded-2xl bg-[var(--bg-primary)]/5 border border-white/10 backdrop-blur-md p-3.5"
                 >
                   <Icon className="h-5 w-5 text-[#D4AF37]" strokeWidth={1.5} />
                   <p className="mt-2 text-[12px] font-semibold text-white">{b.title}</p>
@@ -145,7 +145,7 @@ export function AuthLayoutDeluxe({
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#1D1D1F]">
                   <span className="text-[14px] font-bold tracking-tight text-[#D4AF37]">iT</span>
                 </span>
-                <span className="text-[18px] font-semibold tracking-tight text-[#1D1D1F]">
+                <span className="text-[18px] font-semibold tracking-tight text-[var(--text-primary)]">
                   itech<span className="text-[#D4AF37]">peru</span>
                 </span>
               </motion.a>

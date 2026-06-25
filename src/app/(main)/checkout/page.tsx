@@ -54,13 +54,13 @@ export default function CheckoutPage() {
   if (items.length === 0 && step === "form") {
     return (
       <div className="max-w-md mx-auto text-center py-16">
-        <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#F5F5F7] mb-4">
-          <Truck className="h-8 w-8 text-[#86868B]" strokeWidth={1.5} />
+        <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[var(--bg-secondary)] mb-4">
+          <Truck className="h-8 w-8 text-[var(--text-secondary)]" strokeWidth={1.5} />
         </div>
-        <h1 className="text-[20px] font-bold tracking-tight text-[#1D1D1F]">
+        <h1 className="text-[20px] font-bold tracking-tight text-[var(--text-primary)]">
           Tu carrito está vacío
         </h1>
-        <p className="mt-2 text-[13px] text-[#86868B]">
+        <p className="mt-2 text-[13px] text-[var(--text-secondary)]">
           Agrega productos al carrito para continuar con la compra
         </p>
         <Link
@@ -81,10 +81,10 @@ export default function CheckoutPage() {
         <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#D4AF37]/10 mb-4">
           <Lock className="h-8 w-8 text-[#D4AF37]" strokeWidth={1.5} />
         </div>
-        <h1 className="text-[20px] font-bold tracking-tight text-[#1D1D1F]">
+        <h1 className="text-[20px] font-bold tracking-tight text-[var(--text-primary)]">
           Inicia sesión para comprar
         </h1>
-        <p className="mt-2 text-[13px] text-[#86868B]">
+        <p className="mt-2 text-[13px] text-[var(--text-secondary)]">
           Necesitas una cuenta Deluxe para finalizar tu compra de forma segura
         </p>
         <div className="mt-6 flex flex-col gap-2">
@@ -97,7 +97,7 @@ export default function CheckoutPage() {
           </Link>
           <Link
             href="/auth/register?callbackUrl=/checkout"
-            className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-[#E5E5E7] px-6 py-3 text-[13px] font-semibold text-[#1D1D1F] tap-scale"
+            className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-[var(--border-color)] px-6 py-3 text-[13px] font-semibold text-[var(--text-primary)] tap-scale"
           >
             Crear cuenta gratis
           </Link>
@@ -211,13 +211,13 @@ export default function CheckoutPage() {
       {/* Breadcrumb */}
       <Link
         href="/#catalogo"
-        className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#86868B] hover:text-[#1D1D1F] transition-colors mb-4"
+        className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-4"
       >
         <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2} />
         Seguir comprando
       </Link>
 
-      <h1 className="text-[24px] lg:text-[32px] font-bold tracking-tight text-[#1D1D1F] mb-6">
+      <h1 className="text-[24px] lg:text-[32px] font-bold tracking-tight text-[var(--text-primary)] mb-6">
         Checkout Deluxe
       </h1>
 
@@ -225,12 +225,12 @@ export default function CheckoutPage() {
         {/* ====== COLUMNA IZQUIERDA: Datos y método de pago ====== */}
         <div className="space-y-5">
           {/* Datos del cliente */}
-          <section className="rounded-3xl border border-[#E5E5E7] p-5 lg:p-6">
+          <section className="rounded-3xl border border-[var(--border-color)] p-5 lg:p-6">
             <div className="flex items-center gap-2 mb-4">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1D1D1F] text-[11px] font-bold text-white">
                 1
               </span>
-              <h2 className="text-[15px] font-semibold tracking-tight text-[#1D1D1F]">
+              <h2 className="text-[15px] font-semibold tracking-tight text-[var(--text-primary)]">
                 Datos del cliente
               </h2>
             </div>
@@ -267,12 +267,12 @@ export default function CheckoutPage() {
           </section>
 
           {/* Dirección de envío */}
-          <section className="rounded-3xl border border-[#E5E5E7] p-5 lg:p-6">
+          <section className="rounded-3xl border border-[var(--border-color)] p-5 lg:p-6">
             <div className="flex items-center gap-2 mb-4">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1D1D1F] text-[11px] font-bold text-white">
                 2
               </span>
-              <h2 className="text-[15px] font-semibold tracking-tight text-[#1D1D1F]">
+              <h2 className="text-[15px] font-semibold tracking-tight text-[var(--text-primary)]">
                 Dirección de envío
               </h2>
             </div>
@@ -297,13 +297,13 @@ export default function CheckoutPage() {
                 required
               />
               <div>
-                <label className="block text-[12px] font-medium text-[#1D1D1F]/80 mb-1.5">
+                <label className="block text-[12px] font-medium text-[var(--text-primary)]/80 mb-1.5">
                   Ciudad
                 </label>
                 <select
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="w-full px-4 py-3 text-[14px] text-[#1D1D1F] bg-[#F5F5F7] border-2 border-[#E5E5E7] rounded-2xl focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
+                  className="w-full px-4 py-3 text-[14px] text-[var(--text-primary)] bg-[var(--bg-secondary)] border-2 border-[var(--border-color)] rounded-2xl focus:outline-none focus:border-[#D4AF37] focus:bg-[var(--bg-primary)] transition-all"
                 >
                   <option>Lima</option>
                   <option>Arequipa</option>
@@ -325,12 +325,12 @@ export default function CheckoutPage() {
           </section>
 
           {/* Método de pago */}
-          <section className="rounded-3xl border border-[#E5E5E7] p-5 lg:p-6">
+          <section className="rounded-3xl border border-[var(--border-color)] p-5 lg:p-6">
             <div className="flex items-center gap-2 mb-4">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1D1D1F] text-[11px] font-bold text-white">
                 3
               </span>
-              <h2 className="text-[15px] font-semibold tracking-tight text-[#1D1D1F]">
+              <h2 className="text-[15px] font-semibold tracking-tight text-[var(--text-primary)]">
                 Método de pago
               </h2>
             </div>
@@ -343,17 +343,17 @@ export default function CheckoutPage() {
                 className={`w-full flex items-center gap-3 rounded-2xl border-2 p-4 transition-all text-left ${
                   paymentMethod === "MERCADO_PAGO"
                     ? "border-[#D4AF37] bg-[#FFFBEB] shadow-[0_4px_20px_-4px_rgba(212,175,55,0.3)]"
-                    : "border-[#E5E5E7] hover:border-[#D4AF37]/40"
+                    : "border-[var(--border-color)] hover:border-[#D4AF37]/40"
                 }`}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-[#E5E5E7]">
-                  <CreditCard className="h-5 w-5 text-[#1D1D1F]" strokeWidth={1.5} />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)]">
+                  <CreditCard className="h-5 w-5 text-[var(--text-primary)]" strokeWidth={1.5} />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[13px] font-semibold text-[#1D1D1F]">
+                  <p className="text-[13px] font-semibold text-[var(--text-primary)]">
                     Mercado Pago
                   </p>
-                  <p className="text-[11px] text-[#86868B]">
+                  <p className="text-[11px] text-[var(--text-secondary)]">
                     Tarjeta · Yape · PLIN · Efectivo
                   </p>
                 </div>
@@ -361,7 +361,7 @@ export default function CheckoutPage() {
                   className={`flex h-5 w-5 items-center justify-center rounded-full border-2 transition-all ${
                     paymentMethod === "MERCADO_PAGO"
                       ? "border-[#D4AF37] bg-[#D4AF37]"
-                      : "border-[#E5E5E7]"
+                      : "border-[var(--border-color)]"
                   }`}
                 >
                   {paymentMethod === "MERCADO_PAGO" && (
@@ -377,17 +377,17 @@ export default function CheckoutPage() {
                 className={`w-full flex items-center gap-3 rounded-2xl border-2 p-4 transition-all text-left ${
                   paymentMethod === "CASH_ON_DELIVERY"
                     ? "border-[#D4AF37] bg-[#FFFBEB] shadow-[0_4px_20px_-4px_rgba(212,175,55,0.3)]"
-                    : "border-[#E5E5E7] hover:border-[#D4AF37]/40"
+                    : "border-[var(--border-color)] hover:border-[#D4AF37]/40"
                 }`}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-[#E5E5E7]">
-                  <Truck className="h-5 w-5 text-[#1D1D1F]" strokeWidth={1.5} />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)]">
+                  <Truck className="h-5 w-5 text-[var(--text-primary)]" strokeWidth={1.5} />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[13px] font-semibold text-[#1D1D1F]">
+                  <p className="text-[13px] font-semibold text-[var(--text-primary)]">
                     Pago Contraentrega (Lima)
                   </p>
-                  <p className="text-[11px] text-[#86868B]">
+                  <p className="text-[11px] text-[var(--text-secondary)]">
                     Paga en efectivo al recibir tu pedido
                   </p>
                 </div>
@@ -395,7 +395,7 @@ export default function CheckoutPage() {
                   className={`flex h-5 w-5 items-center justify-center rounded-full border-2 transition-all ${
                     paymentMethod === "CASH_ON_DELIVERY"
                       ? "border-[#D4AF37] bg-[#D4AF37]"
-                      : "border-[#E5E5E7]"
+                      : "border-[var(--border-color)]"
                   }`}
                 >
                   {paymentMethod === "CASH_ON_DELIVERY" && (
@@ -412,7 +412,7 @@ export default function CheckoutPage() {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mt-3 rounded-2xl bg-[#F5F5F7] p-3 text-[11px] text-[#1D1D1F]/80"
+                  className="mt-3 rounded-2xl bg-[var(--bg-secondary)] p-3 text-[11px] text-[var(--text-primary)]/80"
                 >
                   💡 Solo disponible en Lima Metropolitana. El mensajero verificará
                   el equipo contigo antes de recibir el pago.
@@ -424,8 +424,8 @@ export default function CheckoutPage() {
 
         {/* ====== COLUMNA DERECHA: Resumen del pedido ====== */}
         <aside className="lg:sticky lg:top-[160px] lg:self-start">
-          <div className="rounded-3xl border border-[#E5E5E7] p-5 lg:p-6 space-y-4">
-            <h2 className="text-[15px] font-semibold tracking-tight text-[#1D1D1F]">
+          <div className="rounded-3xl border border-[var(--border-color)] p-5 lg:p-6 space-y-4">
+            <h2 className="text-[15px] font-semibold tracking-tight text-[var(--text-primary)]">
               Tu pedido
             </h2>
 
@@ -447,12 +447,12 @@ export default function CheckoutPage() {
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[11px] font-medium text-[#1D1D1F] leading-tight line-clamp-1">
+                    <p className="text-[11px] font-medium text-[var(--text-primary)] leading-tight line-clamp-1">
                       {item.title}
                     </p>
-                    <p className="text-[10px] text-[#86868B]">Grado {item.grade}</p>
+                    <p className="text-[10px] text-[var(--text-secondary)]">Grado {item.grade}</p>
                   </div>
-                  <span className="text-[12px] font-semibold text-[#1D1D1F]">
+                  <span className="text-[12px] font-semibold text-[var(--text-primary)]">
                     {formatPEN(item.unitPrice * item.quantity)}
                   </span>
                 </li>
@@ -460,14 +460,14 @@ export default function CheckoutPage() {
             </ul>
 
             {/* Totales */}
-            <div className="space-y-1.5 pt-3 border-t border-[#E5E5E7]">
+            <div className="space-y-1.5 pt-3 border-t border-[var(--border-color)]">
               <div className="flex justify-between text-[12px]">
-                <span className="text-[#86868B]">Subtotal</span>
-                <span className="font-medium text-[#1D1D1F]">{formatPEN(subtotal)}</span>
+                <span className="text-[var(--text-secondary)]">Subtotal</span>
+                <span className="font-medium text-[var(--text-primary)]">{formatPEN(subtotal)}</span>
               </div>
               <div className="flex justify-between text-[12px]">
-                <span className="text-[#86868B]">Envío</span>
-                <span className="font-medium text-[#1D1D1F]">
+                <span className="text-[var(--text-secondary)]">Envío</span>
+                <span className="font-medium text-[var(--text-primary)]">
                   {shipping === 0 ? (
                     <span className="text-[#10B981]">Gratis</span>
                   ) : (
@@ -475,9 +475,9 @@ export default function CheckoutPage() {
                   )}
                 </span>
               </div>
-              <div className="flex justify-between pt-2 border-t border-[#E5E5E7]">
-                <span className="text-[14px] font-semibold text-[#1D1D1F]">Total</span>
-                <span className="text-[22px] font-bold text-[#1D1D1F]">
+              <div className="flex justify-between pt-2 border-t border-[var(--border-color)]">
+                <span className="text-[14px] font-semibold text-[var(--text-primary)]">Total</span>
+                <span className="text-[22px] font-bold text-[var(--text-primary)]">
                   {formatPEN(total)}
                 </span>
               </div>
@@ -528,7 +528,7 @@ export default function CheckoutPage() {
             </motion.button>
 
             {/* Trust badges */}
-            <div className="flex items-center justify-center gap-3 text-[10px] text-[#86868B] pt-2">
+            <div className="flex items-center justify-center gap-3 text-[10px] text-[var(--text-secondary)] pt-2">
               <span className="flex items-center gap-1">
                 <ShieldCheck className="h-3 w-3 text-[#D4AF37]" strokeWidth={1.5} />
                 Pago seguro
@@ -544,7 +544,7 @@ export default function CheckoutPage() {
               href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "51987654321"}?text=Hola%2C%20tengo%20dudas%20con%20mi%20compra`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 text-[11px] text-[#86868B] hover:text-[#1D1D1F] transition-colors"
+              className="flex items-center justify-center gap-1.5 text-[11px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
               <MessageCircle className="h-3.5 w-3.5" strokeWidth={1.5} />
               ¿Dudas? Escríbenos por WhatsApp

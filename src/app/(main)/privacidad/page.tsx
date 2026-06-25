@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 export default function PrivacidadPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <h1 className="text-[24px] lg:text-[32px] font-bold tracking-tight text-[#1D1D1F]">
+      <h1 className="text-[24px] lg:text-[32px] font-bold tracking-tight text-[var(--text-primary)]">
         Política de Privacidad
       </h1>
-      <p className="text-[12px] text-[#86868B]">Última actualización: Junio 2026</p>
+      <p className="text-[12px] text-[var(--text-secondary)]">Última actualización: Junio 2026</p>
 
-      <div className="prose prose-sm max-w-none space-y-4 text-[13px] text-[#1D1D1F]/80 leading-relaxed">
+      <div className="prose prose-sm max-w-none space-y-4 text-[13px] text-[var(--text-primary)]/80 leading-relaxed">
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">1. Responsable</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">1. Responsable</h2>
           <p>
             itechperu.shop es responsable del tratamiento de tus datos personales. Nos
             comprometemos a proteger tu privacidad conforme a la Ley N° 29733 — Ley de
@@ -27,7 +27,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">2. Datos que recopilamos</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">2. Datos que recopilamos</h2>
           <ul className="list-disc list-inside space-y-1 ml-2">
             <li>Nombre completo</li>
             <li>Correo electrónico</li>
@@ -40,7 +40,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">3. Finalidad</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">3. Finalidad</h2>
           <p>Usamos tus datos para:</p>
           <ul className="list-disc list-inside space-y-1 ml-2 mt-2">
             <li>Procesar y enviar tus pedidos</li>
@@ -52,7 +52,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">4. Base Legal</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">4. Base Legal</h2>
           <p>
             Tratamos tus datos con tu consentimiento (al crear cuenta o hacer un pedido) y
             para ejecutar contratos de compra-venta. No compartimos tus datos con terceros
@@ -61,7 +61,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">5. Proveedores tercerizados</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">5. Proveedores tercerizados</h2>
           <p>Usamos estos servicios que pueden acceder a tus datos:</p>
           <ul className="list-disc list-inside space-y-1 ml-2 mt-2">
             <li><strong>Mercado Pago</strong> — procesamiento de pagos (no vemos tus datos de tarjeta)</li>
@@ -73,7 +73,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">6. Cookies</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">6. Cookies</h2>
           <p>
             Usamos cookies esenciales para el funcionamiento del sitio (sesión, carrito de
             compras) y cookies analíticas anónimas para mejorar el servicio. No vendemos
@@ -83,7 +83,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">7. Tus derechos (ARCO)</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">7. Tus derechos (ARCO)</h2>
           <p>Tienes derecho a:</p>
           <ul className="list-disc list-inside space-y-1 ml-2 mt-2">
             <li><strong>Acceso</strong>: saber qué datos tenemos de ti</li>
@@ -98,7 +98,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">8. Seguridad</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">8. Seguridad</h2>
           <p>
             Implementamos medidas técnicas y organizativas para proteger tus datos: SSL
             256-bit, cifrado de contraseñas con bcrypt, accesos restringidos, backups
@@ -108,7 +108,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section>
-          <h2 className="text-[16px] font-bold text-[#1D1D1F] mb-2">9. Contacto</h2>
+          <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">9. Contacto</h2>
           <p>
             Para consultas sobre privacidad: hola@itechperu.shop o WhatsApp +51 987 654 321.
           </p>

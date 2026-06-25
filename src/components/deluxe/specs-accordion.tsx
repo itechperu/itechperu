@@ -71,22 +71,22 @@ export function SpecsAccordion({ specs }: { specs: ProductSpec[] }) {
         <AccordionItem
           key={section.id}
           value={section.id.toLowerCase()}
-          className="border-b border-[#E5E5E7] last:border-0"
+          className="border-b border-[var(--border-color)] last:border-0"
         >
           <AccordionTrigger className="hover:no-underline py-4 group">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#F5F5F7] group-hover:bg-[#D4AF37]/10 transition-colors">
-                <section.icon className="h-3.5 w-3.5 text-[#1D1D1F] group-hover:text-[#D4AF37] transition-colors" strokeWidth={1.5} />
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--bg-secondary)] group-hover:bg-[#D4AF37]/10 transition-colors">
+                <section.icon className="h-3.5 w-3.5 text-[var(--text-primary)] group-hover:text-[#D4AF37] transition-colors" strokeWidth={1.5} />
               </div>
-              <span className="text-[14px] font-semibold text-[#1D1D1F]">{section.title}</span>
+              <span className="text-[14px] font-semibold text-[var(--text-primary)]">{section.title}</span>
             </div>
           </AccordionTrigger>
           <AccordionContent className="pb-4">
             <div className="grid sm:grid-cols-2 gap-2 pl-9">
               {section.items.map((item, i) => (
                 <div key={i} className="flex items-center justify-between gap-2 py-1">
-                  <span className="text-[12px] text-[#86868B]">{item.label}</span>
-                  <span className="text-[12px] font-medium text-[#1D1D1F] text-right">{item.value}</span>
+                  <span className="text-[12px] text-[var(--text-secondary)]">{item.label}</span>
+                  <span className="text-[12px] font-medium text-[var(--text-primary)] text-right">{item.value}</span>
                 </div>
               ))}
             </div>

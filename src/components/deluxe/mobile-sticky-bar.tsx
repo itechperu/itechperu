@@ -25,18 +25,18 @@ export function MobileStickyBar({ product, selectedGrade, quantity, onAddToCart 
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ delay: 0.5, type: "spring", stiffness: 300, damping: 25 }}
-      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-t border-[#E5E5E7] shadow-[0_-4px_30px_rgb(0,0,0,0.08)]"
+      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--bg-primary)]/95 backdrop-blur-xl border-t border-[var(--border-color)] shadow-[0_-4px_30px_rgb(0,0,0,0.08)]"
     >
       <div className="flex items-center gap-3 p-3 pb-safe">
         {/* Precio */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1">
-            <span className="text-[16px] font-bold text-[#1D1D1F]">{formatPEN(price)}</span>
+            <span className="text-[16px] font-bold text-[var(--text-primary)]">{formatPEN(price)}</span>
             <span className="flex items-center gap-0.5 text-[10px] text-[#10B981] font-medium">
               <CheckCircle2 className="h-3 w-3" strokeWidth={2} /> Stock
             </span>
           </div>
-          <p className="text-[10px] text-[#86868B]">Grado {selectedGrade} · {currentGrade.warranty}</p>
+          <p className="text-[10px] text-[var(--text-secondary)]">Grado {selectedGrade} · {currentGrade.warranty}</p>
         </div>
 
         {/* WhatsApp */}

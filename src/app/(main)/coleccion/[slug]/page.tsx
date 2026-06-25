@@ -49,27 +49,27 @@ export default async function ColeccionSlugPage({ params }: { params: Promise<{ 
       ]} />
 
       <div className="max-w-3xl">
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[#1D1D1F]">{collection.h1}</h1>
-        <p className="mt-3 text-[14px] text-[#86868B] leading-relaxed">{collection.metaDescription}</p>
+        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">{collection.h1}</h1>
+        <p className="mt-3 text-[14px] text-[var(--text-secondary)] leading-relaxed">{collection.metaDescription}</p>
       </div>
 
       {products.length > 0 && (
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-5">
           {products.map((p) => (
-            <Link key={p.id} href={`/producto/${p.slug}`} className="group rounded-3xl overflow-hidden bg-white border border-[#E5E5E7] hover:shadow-lg transition-all">
-              <div className="relative aspect-square overflow-hidden bg-[#F5F5F7]">
+            <Link key={p.id} href={`/producto/${p.slug}`} className="group rounded-3xl overflow-hidden bg-[var(--bg-primary)] border border-[var(--border-color)] hover:shadow-lg transition-all">
+              <div className="relative aspect-square overflow-hidden bg-[var(--bg-secondary)]">
                 <img src={p.images[0]} alt={p.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <div className="p-3 lg:p-4">
-                <h2 className="text-[12px] lg:text-[14px] font-semibold text-[#1D1D1F] line-clamp-2">{p.title}</h2>
-                <p className="mt-1 text-[14px] font-bold text-[#1D1D1F]">{formatPEN(p.basePrice)}</p>
+                <h2 className="text-[12px] lg:text-[14px] font-semibold text-[var(--text-primary)] line-clamp-2">{p.title}</h2>
+                <p className="mt-1 text-[14px] font-bold text-[var(--text-primary)]">{formatPEN(p.basePrice)}</p>
               </div>
             </Link>
           ))}
         </div>
       )}
 
-      <section className="mt-8 text-[13px] text-[#86868B] leading-relaxed max-w-3xl">{collection.content}</section>
+      <section className="mt-8 text-[13px] text-[var(--text-secondary)] leading-relaxed max-w-3xl">{collection.content}</section>
     </div>
   );
 }

@@ -78,10 +78,10 @@ export default function GarantiaPage() {
           <ShieldCheck className="h-4 w-4 text-[#10B981]" strokeWidth={1.5} />
           <span className="text-[11px] font-medium text-[#10B981] tracking-wide">Confianza absoluta</span>
         </div>
-        <h1 className="text-[28px] lg:text-[44px] font-bold tracking-tight text-[#1D1D1F]">
+        <h1 className="text-[28px] lg:text-[44px] font-bold tracking-tight text-[var(--text-primary)]">
           Garantía Deluxe
         </h1>
-        <p className="mt-4 text-[15px] lg:text-[17px] text-[#86868B] leading-relaxed max-w-xl mx-auto">
+        <p className="mt-4 text-[15px] lg:text-[17px] text-[var(--text-secondary)] leading-relaxed max-w-xl mx-auto">
           No vendemos equipos usados. Vendemos equipos verificados con garantía real,
           sin letra pequeña. Cada equipo pasa por 47 puntos de inspección técnica en Lima.
           Así de simple.
@@ -96,10 +96,10 @@ export default function GarantiaPage() {
           { icon: RefreshCw, value: "7", label: "Días de devolución" },
           { icon: Star, value: "4.9/5", label: "+500 calificaciones" },
         ].map((stat, i) => (
-          <div key={i} className="rounded-2xl bg-white border border-[#E5E5E7] p-5 text-center">
-            <stat.icon className={`h-6 w-6 mx-auto ${stat.accent ? "text-[#D4AF37]" : "text-[#1D1D1F]"}`} strokeWidth={1.5} />
-            <p className={`text-[24px] font-bold mt-2 ${stat.accent ? "text-[#D4AF37]" : "text-[#1D1D1F]"}`}>{stat.value}</p>
-            <p className="text-[10px] uppercase tracking-wider text-[#86868B] font-medium mt-1">{stat.label}</p>
+          <div key={i} className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5 text-center">
+            <stat.icon className={`h-6 w-6 mx-auto ${stat.accent ? "text-[#D4AF37]" : "text-[var(--text-primary)]"}`} strokeWidth={1.5} />
+            <p className={`text-[24px] font-bold mt-2 ${stat.accent ? "text-[#D4AF37]" : "text-[var(--text-primary)]"}`}>{stat.value}</p>
+            <p className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-medium mt-1">{stat.label}</p>
           </div>
         ))}
       </section>
@@ -126,7 +126,7 @@ export default function GarantiaPage() {
             { cat: "Seguridad", items: ["IMEI/Serie limpio (SISATEC)", "Sin reporte de robo", "Face ID/Touch ID", "Find My desactivado"] },
             { cat: "Accesorios", items: ["Cargador original", "Cable verificado", "Caja Deluxe", "Sello de garantía"] },
           ].map((group, i) => (
-            <div key={i} className="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <div key={i} className="rounded-2xl bg-[var(--bg-primary)]/5 border border-white/10 p-4">
               <h3 className="text-[13px] font-bold text-[#D4AF37] mb-2">{group.cat}</h3>
               <ul className="space-y-1">
                 {group.items.map((item, j) => (
@@ -143,17 +143,17 @@ export default function GarantiaPage() {
 
       {/* Sistema de Grados */}
       <section className="mb-12">
-        <h2 className="text-[18px] lg:text-[22px] font-bold text-[#1D1D1F] mb-4 text-center">Sistema de Grados</h2>
+        <h2 className="text-[18px] lg:text-[22px] font-bold text-[var(--text-primary)] mb-4 text-center">Sistema de Grados</h2>
         <div className="grid sm:grid-cols-3 gap-4">
           {[
             { grade: "A+", label: "Como Nuevo", desc: "Sin marcas de uso. Batería ≥ 95%. Caja original.", warranty: "6 meses", color: "bg-[#D4AF37]" },
             { grade: "A", label: "Excelente", desc: "Microdesgaste imperceptible. Batería ≥ 90%.", warranty: "4 meses", color: "bg-[#1D1D1F]" },
             { grade: "B", label: "Muy Bueno", desc: "Uso visible en bordes. Batería ≥ 85%. 100% funcional.", warranty: "3 meses", color: "bg-[#86868B]" },
           ].map((g) => (
-            <div key={g.grade} className="rounded-2xl bg-white border border-[#E5E5E7] p-5">
+            <div key={g.grade} className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5">
               <span className={`flex h-12 w-12 items-center justify-center rounded-full text-[14px] font-bold text-white ${g.color}`}>{g.grade}</span>
-              <h3 className="text-[15px] font-bold text-[#1D1D1F] mt-3">Grado {g.grade} — {g.label}</h3>
-              <p className="text-[12px] text-[#86868B] mt-1">{g.desc}</p>
+              <h3 className="text-[15px] font-bold text-[var(--text-primary)] mt-3">Grado {g.grade} — {g.label}</h3>
+              <p className="text-[12px] text-[var(--text-secondary)] mt-1">{g.desc}</p>
               <p className="text-[14px] font-bold text-[#D4AF37] mt-2">Garantía: {g.warranty}</p>
             </div>
           ))}
@@ -162,18 +162,18 @@ export default function GarantiaPage() {
 
       {/* Beneficios */}
       <section className="grid sm:grid-cols-2 gap-4 mb-12">
-        <div className="rounded-2xl bg-white border border-[#E5E5E7] p-5">
+        <div className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5">
           <RefreshCw className="h-6 w-6 text-[#D4AF37]" strokeWidth={1.5} />
-          <h3 className="text-[15px] font-bold text-[#1D1D1F] mt-3">7 días de devolución</h3>
-          <p className="text-[12px] text-[#86868B] mt-1 leading-relaxed">
+          <h3 className="text-[15px] font-bold text-[var(--text-primary)] mt-3">7 días de devolución</h3>
+          <p className="text-[12px] text-[var(--text-secondary)] mt-1 leading-relaxed">
             Si no quedas satisfecho, tienes 7 días para devolverlo. Sin preguntas, sin letra
             pequeña. Reembolso completo del producto.
           </p>
         </div>
-        <div className="rounded-2xl bg-white border border-[#E5E5E7] p-5">
+        <div className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-5">
           <Headphones className="h-6 w-6 text-[#D4AF37]" strokeWidth={1.5} />
-          <h3 className="text-[15px] font-bold text-[#1D1D1F] mt-3">Soporte VIP</h3>
-          <p className="text-[12px] text-[#86868B] mt-1 leading-relaxed">
+          <h3 className="text-[15px] font-bold text-[var(--text-primary)] mt-3">Soporte VIP</h3>
+          <p className="text-[12px] text-[var(--text-secondary)] mt-1 leading-relaxed">
             ¿Problema con tu equipo? Escríbenos por WhatsApp VIP y te atendemos
             prioritariamente. Soporte real, no chatbots.
           </p>
@@ -182,15 +182,15 @@ export default function GarantiaPage() {
 
       {/* FAQ */}
       <section className="mb-12">
-        <h2 className="text-[18px] lg:text-[22px] font-bold text-[#1D1D1F] mb-4 text-center">Preguntas frecuentes sobre garantía</h2>
+        <h2 className="text-[18px] lg:text-[22px] font-bold text-[var(--text-primary)] mb-4 text-center">Preguntas frecuentes sobre garantía</h2>
         <div className="max-w-3xl mx-auto space-y-3">
           {faqs.map((faq, i) => (
-            <div key={i} className="rounded-2xl bg-white border border-[#E5E5E7] p-4">
-              <h3 className="text-[14px] font-semibold text-[#1D1D1F] flex items-start gap-2">
+            <div key={i} className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-4">
+              <h3 className="text-[14px] font-semibold text-[var(--text-primary)] flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[#D4AF37] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
                 {faq.q}
               </h3>
-              <p className="mt-2 ml-6 text-[13px] text-[#1D1D1F]/70 leading-relaxed">{faq.a}</p>
+              <p className="mt-2 ml-6 text-[13px] text-[var(--text-primary)]/70 leading-relaxed">{faq.a}</p>
             </div>
           ))}
         </div>

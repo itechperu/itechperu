@@ -55,10 +55,10 @@ export default function ResetPasswordPage() {
               <CheckCircle2 className="h-8 w-8 text-[#10B981]" strokeWidth={1.5} />
             </motion.div>
 
-            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[#1D1D1F]">
+            <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
               ¡Contraseña actualizada!
             </h2>
-            <p className="mt-2 text-[13px] text-[#86868B] leading-relaxed">
+            <p className="mt-2 text-[13px] text-[var(--text-secondary)] leading-relaxed">
               Tu cuenta ha sido protegida con tu nueva contraseña.
               <br />
               Ya puedes iniciar sesión normalmente.
@@ -98,10 +98,10 @@ export default function ResetPasswordPage() {
                   Restablecer
                 </span>
               </motion.div>
-              <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[#1D1D1F]">
+              <h2 className="text-[24px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
                 Crear nueva contraseña
               </h2>
-              <p className="mt-1 text-[13px] text-[#86868B] leading-relaxed">
+              <p className="mt-1 text-[13px] text-[var(--text-secondary)] leading-relaxed">
                 Tu nueva contraseña debe ser diferente a la anterior y tener al
                 menos 6 caracteres.
               </p>
@@ -164,10 +164,10 @@ export default function ResetPasswordPage() {
               </motion.button>
             </form>
 
-            <p className="mt-6 text-center text-[12px] text-[#86868B]">
+            <p className="mt-6 text-center text-[12px] text-[var(--text-secondary)]">
               <Link
                 href="/auth/login"
-                className="text-[#1D1D1F] font-medium hover:text-[#D4AF37] transition-colors underline-offset-4 hover:underline"
+                className="text-[var(--text-primary)] font-medium hover:text-[#D4AF37] transition-colors underline-offset-4 hover:underline"
               >
                 Cancelar y volver
               </Link>

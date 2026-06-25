@@ -31,17 +31,17 @@ export async function LandingPageView({ slug }: { slug: string }) {
   // Render content
   const renderContent = (content: string) => {
     return content.split("\n\n").map((block, i) => {
-      if (block.startsWith("## ")) return <h2 key={i} className="text-[20px] lg:text-[22px] font-bold text-[#1D1D1F] mt-8 mb-3">{block.replace("## ", "")}</h2>;
-      if (block.startsWith("### ")) return <h3 key={i} className="text-[16px] font-semibold text-[#1D1D1F] mt-5 mb-2">{block.replace("### ", "")}</h3>;
+      if (block.startsWith("## ")) return <h2 key={i} className="text-[20px] lg:text-[22px] font-bold text-[var(--text-primary)] mt-8 mb-3">{block.replace("## ", "")}</h2>;
+      if (block.startsWith("### ")) return <h3 key={i} className="text-[16px] font-semibold text-[var(--text-primary)] mt-5 mb-2">{block.replace("### ", "")}</h3>;
       if (block.startsWith("- ")) {
         const items = block.split("\n").filter((l) => l.startsWith("- "));
-        return <ul key={i} className="list-disc list-inside space-y-1 mb-3">{items.map((item, j) => <li key={j} className="text-[14px] text-[#1D1D1F]/80">{item.replace("- ", "")}</li>)}</ul>;
+        return <ul key={i} className="list-disc list-inside space-y-1 mb-3">{items.map((item, j) => <li key={j} className="text-[14px] text-[var(--text-primary)]/80">{item.replace("- ", "")}</li>)}</ul>;
       }
       if (/^\d+\.\s/.test(block)) {
         const items = block.split("\n").filter((l) => /^\d+\.\s/.test(l));
-        return <ol key={i} className="list-decimal list-inside space-y-1 mb-3">{items.map((item, j) => <li key={j} className="text-[14px] text-[#1D1D1F]/80">{item.replace(/^\d+\.\s/, "")}</li>)}</ol>;
+        return <ol key={i} className="list-decimal list-inside space-y-1 mb-3">{items.map((item, j) => <li key={j} className="text-[14px] text-[var(--text-primary)]/80">{item.replace(/^\d+\.\s/, "")}</li>)}</ol>;
       }
-      return <p key={i} className="text-[14px] lg:text-[15px] text-[#1D1D1F]/80 leading-relaxed mb-3">{block}</p>;
+      return <p key={i} className="text-[14px] lg:text-[15px] text-[var(--text-primary)]/80 leading-relaxed mb-3">{block}</p>;
     });
   };
 
@@ -56,13 +56,13 @@ export async function LandingPageView({ slug }: { slug: string }) {
 
       {/* Hero */}
       <div className="max-w-3xl">
-        <h1 className="text-[28px] lg:text-[44px] font-bold tracking-tight text-[#1D1D1F]">{page.h1}</h1>
-        <p className="mt-3 text-[15px] lg:text-[17px] text-[#86868B] leading-relaxed">{page.metaDescription}</p>
+        <h1 className="text-[28px] lg:text-[44px] font-bold tracking-tight text-[var(--text-primary)]">{page.h1}</h1>
+        <p className="mt-3 text-[15px] lg:text-[17px] text-[var(--text-secondary)] leading-relaxed">{page.metaDescription}</p>
         <div className="mt-5 flex flex-wrap gap-2">
           <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] px-5 py-2.5 text-[13px] font-semibold text-white">
             <MessageCircle className="h-4 w-4" strokeWidth={1.5} /> Consultar por WhatsApp
           </a>
-          <Link href="/coleccion" className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#E5E5E7] px-5 py-2.5 text-[13px] font-semibold text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors">
+          <Link href="/coleccion" className="inline-flex items-center gap-1.5 rounded-full border-2 border-[var(--border-color)] px-5 py-2.5 text-[13px] font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
             Ver catálogo <ChevronRight className="h-4 w-4" strokeWidth={2} />
           </Link>
         </div>
@@ -75,15 +75,15 @@ export async function LandingPageView({ slug }: { slug: string }) {
 
       {/* FAQ */}
       <section className="mt-12 max-w-3xl">
-        <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1D1D1F] mb-4">Preguntas frecuentes</h2>
+        <h2 className="text-[20px] lg:text-[24px] font-bold text-[var(--text-primary)] mb-4">Preguntas frecuentes</h2>
         <div className="space-y-3">
           {page.faqs.map((faq, i) => (
-            <div key={i} className="rounded-2xl bg-white border border-[#E5E5E7] p-4">
-              <h3 className="text-[14px] font-semibold text-[#1D1D1F] flex items-start gap-2">
+            <div key={i} className="rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] p-4">
+              <h3 className="text-[14px] font-semibold text-[var(--text-primary)] flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[#D4AF37] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
                 {faq.q}
               </h3>
-              <p className="mt-2 ml-6 text-[13px] text-[#1D1D1F]/70 leading-relaxed">{faq.a}</p>
+              <p className="mt-2 ml-6 text-[13px] text-[var(--text-primary)]/70 leading-relaxed">{faq.a}</p>
             </div>
           ))}
         </div>
@@ -91,15 +91,15 @@ export async function LandingPageView({ slug }: { slug: string }) {
 
       {/* Productos relacionados */}
       <section className="mt-12">
-        <h2 className="text-[18px] lg:text-[22px] font-bold text-[#1D1D1F] mb-4">Productos relacionados</h2>
+        <h2 className="text-[18px] lg:text-[22px] font-bold text-[var(--text-primary)] mb-4">Productos relacionados</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-4">
           {relatedProducts.map((p) => (
-            <Link key={p.id} href={`/producto/${p.slug}`} className="group rounded-2xl bg-white border border-[#E5E5E7] overflow-hidden hover:shadow-md transition-all">
-              <div className="aspect-square overflow-hidden bg-[#F5F5F7]">
+            <Link key={p.id} href={`/producto/${p.slug}`} className="group rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] overflow-hidden hover:shadow-md transition-all">
+              <div className="aspect-square overflow-hidden bg-[var(--bg-secondary)]">
                 <img src={p.images[0]} alt={p.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <div className="p-2.5">
-                <p className="text-[11px] font-medium text-[#1D1D1F] line-clamp-2">{p.title}</p>
+                <p className="text-[11px] font-medium text-[var(--text-primary)] line-clamp-2">{p.title}</p>
                 <p className="text-[13px] font-bold text-[#D4AF37] mt-1">{formatPEN(p.basePrice)}</p>
               </div>
             </Link>
@@ -108,11 +108,11 @@ export async function LandingPageView({ slug }: { slug: string }) {
       </section>
 
       {/* Internal linking */}
-      <section className="mt-10 rounded-2xl bg-[#F5F5F7] p-5">
-        <h3 className="text-[14px] font-semibold text-[#1D1D1F] mb-2">Explora más categorías</h3>
+      <section className="mt-10 rounded-2xl bg-[var(--bg-secondary)] p-5">
+        <h3 className="text-[14px] font-semibold text-[var(--text-primary)] mb-2">Explora más categorías</h3>
         <div className="flex flex-wrap gap-2">
           {CATEGORIES_SEO.slice(0, 5).map((cat) => (
-            <Link key={cat.slug} href={`/categoria/${cat.slug}`} className="rounded-full bg-white border border-[#E5E5E7] px-3 py-1.5 text-[12px] font-medium text-[#1D1D1F] hover:border-[#D4AF37]/30 transition-colors">
+            <Link key={cat.slug} href={`/categoria/${cat.slug}`} className="rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] px-3 py-1.5 text-[12px] font-medium text-[var(--text-primary)] hover:border-[#D4AF37]/30 transition-colors">
               {cat.name}
             </Link>
           ))}
@@ -124,7 +124,7 @@ export async function LandingPageView({ slug }: { slug: string }) {
         <ShieldCheck className="h-8 w-8 text-[#D4AF37] mx-auto" strokeWidth={1.5} />
         <h2 className="mt-3 text-[18px] lg:text-[20px] font-bold text-white">¿Listo para comprar con confianza?</h2>
         <p className="text-[13px] text-white/60 mt-1">Garantía real · 47 puntos de inspección · Envío a todo Perú</p>
-        <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-4 rounded-full bg-[#D4AF37] px-6 py-3 text-[14px] font-semibold text-[#1D1D1F]">
+        <a href="https://wa.me/51987654321" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-4 rounded-full bg-[#D4AF37] px-6 py-3 text-[14px] font-semibold text-[var(--text-primary)]">
           <MessageCircle className="h-4 w-4" strokeWidth={1.5} /> WhatsApp VIP
         </a>
       </section>
