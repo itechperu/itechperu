@@ -155,6 +155,40 @@
   color: var(--text-primary);
 }
 
+/* ====== Transiciones premium entre secciones ====== */
+/* Degradado extremadamente suave (casi invisible) para uniones oscuro/claro */
+/* Light mode: de blanco a gris ultra sutil */
+.transition-fade-light {
+  height: 60px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(245, 245, 247, 0.5) 50%, var(--bg-primary) 100%);
+  pointer-events: none;
+}
+
+/* Dark mode: de negro a gris oscuro ultra sutil */
+.dark .transition-fade-light {
+  background: linear-gradient(to bottom, transparent 0%, rgba(28, 28, 30, 0.5) 50%, var(--bg-primary) 100%);
+}
+
+/* Transición de claro a oscuro (hero → contenido) */
+.transition-fade-dark {
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(29, 29, 31, 0.03) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.dark .transition-fade-dark {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 0%, transparent 100%);
+}
+
+/* Transición universal suave entre secciones */
+.transition-section {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
+  opacity: 0.5;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
 /* ====== iTECH PERU — Deluxe Design System Utilities ====== */
 
 /* Hide scrollbar but keep scrollable (for horizontal galleries, tab bars, etc.) */

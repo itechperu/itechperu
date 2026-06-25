@@ -15,6 +15,9 @@ export default async function HomePage() {
       {/* Hero full-bleed cinematográfico */}
       <HeroClient featuredProduct={heroProduct} />
 
+      {/* Transición suave hero oscuro → contenido claro */}
+      <div className="transition-fade-dark" />
+
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         {/* ====== Trust strip minimalista ====== */}
         <div className="flex flex-wrap items-center justify-center gap-4 lg:gap-8 py-8 lg:py-12 border-b border-[var(--border-color)]">
@@ -139,6 +142,9 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* Transición suave claro → oscuro */}
+        <div className="transition-fade-light" />
+
         {/* ====== Confianza — sección cinematográfica ====== */}
         <section className="py-16 lg:py-24">
           <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#000000] p-8 lg:p-16 text-center">
@@ -172,8 +178,11 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* Transición suave oscuro → claro */}
+        <div className="transition-fade-light" />
+
         {/* ====== CTA final ====== */}
-        <section className="py-12 lg:py-16 text-center border-t border-[var(--border-color)]">
+        <section className="py-12 lg:py-16 text-center">
           <h2 className="text-[22px] lg:text-[28px] font-bold text-[var(--text-primary)] tracking-tight">
             ¿Listo para la experiencia Deluxe?
           </h2>
