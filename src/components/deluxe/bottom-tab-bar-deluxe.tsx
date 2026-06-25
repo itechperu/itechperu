@@ -2,52 +2,58 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, LayoutGrid, Heart, MessageCircle, SlidersHorizontal } from "lucide-react";
+import { Home, LayoutGrid, Heart, User, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 /**
- * Tab Bar Flotante Deluxe — itechperu.shop (responsivo)
+ * BottomTabBarDeluxe — Tab bar flotante mobile (solo < lg).
  *
- * - Visible solo en mobile y tablet (< lg, 1024px)
- * - Oculto en desktop (≥ lg) donde la navegación ya está en el header
- * - Flota a ~16px del borde inferior con rounded-full y sombra difuminada
- * - El botón central (WhatsApp VIP) destacado en Oro Champagne
+ * 5 tabs con rutas reales:
+ *  - Inicio → /
+ *  - Catálogo → /catalogo
+ *  - WhatsApp (centro, destacado oro)
+ *  - Favoritos → /cuenta/favoritos
+ *  - Perfil → /cuenta o /auth/login
+ *
+ * Área táctil mínima 48px. Animación de indicador activo.
  */
 const TABS = [
-  { id: "home", label: "Inicio", icon: Home, href: "/", highlight: false },
-  { id: "catalog", label: "Catálogo", icon: LayoutGrid, href: "#catalogo", highlight: false },
-  { id: "whatsapp", label: "VIP", icon: MessageCircle, href: "https://wa.me/51987654321?text=Hola%20iTECH%20Peru%2C%20quiero%20info%20VIP", highlight: true, external: true },
-  { id: "favorites", label: "Favoritos", icon: Heart, href: "/", highlight: false },
-  { id: "filters", label: "Filtros", icon: SlidersHorizontal, href: "/", highlight: false },
+  { id: "home", label: "Inicio", icon: Home, href: "/" },
+  { id: "catalog", label: "Catálogo", icon: LayoutGrid, href: "/catalogo" },
+  { id: "whatsapp", label: "VIP", icon: MessageCircle, href: "https://wa.me/51987654321?text=Hola%20iTECH%20Peru", external: true, highlight: true },
+  { id: "favorites", label: "Favoritos", icon: Heart, href: "/cuenta/favoritos" },
+  { id: "profile", label: "Perfil", icon: User, href: "/auth/login" },
 ] as const;
 
 export function BottomTabBarDeluxe() {
   const pathname = usePathname();
 
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    if (href === "/catalogo") return pathname === "/catalogo" || pathname.startsWith("/producto") || pathname.startsWith("/categoria");
+    if (href === "/cuenta/favoritos") return pathname === "/cuenta/favoritos";
+    if (href === "/auth/login") return pathname === "/auth/login" || pathname.startsWith("/cuenta");
+    return false;
+  };
+
   return (
-    <nav className="lg:hidden fixed bottom-4 left-1/2 z-50 -translate-x-1/2 pb-safe w-full max-w-[440px] px-4">
-      <div className="flex items-center gap-1 sm:gap-2 justify-center rounded-full border border-white/40 bg-white/80 backdrop-blur-xl px-2 py-2 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.18)]">
+    <nav className="lg:hidden fixed bottom-4 left-1/2 z-50 -translate-x-1/2 w-full max-w-[440px] px-4 pb-safe">
+      <div className="flex items-center justify-center gap-1 rounded-full border border-[var(--border-color)] bg-[var(--bg-primary)]/90 backdrop-blur-xl px-2 py-2 shadow-[0_12px_40px_-8px_rgb(0_0_0/0.18)]">
         {TABS.map((tab) => {
           const Icon = tab.icon;
-          const isCenter = tab.highlight;
-          const isActive = pathname === tab.href && !("external" in tab && tab.external);
+          const active = !("external" in tab && tab.external) && isActive(tab.href);
 
-          if (isCenter) {
+          if ("highlight" in tab && tab.highlight) {
             return (
               <Link
                 key={tab.id}
                 href={tab.href}
                 target={"external" in tab && tab.external ? "_blank" : undefined}
                 rel={"external" in tab && tab.external ? "noopener noreferrer" : undefined}
+                className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] shadow-[0_4px_16px_-2px_rgba(212,175,55,0.5)] transition-all hover:scale-105 active:scale-95 -mx-1"
                 aria-label={tab.label}
-                className="group relative flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8941F] shadow-[0_6px_20px_-2px_rgb(212_175_55/0.5)] transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                <Icon
-                  className="h-[22px] w-[22px] text-white transition-transform duration-300 group-hover:scale-110"
-                  strokeWidth={1.5}
-                />
-                <span className="pointer-events-none absolute -top-7 whitespace-nowrap rounded-md bg-[#1D1D1F] px-2 py-0.5 text-[9px] font-semibold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                  WhatsApp VIP
-                </span>
+                <Icon className="h-[22px] w-[22px] text-white" strokeWidth={1.5} />
               </Link>
             );
           }
@@ -56,24 +62,27 @@ export function BottomTabBarDeluxe() {
             <Link
               key={tab.id}
               href={tab.href}
+              className="group relative flex h-12 w-12 flex-col items-center justify-center gap-0.5 rounded-full transition-all"
               aria-label={tab.label}
-              className="group relative flex h-11 w-11 sm:h-12 sm:w-12 flex-col items-center justify-center gap-0.5 rounded-full transition-all duration-300 tap-scale"
             >
               <Icon
-                className={`h-[20px] w-[20px] transition-colors duration-200 ${
-                  isActive ? "text-[#1D1D1F]" : "text-[#86868B] group-hover:text-[#1D1D1F]"
+                className={`h-[20px] w-[20px] transition-colors ${
+                  active ? "text-[#D4AF37]" : "text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]"
                 }`}
                 strokeWidth={1.5}
               />
               <span
-                className={`text-[8.5px] sm:text-[9px] font-medium leading-none transition-colors duration-200 ${
-                  isActive ? "text-[#1D1D1F]" : "text-[#86868B] group-hover:text-[#1D1D1F]"
+                className={`text-[8.5px] font-medium leading-none transition-colors ${
+                  active ? "text-[#D4AF37]" : "text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]"
                 }`}
               >
                 {tab.label}
               </span>
-              {isActive && (
-                <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-[#D4AF37]" />
+              {active && (
+                <motion.span
+                  layoutId="activeTab"
+                  className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-[#D4AF37]"
+                />
               )}
             </Link>
           );

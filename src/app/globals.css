@@ -124,6 +124,37 @@
   }
 }
 
+/* ====== Dark Mode — iTECH PERU Deluxe ====== */
+
+/* Variables semánticas para dark/light mode */
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F7;
+  --bg-tertiary: #FAFAFA;
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --border-color: #E5E5E7;
+  --accent-gold: #D4AF37;
+  --shadow-color: rgb(0 0 0 / 0.04);
+}
+
+.dark {
+  --bg-primary: #000000;
+  --bg-secondary: #1C1C1E;
+  --bg-tertiary: #2C2C2E;
+  --text-primary: #F5F5F7;
+  --text-secondary: #86868B;
+  --border-color: #38383A;
+  --accent-gold: #D4AF37;
+  --shadow-color: rgb(0 0 0 / 0.3);
+}
+
+/* Aplicar variables automáticamente */
+.dark body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
 /* ====== iTECH PERU — Deluxe Design System Utilities ====== */
 
 /* Hide scrollbar but keep scrollable (for horizontal galleries, tab bars, etc.) */

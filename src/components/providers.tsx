@@ -1,17 +1,27 @@
 "use client";
 
+import { ThemeProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
 import { SmoothScrollProvider } from "./providers/smooth-scroll-provider";
 
 /**
- * Wrapper client component para todos los providers de la app.
+ * Providers — todos los providers globales de la app.
+ * - ThemeProvider (next-themes: dark/light/system, persistente, SSR)
  * - SessionProvider (NextAuth)
- * - SmoothScrollProvider (Lenis — scroll inmersivo)
+ * - SmoothScrollProvider (Lenis)
  */
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <SessionProvider>
-      <SmoothScrollProvider>{children}</SmoothScrollProvider>
-    </SessionProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+      storageKey="itechperu-theme"
+    >
+      <SessionProvider>
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      </SessionProvider>
+    </ThemeProvider>
   );
 }

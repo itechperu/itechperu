@@ -31,7 +31,7 @@ export function FooterDeluxe() {
             icon={CreditCard}
             title="Pago Seguro"
             desc="Mercado Pago + Contraentrega"
-            href="/coleccion"
+            href="/catalogo"
           />
           <TrustBadge
             icon={RefreshCw}
@@ -98,7 +98,7 @@ export function FooterDeluxe() {
                 Tienda
               </h3>
               <ul className="space-y-2">
-                <li><FooterLink href="/coleccion">Catálogo completo</FooterLink></li>
+                <li><FooterLink href="/catalogo">Catálogo</FooterLink></li>
                 <li><FooterLink href="/categoria/ipads">iPads</FooterLink></li>
                 <li><FooterLink href="/categoria/macbooks">MacBooks</FooterLink></li>
                 <li><FooterLink href="/categoria/laptops">Laptops</FooterLink></li>
