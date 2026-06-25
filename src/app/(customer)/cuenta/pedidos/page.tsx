@@ -68,7 +68,7 @@ export default function CustomerOrdersPage() {
               Cuando hagas tu primera compra, aparecerá aquí
             </p>
             <Link
-              href="/#catalogo"
+              href="/catalogo"
               className="inline-flex items-center gap-1.5 mt-4 rounded-full bg-[#1D1D1F] px-5 py-2 text-[12px] font-semibold text-white"
             >
               Ver catálogo <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />

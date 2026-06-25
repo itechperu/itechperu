@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getProducts, formatPEN } from "@/data/products";
 import { COLLECTIONS_SEO, getCollectionBySlug } from "@/data/seo-content";
 import { BreadcrumbsDeluxe } from "@/components/deluxe/breadcrumbs-deluxe";
+import { BackButton } from "@/components/deluxe/back-button";
 import { Star, ChevronRight } from "lucide-react";
 
 export const revalidate = 3600;
@@ -42,6 +43,7 @@ export default async function ColeccionSlugPage({ params }: { params: Promise<{ 
 
   return (
     <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-8 lg:py-12">
+      <BackButton />
       <BreadcrumbsDeluxe items={[
         { name: "Inicio", href: "/" },
         { name: "Colecciones", href: "/coleccion" },

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "@/components/deluxe/back-button";
 import { MessageCircle, Mail, MapPin, Clock, Instagram, Facebook } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -11,8 +12,10 @@ export const metadata: Metadata = {
 export default function ContactoPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
-      <section className="text-center">
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
+      <BackButton />
+    <section className="text-center">
+        <BackButton />
+      <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
           Hablemos
         </h1>
         <p className="mt-3 text-[14px] text-[var(--text-secondary)]">

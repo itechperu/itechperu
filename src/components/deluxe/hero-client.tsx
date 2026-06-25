@@ -80,7 +80,7 @@ export function HeroClient({ featuredProduct }: HeroClientProps) {
               className="mt-8 flex flex-wrap items-center gap-3"
             >
               <Link
-                href={featuredProduct ? `/productos/${featuredProduct.slug}` : "/#catalogo"}
+                href={featuredProduct ? `/productos/${featuredProduct.slug}` : "/catalogo"}
                 className="group flex items-center gap-2 rounded-full bg-white px-6 lg:px-8 py-3 lg:py-4 text-[14px] lg:text-[15px] font-semibold text-[#1D1D1F] hover:bg-[#F5F5F7] transition-all hover:scale-[1.02]"
               >
                 Ver destacado

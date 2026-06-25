@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "@/components/deluxe/back-button";
 import { Truck, Clock, MapPin, Package, CreditCard, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
@@ -12,14 +13,16 @@ export const metadata: Metadata = {
 export default function EnviosPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-10">
-      <section className="text-center">
+      <BackButton />
+    <section className="text-center">
         <div className="inline-flex items-center gap-1.5 rounded-full bg-[#3B82F6]/10 px-2.5 py-1 mb-4">
           <Truck className="h-3 w-3 text-[#3B82F6]" strokeWidth={1.5} />
           <span className="text-[10px] font-medium text-[#3B82F6] tracking-wide">
             Cobertura nacional
           </span>
         </div>
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
+        <BackButton />
+      <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
           Envíos y cobertura
         </h1>
         <p className="mt-3 text-[14px] text-[var(--text-secondary)] max-w-2xl mx-auto">

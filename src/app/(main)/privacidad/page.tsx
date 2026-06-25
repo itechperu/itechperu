@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "@/components/deluxe/back-button";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad — itechperu.shop",
@@ -11,13 +12,15 @@ export const metadata: Metadata = {
 export default function PrivacidadPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+      <BackButton />
       <h1 className="text-[24px] lg:text-[32px] font-bold tracking-tight text-[var(--text-primary)]">
         Política de Privacidad
       </h1>
       <p className="text-[12px] text-[var(--text-secondary)]">Última actualización: Junio 2026</p>
 
       <div className="prose prose-sm max-w-none space-y-4 text-[13px] text-[var(--text-primary)]/80 leading-relaxed">
-        <section>
+        <BackButton />
+    <section>
           <h2 className="text-[16px] font-bold text-[var(--text-primary)] mb-2">1. Responsable</h2>
           <p>
             itechperu.shop es responsable del tratamiento de tus datos personales. Nos

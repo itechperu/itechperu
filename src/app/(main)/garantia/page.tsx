@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "@/components/deluxe/back-button";
 import Link from "next/link";
 import { ShieldCheck, Award, Clock, RefreshCw, CheckCircle2, ChevronRight, Wrench, Truck, CreditCard, Headphones } from "lucide-react";
 
@@ -73,12 +74,14 @@ export default function GarantiaPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
 
       {/* Hero */}
-      <section className="text-center max-w-2xl mx-auto mb-12">
+      <BackButton />
+    <section className="text-center max-w-2xl mx-auto mb-12">
         <div className="inline-flex items-center gap-1.5 rounded-full bg-[#10B981]/10 px-3 py-1.5 mb-4">
           <ShieldCheck className="h-4 w-4 text-[#10B981]" strokeWidth={1.5} />
           <span className="text-[11px] font-medium text-[#10B981] tracking-wide">Confianza absoluta</span>
         </div>
-        <h1 className="text-[28px] lg:text-[44px] font-bold tracking-tight text-[var(--text-primary)]">
+        <BackButton />
+      <h1 className="text-[28px] lg:text-[44px] font-bold tracking-tight text-[var(--text-primary)]">
           Garantía Deluxe
         </h1>
         <p className="mt-4 text-[15px] lg:text-[17px] text-[var(--text-secondary)] leading-relaxed max-w-xl mx-auto">

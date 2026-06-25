@@ -70,7 +70,7 @@ export default function CustomerFavoritesPage() {
               Toca el corazón en cualquier producto para guardarlo aquí
             </p>
             <Link
-              href="/#catalogo"
+              href="/catalogo"
               className="inline-flex items-center gap-1.5 mt-4 rounded-full bg-[#1D1D1F] px-5 py-2 text-[12px] font-semibold text-white"
             >
               Explorar catálogo <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />

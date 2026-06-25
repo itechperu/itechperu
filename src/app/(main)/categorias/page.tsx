@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getProducts } from "@/data/products";
 import { CATEGORIES_SEO } from "@/data/seo-content";
 import { BreadcrumbsDeluxe } from "@/components/deluxe/breadcrumbs-deluxe";
+import { BackButton } from "@/components/deluxe/back-button";
 import { ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default async function CategoriasPage() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-6 lg:py-10">
+      <BackButton />
       <BreadcrumbsDeluxe items={[{ name: "Inicio", href: "/" }, { name: "Categorías" }]} />
 
       <div className="max-w-2xl mb-8">

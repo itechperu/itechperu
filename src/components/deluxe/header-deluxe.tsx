@@ -21,10 +21,12 @@ const NAV_LINKS = [
 ];
 
 /**
- * HeaderDeluxe — Header full-bleed premium.
+ * HeaderDeluxe — Header global único, idéntico en todas las páginas.
  *
- * Solo rutas reales (Next.js App Router). Cero hash routing.
- * Dark mode compatible. Theme toggle incluido.
+ * Modo claro: fondo blanco, texto negro, border bottom sutil
+ * Modo oscuro: fondo negro, texto blanco, border bottom sutil
+ * NUNCA transparente — el logo SIEMPRE visible
+ * Solo rutas reales (cero hash routing)
  */
 export function HeaderDeluxe() {
   const pathname = usePathname();
@@ -40,7 +42,7 @@ export function HeaderDeluxe() {
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 20);
+    setScrolled(latest > 10);
   });
 
   useEffect(() => {
@@ -64,35 +66,31 @@ export function HeaderDeluxe() {
     return pathname.startsWith(href);
   };
 
+  const isHome = pathname === "/";
+
   return (
     <>
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
-          scrolled
-            ? "bg-[var(--bg-primary)]/80 backdrop-blur-xl border-[var(--border-color)]/50 shadow-[0_4px_30px_var(--shadow-color)]"
-            : "bg-transparent border-transparent"
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled || !isHome
+            ? "bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-color)] shadow-[0_2px_20px_var(--shadow-color)]"
+            : "bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-transparent"
         }`}
       >
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
+            {/* Logo — SIEMPRE visible */}
             <Link href="/" className="flex items-center gap-2 flex-shrink-0 group" aria-label="iTECH Peru inicio">
               <motion.span
                 whileHover={{ scale: 1.05 }}
-                className={`flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-xl transition-colors ${
-                  scrolled ? "bg-[#1D1D1F]" : "bg-white/10 backdrop-blur-md border border-white/20"
-                }`}
+                className="flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-xl bg-[#1D1D1F]"
               >
-                <span className={`text-[12px] font-bold tracking-tight ${scrolled ? "text-[#D4AF37]" : "text-white"}`}>
-                  iT
-                </span>
+                <span className="text-[12px] font-bold tracking-tight text-[#D4AF37]">iT</span>
               </motion.span>
-              <span className={`text-[16px] lg:text-[18px] font-semibold tracking-tight transition-colors ${
-                scrolled ? "text-[var(--text-primary)]" : "text-white"
-              }`}>
+              <span className="text-[16px] lg:text-[18px] font-semibold tracking-tight text-[var(--text-primary)]">
                 itech<span className="text-[#D4AF37]">peru</span>
               </span>
             </Link>
@@ -106,17 +104,13 @@ export function HeaderDeluxe() {
                     key={link.href}
                     href={link.href}
                     className={`relative px-4 py-2 text-[14px] font-medium transition-colors rounded-full ${
-                      scrolled
-                        ? active
-                          ? "text-[var(--text-primary)] bg-[var(--bg-secondary)]"
-                          : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]/50"
-                        : active
-                          ? "text-white bg-white/10 backdrop-blur-md"
-                          : "text-white/70 hover:text-white hover:bg-white/10"
+                      active
+                        ? "text-[#D4AF37] bg-[#D4AF37]/10"
+                        : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]"
                     }`}
                   >
                     {link.label}
-                    {active && scrolled && (
+                    {active && (
                       <motion.span
                         layoutId="activeNav"
                         className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-6 rounded-full bg-[#D4AF37]"
@@ -129,32 +123,24 @@ export function HeaderDeluxe() {
 
             {/* Acciones */}
             <div className="flex items-center gap-1 sm:gap-2">
-              {/* Search */}
               <button
                 onClick={() => setSearchOpen(true)}
-                className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
-                  scrolled ? "hover:bg-[var(--bg-secondary)] text-[var(--text-primary)]" : "hover:bg-white/10 text-white"
-                }`}
+                className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] transition-colors"
                 aria-label="Buscar"
               >
                 <Search className="h-[18px] w-[18px]" strokeWidth={1.5} />
               </button>
 
-              {/* Theme toggle */}
-              <ThemeToggle className={scrolled ? "" : "text-white"} />
+              <ThemeToggle />
 
-              {/* Favoritos (desktop) */}
               <Link
                 href="/cuenta/favoritos"
-                className={`hidden lg:flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
-                  scrolled ? "hover:bg-[var(--bg-secondary)] text-[var(--text-primary)]" : "hover:bg-white/10 text-white"
-                }`}
+                className="hidden lg:flex h-10 w-10 items-center justify-center rounded-full hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] transition-colors"
                 aria-label="Favoritos"
               >
                 <Heart className="h-[18px] w-[18px]" strokeWidth={1.5} />
               </Link>
 
-              {/* Admin */}
               {mounted && isAdmin && (
                 <Link
                   href="/admin"
@@ -165,12 +151,9 @@ export function HeaderDeluxe() {
                 </Link>
               )}
 
-              {/* Carrito */}
               <button
                 onClick={openCart}
-                className={`relative flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
-                  scrolled ? "hover:bg-[var(--bg-secondary)] text-[var(--text-primary)]" : "hover:bg-white/10 text-white"
-                }`}
+                className="relative flex h-10 w-10 items-center justify-center rounded-full hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] transition-colors"
                 aria-label={`Carrito con ${mounted ? cartCount : 0} productos`}
               >
                 <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={1.5} />
@@ -188,12 +171,9 @@ export function HeaderDeluxe() {
                 </AnimatePresence>
               </button>
 
-              {/* Perfil */}
               <Link
                 href={mounted && session?.user ? "/cuenta" : "/auth/login"}
-                className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors relative ${
-                  scrolled ? "hover:bg-[var(--bg-secondary)] text-[var(--text-primary)]" : "hover:bg-white/10 text-white"
-                }`}
+                className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] transition-colors relative"
                 aria-label="Mi cuenta"
               >
                 {mounted && session?.user?.image ? (
@@ -202,16 +182,13 @@ export function HeaderDeluxe() {
                   <User className="h-[18px] w-[18px]" strokeWidth={1.5} />
                 )}
                 {mounted && session?.user && (
-                  <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-[#10B981] border-2 border-white" />
+                  <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-[#10B981] border-2 border-[var(--bg-primary)]" />
                 )}
               </Link>
 
-              {/* Menú móvil */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className={`lg:hidden flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
-                  scrolled ? "hover:bg-[var(--bg-secondary)] text-[var(--text-primary)]" : "hover:bg-white/10 text-white"
-                }`}
+                className="lg:hidden flex h-10 w-10 items-center justify-center rounded-full hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] transition-colors"
                 aria-label="Menú"
               >
                 <Menu className="h-5 w-5" strokeWidth={1.5} />
@@ -262,7 +239,7 @@ export function HeaderDeluxe() {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`block px-4 py-3 rounded-2xl text-[16px] font-medium transition-colors ${
                       isActive(link.href)
-                        ? "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
+                        ? "bg-[var(--bg-secondary)] text-[#D4AF37]"
                         : "text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]"
                     }`}
                   >

@@ -167,7 +167,7 @@ export default async function ProductPage({ params }: PageProps) {
         "@type": "ListItem",
         position: 2,
         name: product.category,
-        item: `${siteUrl}/#catalogo`,
+        item: `${siteUrl}/catalogo`,
       },
       {
         "@type": "ListItem",

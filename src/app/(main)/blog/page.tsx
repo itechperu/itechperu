@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BLOG_POSTS } from "@/data/seo-content";
 import { BreadcrumbsDeluxe } from "@/components/deluxe/breadcrumbs-deluxe";
+import { BackButton } from "@/components/deluxe/back-button";
 import { Clock, ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-8 lg:py-12">
+      <BackButton />
       <BreadcrumbsDeluxe items={[{ name: "Inicio", href: "/" }, { name: "Blog" }]} />
 
       <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">Blog itechperu</h1>

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BLOG_POSTS, getBlogPostBySlug } from "@/data/seo-content";
 import { BreadcrumbsDeluxe } from "@/components/deluxe/breadcrumbs-deluxe";
+import { BackButton } from "@/components/deluxe/back-button";
 import { Clock, Calendar, ChevronRight, MessageCircle } from "lucide-react";
 
 export const revalidate = 3600;
@@ -66,6 +67,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 py-8 lg:py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
 
+      <BackButton />
       <BreadcrumbsDeluxe items={[
         { name: "Inicio", href: "/" },
         { name: "Blog", href: "/blog" },

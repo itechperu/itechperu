@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getProducts, formatPEN } from "@/data/products";
 import { CATEGORIES_SEO, getCategoryBySlug } from "@/data/seo-content";
 import { BreadcrumbsDeluxe } from "@/components/deluxe/breadcrumbs-deluxe";
+import { BackButton } from "@/components/deluxe/back-button";
 import { Star, ShieldCheck, ChevronRight } from "lucide-react";
 
 export const revalidate = 3600;
@@ -94,6 +95,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ slug
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
+      <BackButton />
       <BreadcrumbsDeluxe items={[
         { name: "Inicio", href: "/" },
         { name: "Categorías", href: "/coleccion" },

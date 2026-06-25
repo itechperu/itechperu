@@ -64,7 +64,7 @@ export default function CheckoutPage() {
           Agrega productos al carrito para continuar con la compra
         </p>
         <Link
-          href="/#catalogo"
+          href="/catalogo"
           className="inline-flex items-center gap-2 mt-6 rounded-full bg-[#1D1D1F] px-6 py-3 text-[13px] font-semibold text-white tap-scale"
         >
           Ver catálogo
@@ -210,7 +210,7 @@ export default function CheckoutPage() {
     <div className="max-w-6xl mx-auto">
       {/* Breadcrumb */}
       <Link
-        href="/#catalogo"
+        href="/catalogo"
         className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-4"
       >
         <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2} />

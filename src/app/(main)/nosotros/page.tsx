@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "@/components/deluxe/back-button";
 import Link from "next/link";
 import { ShieldCheck, Award, Users, Truck, Heart, Target, Eye, Sparkles, ChevronRight } from "lucide-react";
 
@@ -13,14 +14,16 @@ export default function NosotrosPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-12">
       {/* Hero */}
-      <section className="text-center">
+      <BackButton />
+    <section className="text-center">
         <div className="inline-flex items-center gap-1.5 rounded-full bg-[#D4AF37]/10 px-2.5 py-1 mb-4">
           <Sparkles className="h-3 w-3 text-[#D4AF37]" strokeWidth={1.5} />
           <span className="text-[10px] font-medium text-[#D4AF37] tracking-wide">
             Nuestra historia
           </span>
         </div>
-        <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
+        <BackButton />
+      <h1 className="text-[28px] lg:text-[40px] font-bold tracking-tight text-[var(--text-primary)]">
           Tecnología premium,<br />
           <span className="bg-gradient-to-r from-[#D4AF37] to-[#B8941F] bg-clip-text text-transparent">
             precio inteligente
