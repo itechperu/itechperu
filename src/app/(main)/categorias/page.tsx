@@ -30,7 +30,7 @@ export default async function CategoriasPage() {
   const products = await getProducts();
 
   return (
-    <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-6 lg:py-10">
+    <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10 py-6 lg:py-10">
       <BackButton />
       <BreadcrumbsDeluxe items={[{ name: "Inicio", href: "/" }, { name: "Categorías" }]} />
 

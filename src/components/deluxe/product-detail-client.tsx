@@ -61,7 +61,7 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
   };
 
   return (
-    <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-4 lg:py-8">
+    <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10 py-4 lg:py-8">
       {/* Botón volver */}
       <Link
         href="/coleccion"

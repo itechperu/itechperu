@@ -44,7 +44,7 @@ export default function GarantiaPage() {
   };
 
   return (
-    <div className="mx-auto max-w-[900px] px-4 sm:px-6 lg:px-10 py-8 lg:py-16">
+    <div className="mx-auto max-w-[1000px] px-4 sm:px-6 lg:px-10 py-8 lg:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <BackButton />
 

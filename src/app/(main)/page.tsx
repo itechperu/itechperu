@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getProducts, formatPEN, type Product } from "@/data/products";
 import { ShieldCheck, ChevronRight, ArrowRight, Sparkles } from "lucide-react";
 import { HeroClient } from "@/components/deluxe/hero-client";
+import { RevealOnScroll } from "@/components/deluxe/reveal-on-scroll";
 
 export const revalidate = 3600;
 
@@ -18,7 +19,7 @@ export default async function HomePage() {
       {/* Transición suave hero oscuro → contenido claro */}
       <div className="transition-fade-dark" />
 
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
         {/* ====== Trust strip minimalista ====== */}
         <div className="flex flex-wrap items-center justify-center gap-4 lg:gap-8 py-8 lg:py-12 border-b border-[var(--border-color)]">
           {[
@@ -39,6 +40,7 @@ export default async function HomePage() {
 
         {/* ====== Producto destacado — storytelling ====== */}
         {heroProduct && (
+          <RevealOnScroll>
           <section className="py-16 lg:py-24">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div className="order-2 lg:order-1">
@@ -79,9 +81,11 @@ export default async function HomePage() {
               </div>
             </div>
           </section>
+          </RevealOnScroll>
         )}
 
         {/* ====== Categorías — enlaces directos ====== */}
+        <RevealOnScroll delay={0.1}>
         <section className="py-12 lg:py-16 border-t border-[var(--border-color)]">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-[22px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
@@ -111,8 +115,10 @@ export default async function HomePage() {
             ))}
           </div>
         </section>
+        </RevealOnScroll>
 
         {/* ====== Productos destacados — grid limpio ====== */}
+        <RevealOnScroll delay={0.15}>
         <section className="py-12 lg:py-16 border-t border-[var(--border-color)]">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-[22px] lg:text-[28px] font-bold tracking-tight text-[var(--text-primary)]">
@@ -141,11 +147,13 @@ export default async function HomePage() {
             ))}
           </div>
         </section>
+        </RevealOnScroll>
 
         {/* Transición suave claro → oscuro */}
         <div className="transition-fade-light" />
 
         {/* ====== Confianza — sección cinematográfica ====== */}
+        <RevealOnScroll>
         <section className="py-16 lg:py-24">
           <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2D] to-[#000000] p-8 lg:p-16 text-center">
             <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-[#D4AF37]/20 blur-[120px]" />
@@ -177,11 +185,13 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+        </RevealOnScroll>
 
         {/* Transición suave oscuro → claro */}
         <div className="transition-fade-light" />
 
         {/* ====== CTA final ====== */}
+        <RevealOnScroll delay={0.1}>
         <section className="py-12 lg:py-16 text-center">
           <h2 className="text-[22px] lg:text-[28px] font-bold text-[var(--text-primary)] tracking-tight">
             ¿Listo para la experiencia Deluxe?
@@ -198,6 +208,7 @@ export default async function HomePage() {
             </a>
           </div>
         </section>
+        </RevealOnScroll>
       </div>
     </div>
   );

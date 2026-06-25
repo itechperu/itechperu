@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function NosotrosPage() {
   return (
-    <div className="mx-auto max-w-[800px] px-4 sm:px-6 lg:px-10 py-8 lg:py-16">
+    <div className="mx-auto max-w-[1000px] px-4 sm:px-6 lg:px-10 py-8 lg:py-16">
       <BackButton />
 
       {/* Historia */}

@@ -80,7 +80,7 @@ export function HeaderDeluxe() {
             : "bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-transparent"
         }`}
       >
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo — SIEMPRE visible */}
             <Link href="/" className="flex items-center gap-2 flex-shrink-0 group" aria-label="iTECH Peru inicio">

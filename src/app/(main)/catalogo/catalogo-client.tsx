@@ -50,7 +50,7 @@ export function CatalogoClient({ products }: CatalogoClientProps) {
   }, [products, search, category, sortBy]);
 
   return (
-    <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-6 lg:py-10">
+    <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10 py-6 lg:py-10">
       <BreadcrumbsDeluxe items={[{ name: "Inicio", href: "/" }, { name: "Catálogo" }]} />
 
       <div className="max-w-2xl mb-6">

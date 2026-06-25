@@ -18,15 +18,8 @@ export default function MainLayout({
 }) {
   return (
     <div className="relative min-h-screen flex flex-col bg-[var(--bg-primary)] bg-frost overflow-x-hidden">
-      {/* Header full-bleed inmersivo — z-50, altura fija 64px mobile / 80px desktop */}
       <HeaderDeluxe />
 
-      {/* Contenido principal
-          - En home: sin padding-top (hero full-screen compensa)
-          - En subpáginas: padding-top para evitar overlap con header
-          - Header altura: h-16 (64px) mobile, h-20 (80px) desktop
-          - Offset extra: +24px para respirar entre header y breadcrumbs
-      */}
       <main className="flex-1 w-full pt-16 lg:pt-20 pb-[120px] lg:pb-[80px]">
         {children}
       </main>
